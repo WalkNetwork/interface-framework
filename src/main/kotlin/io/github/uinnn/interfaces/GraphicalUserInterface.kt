@@ -1,7 +1,10 @@
 package io.github.uinnn.interfaces
 
-import io.github.uinnn.interfaces.common.*
+import io.github.uinnn.interfaces.common.Filter
+import io.github.uinnn.interfaces.common.fill
+import io.github.uinnn.interfaces.interfaces.*
 import io.github.uinnn.interfaces.serializer.GraphicalInterfaceSerializer
+import io.github.uinnn.interfaces.worker.Worker
 import kotlinx.serialization.Serializable
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory

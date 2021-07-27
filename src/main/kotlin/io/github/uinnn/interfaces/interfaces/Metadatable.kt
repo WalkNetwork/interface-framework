@@ -1,4 +1,4 @@
-package io.github.uinnn.interfaces.common
+package io.github.uinnn.interfaces.interfaces
 
 typealias Storage = HashMap<String, Any>
 

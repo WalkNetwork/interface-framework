@@ -6,10 +6,11 @@ plugins {
   id("maven-publish")
   id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
   id("signing")
+  id("org.jetbrains.dokka") version "1.5.0"
 }
 
 group = "io.github.uinnn"
-version = "1.0"
+version = "1.0.1"
 
 repositories {
   mavenCentral()
@@ -21,6 +22,7 @@ dependencies {
   compileOnly(kotlin("stdlib-jdk8"))
   compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
   compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-core:1.2.2")
+  dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.5.0")
 }
 
 nexusPublishing {
@@ -61,8 +63,8 @@ tasks {
         version = project.version.toString()
         pom {
           name.set("interface-framework")
-          description.set("A Interface (Inventory) framework made in kotlin for spigot use!")
-          url.set("https://github.com/uinnn/serializer-framework")
+          description.set("a complex and complete interface (inventory) framework write in kotlin for spigot use!")
+          url.set("https://github.com/uinnn/interface-framework")
           developers {
             developer {
               id.set("uinnn")
@@ -76,7 +78,7 @@ tasks {
             }
           }
           scm {
-            url.set("https://github.com/uinnn/serializer-framework/tree/master/src")
+            url.set("https://github.com/uinnn/interface-framework/tree/master/src")
           }
         }
       }

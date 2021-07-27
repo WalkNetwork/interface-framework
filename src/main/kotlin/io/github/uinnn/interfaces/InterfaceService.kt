@@ -1,6 +1,6 @@
 package io.github.uinnn.interfaces
 
-import io.github.uinnn.interfaces.common.ObserverKind
+import io.github.uinnn.interfaces.interfaces.ObserverKind
 import io.github.uinnn.interfaces.common.interfaceOrNull
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player

@@ -1,7 +1,7 @@
 package io.github.uinnn.interfaces.serializer
 
-import io.github.uinnn.interfaces.common.ObserverKind
-import io.github.uinnn.interfaces.common.Observers
+import io.github.uinnn.interfaces.interfaces.ObserverKind
+import io.github.uinnn.interfaces.interfaces.Observers
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.buildClassSerialDescriptor

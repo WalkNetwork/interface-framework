@@ -1,6 +1,6 @@
 package io.github.uinnn.interfaces
 
-import io.github.uinnn.interfaces.common.*
+import io.github.uinnn.interfaces.interfaces.*
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryClickEvent

@@ -1,5 +1,7 @@
 package io.github.uinnn.interfaces.common
 
+import io.github.uinnn.interfaces.Engine
+import io.github.uinnn.interfaces.Engines
 import io.github.uinnn.interfaces.GraphicalUserInterface
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -70,4 +72,9 @@ fun lastSlot(line: Int) = line * 9 - 1
  * ```
  */
 fun slotAt(line: Int, slot: Int) = startSlot(line) + slot - 1
+
+/**
+ * Converts this ItemStack to a engine.
+ */
+fun ItemStack.toEngine(slot: Int = 0): Engine = Engines.from(this, slot)
 

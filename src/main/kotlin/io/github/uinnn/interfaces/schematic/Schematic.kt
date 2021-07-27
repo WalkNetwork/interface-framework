@@ -1,6 +1,6 @@
 package io.github.uinnn.interfaces.schematic
 
-import io.github.uinnn.interfaces.paginated.PaginatedGraphicalInterface
+import io.github.uinnn.interfaces.PaginatedGraphicalInterface
 
 typealias Includer = IntArray
 typealias Excluder = IntArray
