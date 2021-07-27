@@ -1,8 +1,19 @@
 package io.github.uinnn.interfaces.interfaces
 
-typealias Storage = HashMap<String, Any>
+import java.util.concurrent.ConcurrentHashMap
 
+typealias Storage = ConcurrentHashMap<String, Any>
+
+/**
+ * Represents a metadatable object for graphical user interfaces or engines.
+ * This is, the object will be able to store metadata of any type
+ * with a String as key.
+ */
 interface Metadatable {
+
+  /**
+   * All registered metadata of this metadatable object.
+   */
   var storage: Storage
 
   /**
@@ -18,20 +29,28 @@ interface Metadatable {
   fun introduce(key: String, value: Any) = storage.putIfAbsent(key, value)
 
   /**
+   * Returns if the specified key is in the storage
+   * of this metadata object.
+   */
+  fun includes(key: String) = storage.containsKey(key)
+
+  /**
    * Invalidates a metadata, this is,
-   * remove a existent data in the storage.
+   * remove a existent metadata in the storage.
    */
   fun invalidate(key: String) = storage.remove(key)
 
   /**
    * Try locates a existent metadata, or
-   * null if the data not exists in the storage.
+   * null if the metadata not exists in the storage.
    */
   fun <T> locate(key: String): T? = storage[key] as? T
 
   /**
-   * Acquire a existent metadata. If
-   * not exists in the storage a NPE will be throw.
+   * Acquire a existent metadata as a [Result] of [T].
+   * Supporting this was safe try-catch use.
    */
-  fun <T> acquire(key: String): T = storage[key] as T
+  fun <T> acquire(key: String): Result<T> = runCatching {
+    storage[key] as T
+  }
 }

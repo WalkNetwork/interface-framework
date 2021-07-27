@@ -6,8 +6,20 @@ import org.bukkit.entity.Player
 typealias AccessAction = GraphicalUserInterface.(Player) -> Unit
 typealias AccessSet = HashSet<AccessAction>
 
+/**
+ * Represents a accessible object for graphical user interfaces.
+ * This is, the object will be to accessable or inaccessible by a player
+ */
 interface Accessible {
+
+  /**
+   * All registered accessors of this accessible object.
+   */
   var accessors: AccessSet
+
+  /**
+   * All registered uncessor of this accesible object.
+   */
   var uncessors: AccessSet
   
   /**

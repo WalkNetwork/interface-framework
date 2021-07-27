@@ -2,7 +2,16 @@ package io.github.uinnn.interfaces.interfaces
 
 import java.util.*
 
+/**
+ * Represents a observable object for graphical user interfaces.
+ * This is, the object will be able to observe a kind of observer.
+ * Also know as events.
+ */
 interface Observable {
+
+  /**
+   * All registered observers of this observable object.
+   */
   var observers: Observers
 
   /**

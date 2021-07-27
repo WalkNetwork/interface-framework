@@ -4,7 +4,12 @@ import io.github.uinnn.interfaces.Engine
 
 typealias AlterAction = Engine.() -> Unit
 
+/**
+ * Represents a alterable object for engines.
+ * This is, the object will be able alter your state in a new one.
+ */
 interface Alterable {
+
   /**
    * Alter the current engine with
    * a updated new engine.

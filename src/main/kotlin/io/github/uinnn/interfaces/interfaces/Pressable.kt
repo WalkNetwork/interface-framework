@@ -6,7 +6,15 @@ import org.bukkit.event.inventory.InventoryClickEvent
 typealias PressAction = InventoryClickEvent.(GraphicalUserInterface) -> Unit
 typealias PressSet = HashSet<PressAction>
 
+/**
+ * Represents a pressable object for engines.
+ * This is, the object will be able to press.
+ */
 interface Pressable {
+
+  /**
+   * All registered press of this pressable object.
+   */
   var pressSet: PressSet
 
   /**
