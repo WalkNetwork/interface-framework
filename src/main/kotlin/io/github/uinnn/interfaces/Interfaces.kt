@@ -93,10 +93,19 @@ object Interfaces {
     return parent(title, lines, parent).apply(action)
   }
 
+  /**
+   * Creates a paginated graphical interface
+   * with title and lines specified.
+   */
   fun paginated(title: String, lines: Int): PaginatedGraphicalInterface {
     return SimplePaginatedInterface(title, lines)
   }
 
+  /**
+   * Creates a paginated graphical interface
+   * with title and lines specified. Also apply a
+   * [PaginatedInterfaceAction] to build this interface.
+   */
   inline fun paginated(title: String, lines: Int, action: PaginatedInterfaceAction): PaginatedGraphicalInterface {
     return SimplePaginatedInterface(title, lines).apply(action)
   }
