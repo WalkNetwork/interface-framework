@@ -1,112 +1,94 @@
 package io.github.uinnn.interfaces
 
-import org.bukkit.entity.Player
+typealias InterfaceAction = GraphicalInterface.() -> Unit
+typealias ScrollableInterfaceAction = ScrollableGraphicalInterface.() -> Unit
 
-typealias InterfaceAction = GraphicalUserInterface.() -> Unit
-typealias PaginatedInterfaceAction = PaginatedGraphicalInterface.() -> Unit
-
+/**
+ * A utility class to creating new interfaces.
+ */
 object Interfaces {
 
   /**
-   * Creates a empty graphical user interface.
+   * Creates a empty [GraphicalInterface].
    */
-  fun empty(): GraphicalUserInterface {
+  fun empty(): GraphicalInterface {
     return SimpleGraphicalInterface("", 1)
   }
 
   /**
-   * Creates a graphical user interface with
+   * Creates a [GraphicalInterface] with
    * title and lines specified.
    */
-  fun create(title: String, lines: Int): GraphicalUserInterface {
+  fun create(title: String, lines: Int): GraphicalInterface {
     return SimpleGraphicalInterface(title, lines)
   }
 
   /**
-   * Creates a graphical user interface with
+   * Creates a [GraphicalInterface] with
    * title and lines specified. Also apply a [InterfaceAction]
    * to build this interface.
    */
-  inline fun create(title: String, lines: Int, action: InterfaceAction): GraphicalUserInterface {
+  inline fun create(title: String, lines: Int, action: InterfaceAction): GraphicalInterface {
     return SimpleGraphicalInterface(title, lines).apply(action)
   }
 
   /**
-   * Creates a workable graphical user interface
+   * Creates a workable [GraphicalInterface]
    * with title and lines specified.
    */
-  fun workable(title: String, lines: Int): GraphicalUserInterface {
+  fun workable(title: String, lines: Int): GraphicalInterface {
     return SimpleGraphicalInterface(title, lines).apply {
       worker.allow = true
     }
   }
 
   /**
-   * Creates a workable graphical user interface
+   * Creates a workable [GraphicalInterface]
    * with title and lines specified. Also apply a [InterfaceAction]
    * to build this interface.
    */
-  inline fun workable(title: String, lines: Int, action: InterfaceAction): GraphicalUserInterface {
+  inline fun workable(title: String, lines: Int, action: InterfaceAction): GraphicalInterface {
     return workable(title, lines).apply(action)
   }
 
   /**
-   * Creates a ownerable graphical user interface
-   * with title and lines specified.
-   */
-  fun ownerable(title: String, lines: Int, owner: Player): GraphicalUserInterface {
-    return SimpleGraphicalInterface(title, lines).apply {
-      this.owner = owner
-    }
-  }
-
-  /**
-   * Creates a ownerable graphical user interface
-   * with title and lines specified. Also apply a [InterfaceAction]
-   * to build this interface.
-   */
-  inline fun ownerable(title: String, lines: Int, owner: Player, action: InterfaceAction): GraphicalUserInterface {
-    return ownerable(title, lines, owner).apply(action)
-  }
-
-  /**
-   * Creates a graphical user interface with
+   * Creates a [GraphicalInterface] with
    * a parent, title and lines specified.
    */
-  fun parent(title: String, lines: Int, parent: GraphicalUserInterface): GraphicalUserInterface {
+  fun parent(title: String, lines: Int, parent: GraphicalInterface): GraphicalInterface {
     return SimpleGraphicalInterface(title, lines).apply {
       this.parent = parent
     }
   }
 
   /**
-   * Creates a graphical user interface with a parent,
+   * Creates a [GraphicalInterface] with a parent,
    * title and lines specified. Also apply a [InterfaceAction]
    * to build this interface.
    */
   inline fun parent(
     title: String,
     lines: Int,
-    parent: GraphicalUserInterface,
+    parent: GraphicalInterface,
     action: InterfaceAction
-  ): GraphicalUserInterface {
+  ): GraphicalInterface {
     return parent(title, lines, parent).apply(action)
   }
 
   /**
-   * Creates a paginated graphical interface
+   * Creates a [ScrollableGraphicalInterface]
    * with title and lines specified.
    */
-  fun paginated(title: String, lines: Int): PaginatedGraphicalInterface {
-    return SimplePaginatedInterface(title, lines)
+  fun scrollable(title: String, lines: Int): ScrollableGraphicalInterface {
+    return SimpleScrollableInterface(title, lines)
   }
 
   /**
-   * Creates a paginated graphical interface
+   * Creates a [ScrollableGraphicalInterface]
    * with title and lines specified. Also apply a
-   * [PaginatedInterfaceAction] to build this interface.
+   * [ScrollableInterfaceAction] to build this interface.
    */
-  inline fun paginated(title: String, lines: Int, action: PaginatedInterfaceAction): PaginatedGraphicalInterface {
-    return SimplePaginatedInterface(title, lines).apply(action)
+  inline fun scrollable(title: String, lines: Int, action: ScrollableInterfaceAction): ScrollableGraphicalInterface {
+    return SimpleScrollableInterface(title, lines).apply(action)
   }
 }

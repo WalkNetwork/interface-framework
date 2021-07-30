@@ -1,13 +1,13 @@
 package io.github.uinnn.interfaces.interfaces
 
-import io.github.uinnn.interfaces.GraphicalUserInterface
-import org.bukkit.entity.Player
+import io.github.uinnn.interfaces.GraphicalInterface
+import io.github.uinnn.interfaces.common.Action
 
-typealias RenderAction = GraphicalUserInterface.(Player) -> Unit
+typealias RenderAction = Action<GraphicalInterface>
 typealias RenderSet = HashSet<RenderAction>
 
 /**
- * Represents a renderable object for graphical user interfaces or engines.
+ * Represents a renderable object for graphical interfaces or engines.
  * This is, the object will be able to renderize.
  */
 interface Renderable {
@@ -19,9 +19,10 @@ interface Renderable {
   
   /**
    * Render this renderable
-   * object to the player.
+   * object to the owner of the
+   * graphical interface.
    */
-  fun render(player: Player)
+  fun render()
   
   /**
    * Register a handler to be

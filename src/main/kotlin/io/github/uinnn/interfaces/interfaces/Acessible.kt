@@ -1,13 +1,14 @@
 package io.github.uinnn.interfaces.interfaces
 
-import io.github.uinnn.interfaces.GraphicalUserInterface
+import io.github.uinnn.interfaces.GraphicalInterface
+import io.github.uinnn.interfaces.common.Action
 import org.bukkit.entity.Player
 
-typealias AccessAction = GraphicalUserInterface.(Player) -> Unit
+typealias AccessAction = Action<GraphicalInterface>
 typealias AccessSet = HashSet<AccessAction>
 
 /**
- * Represents a accessible object for graphical user interfaces.
+ * Represents a accessible object for graphical interfaces.
  * This is, the object will be to accessable or inaccessible by a player
  */
 interface Accessible {
@@ -23,16 +24,17 @@ interface Accessible {
   var uncessors: AccessSet
   
   /**
-   * Makes player access (open)
-   * this graphical user interface.
+   * Makes player access (open) this graphical interface.
+   * Also sets the specified player as owner
+   * of this graphical interface
    */
   fun access(player: Player)
   
   /**
-   * Makes player uncess (close)
-   * this graphical user interface.
+   * Makes owner uncess (close)
+   * this graphical interface.
    */
-  fun uncess(player: Player, close: Boolean = true)
+  fun uncess(close: Boolean = true)
   
   /**
    * Register a handler to be

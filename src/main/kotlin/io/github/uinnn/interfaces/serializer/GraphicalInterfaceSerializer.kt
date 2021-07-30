@@ -1,10 +1,10 @@
 package io.github.uinnn.interfaces.serializer
 
-import io.github.uinnn.interfaces.setSize
-import io.github.uinnn.interfaces.setTitle
-import io.github.uinnn.interfaces.GraphicalUserInterface
+import io.github.uinnn.interfaces.GraphicalInterface
 import io.github.uinnn.interfaces.Interfaces
 import io.github.uinnn.interfaces.common.fill
+import io.github.uinnn.interfaces.setSize
+import io.github.uinnn.interfaces.setTitle
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.buildClassSerialDescriptor
@@ -16,7 +16,7 @@ import kotlinx.serialization.encoding.encodeStructure
 import org.bukkit.Material
 import org.bukkit.material.MaterialData
 
-object GraphicalInterfaceSerializer : KSerializer<GraphicalUserInterface> {
+object GraphicalInterfaceSerializer : KSerializer<GraphicalInterface> {
   override val descriptor: SerialDescriptor = buildClassSerialDescriptor("interface") {
     element<String>("title")
     element<Int>("size")
@@ -46,7 +46,7 @@ object GraphicalInterfaceSerializer : KSerializer<GraphicalUserInterface> {
     }
   }
   
-  override fun serialize(encoder: Encoder, value: GraphicalUserInterface) = encoder.encodeStructure(descriptor) {
+  override fun serialize(encoder: Encoder, value: GraphicalInterface) = encoder.encodeStructure(descriptor) {
     encodeStringElement(descriptor, 0, value.title)
     encodeIntElement(descriptor, 1, value.size / 9)
     encodeBooleanElement(descriptor, 2, value.worker.allow)

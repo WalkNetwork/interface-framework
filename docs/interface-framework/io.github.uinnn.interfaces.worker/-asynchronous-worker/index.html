@@ -22,193 +22,108 @@
           </div>
           <div class="cover ">
             <h1 class="cover"><span>Asynchronous</span><wbr></wbr><span>Worker</span></h1>
-            <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">public final class <a href="index.html">AsynchronousWorker</a> extends <a href="../-abstract-worker/index.html">AbstractWorker</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">A worker default class. This class works everything in async mode. By default a <a href="../../io.github.uinnn.interfaces/-graphical-user-interface/index.html">GraphicalUserInterface</a> NOT allows a worker to work just because that consumes more server processing. You can change if a worker is allowed to work changing the <a href="index.html#-359978583%2FProperties%2F769193423">allow</a> property. Also by defaults, the interval for work is one second (<a href="index.html#-973370013%2FProperties%2F769193423">interval</a>).</p><h3 class=""> Note:</h3><p class="paragraph">If you want for example run a sync task you need to execute the default bukkit scheduler sync task.</p></div></div>
+            <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">class <a href="index.html">AsynchronousWorker</a>(graphical: <a href="../../io.github.uinnn.interfaces/-graphical-interface/index.html">GraphicalInterface</a>, allow: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>, interval: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.time/-duration/index.html">Duration</a>) : <a href="../-worker/index.html">Worker</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">A worker default class. This class works everything in async mode. By default a <a href="../../io.github.uinnn.interfaces/-graphical-interface/index.html">GraphicalInterface</a> NOT allows a worker to work just because that consumes more server processing. You can change if a worker is allowed to work changing the <a href="allow.html">allow</a> property. Also by defaults, the interval for work is one second (<a href="interval.html">interval</a>).</p><h3 class=""> Note:</h3><p class="paragraph">If you want for example run a sync task you need to execute the default bukkit scheduler sync task.</p></div></div>
           </div>
           <div class="tabbedcontent">
             <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button></div>
             <div class="tabs-section-body">
               <h2 class="tabbedcontent">Constructors</h2>
-              <div class="table" data-togglable="Constructors"><a data-name="2089090235%2FConstructors%2F769193423" anchor-label="AsynchronousWorker" id="2089090235%2FConstructors%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
+              <div class="table" data-togglable="Constructors"><a data-name="-1305088816%2FConstructors%2F769193423" anchor-label="AsynchronousWorker" id="-1305088816%2FConstructors%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
                 <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
                   <div class="main-subrow keyValue TabbedContent">
-                    <div class=""><span class="inline-flex"><a href="-asynchronous-worker.html">AsynchronousWorker</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2089090235%2FConstructors%2F769193423"></span>
+                    <div class=""><span class="inline-flex"><a href="-asynchronous-worker.html">AsynchronousWorker</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1305088816%2FConstructors%2F769193423"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
                       <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace block"><a href="index.html">AsynchronousWorker</a> <a href="-asynchronous-worker.html">AsynchronousWorker</a>(<a href="../../io.github.uinnn.interfaces/-graphical-user-interface/index.html">GraphicalUserInterface</a> graphical, <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html">Boolean</a> allow, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.time/-duration/index.html">Duration</a> interval)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">fun <a href="-asynchronous-worker.html">AsynchronousWorker</a>(graphical: <a href="../../io.github.uinnn.interfaces/-graphical-interface/index.html">GraphicalInterface</a>, allow: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false, interval: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.time/-duration/index.html">Duration</a> = Duration.seconds(1))<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
               <h2 class="">Functions</h2>
-              <div class="table" data-togglable="Functions"><a data-name="-506936788%2FFunctions%2F769193423" anchor-label="acquire" id="-506936788%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
+              <div class="table" data-togglable="Functions"><a data-name="1992177890%2FFunctions%2F769193423" anchor-label="acquire" id="1992177890%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
                 <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#-506936788%2FFunctions%2F769193423">acquire</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-506936788%2FFunctions%2F769193423"></span>
+                    <div class=""><span class="inline-flex"><a href="../../io.github.uinnn.interfaces.interfaces/-metadatable/acquire.html">acquire</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1992177890%2FFunctions%2F769193423"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
                       <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
 
   <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace block"><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html">Result</a>&lt;<a href="../../io.github.uinnn.interfaces.interfaces/-metadatable/acquire.html">T</a>&gt; <a href="index.html#-506936788%2FFunctions%2F769193423">acquire</a>&lt;T extends <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> key)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">open fun &lt;<a href="../../io.github.uinnn.interfaces.interfaces/-metadatable/acquire.html">T</a>&gt; <a href="../../io.github.uinnn.interfaces.interfaces/-metadatable/acquire.html">acquire</a>(key: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html">Result</a>&lt;<a href="../../io.github.uinnn.interfaces.interfaces/-metadatable/acquire.html">T</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
   </div>
-<a data-name="-506936788%2FFunctions%2F769193423" anchor-label="acquire" id="-506936788%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="-506936788%2FFunctions%2F769193423" anchor-label="acquire" id="-506936788%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>Acquire a existent metadata as a <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html">Result</a> of <a href="../../io.github.uinnn.interfaces.interfaces/-metadatable/acquire.html">T</a>.</div></div>
+<a data-name="1992177890%2FFunctions%2F769193423" anchor-label="acquire" id="1992177890%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="1992177890%2FFunctions%2F769193423" anchor-label="acquire" id="1992177890%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>Acquire a existent metadata as a <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html">Result</a> of <a href="../../io.github.uinnn.interfaces.interfaces/-metadatable/acquire.html">T</a>.</div></div>
 </div>
                     </div>
                   </div>
                 </div>
-<a data-name="-1089631147%2FFunctions%2F769193423" anchor-label="getAllow" id="-1089631147%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
+<a data-name="-100696723%2FFunctions%2F769193423" anchor-label="includes" id="-100696723%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
                 <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="get-allow.html">getAllow</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1089631147%2FFunctions%2F769193423"></span>
+                    <div class=""><span class="inline-flex"><a href="../../io.github.uinnn.interfaces.interfaces/-metadatable/includes.html">includes</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-100696723%2FFunctions%2F769193423"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
                       <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
 
   <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace block"><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html">Boolean</a> <a href="get-allow.html">getAllow</a>()<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">open fun <a href="../../io.github.uinnn.interfaces.interfaces/-metadatable/includes.html">includes</a>(key: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
   </div>
-<a data-name="-1089631147%2FFunctions%2F769193423" anchor-label="getAllow" id="-1089631147%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="-1089631147%2FFunctions%2F769193423" anchor-label="getAllow" id="-1089631147%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>If this worker is able to work.</div></div>
+<a data-name="-100696723%2FFunctions%2F769193423" anchor-label="includes" id="-100696723%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="-100696723%2FFunctions%2F769193423" anchor-label="includes" id="-100696723%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>Returns if the specified key is in the storage of this metadata object.</div></div>
 </div>
                     </div>
                   </div>
                 </div>
-<a data-name="247298379%2FFunctions%2F769193423" anchor-label="getGraphical" id="247298379%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
+<a data-name="-486117588%2FFunctions%2F769193423" anchor-label="interject" id="-486117588%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
                 <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="get-graphical.html">getGraphical</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="247298379%2FFunctions%2F769193423"></span>
+                    <div class=""><span class="inline-flex"><a href="../../io.github.uinnn.interfaces.interfaces/-metadatable/interject.html">interject</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-486117588%2FFunctions%2F769193423"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
                       <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
 
   <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace block"><a href="../../io.github.uinnn.interfaces/-graphical-user-interface/index.html">GraphicalUserInterface</a> <a href="get-graphical.html">getGraphical</a>()<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">open fun <a href="../../io.github.uinnn.interfaces.interfaces/-metadatable/interject.html">interject</a>(key: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, value: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
   </div>
-<a data-name="247298379%2FFunctions%2F769193423" anchor-label="getGraphical" id="247298379%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="247298379%2FFunctions%2F769193423" anchor-label="getGraphical" id="247298379%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>The graphical user interface owner of this worker.</div></div>
+<a data-name="-486117588%2FFunctions%2F769193423" anchor-label="interject" id="-486117588%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="-486117588%2FFunctions%2F769193423" anchor-label="interject" id="-486117588%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>Interject a metadata, this is, put a data or overwrite a existent data.</div></div>
 </div>
                     </div>
                   </div>
                 </div>
-<a data-name="-1223419081%2FFunctions%2F769193423" anchor-label="getInterval" id="-1223419081%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
+<a data-name="322242741%2FFunctions%2F769193423" anchor-label="introduce" id="322242741%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
                 <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="get-interval.html">getInterval</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1223419081%2FFunctions%2F769193423"></span>
+                    <div class=""><span class="inline-flex"><a href="../../io.github.uinnn.interfaces.interfaces/-metadatable/introduce.html">introduce</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="322242741%2FFunctions%2F769193423"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
                       <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
 
   <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace block"><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.time/-duration/index.html">Duration</a> <a href="get-interval.html">getInterval</a>()<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">open fun <a href="../../io.github.uinnn.interfaces.interfaces/-metadatable/introduce.html">introduce</a>(key: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, value: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
   </div>
-<a data-name="-1223419081%2FFunctions%2F769193423" anchor-label="getInterval" id="-1223419081%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="-1223419081%2FFunctions%2F769193423" anchor-label="getInterval" id="-1223419081%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>The delay of this worker before he's works again.</div></div>
+<a data-name="322242741%2FFunctions%2F769193423" anchor-label="introduce" id="322242741%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="322242741%2FFunctions%2F769193423" anchor-label="introduce" id="322242741%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>Introduce a metadata, this is, put a data only if not exists in the storage.</div></div>
 </div>
                     </div>
                   </div>
                 </div>
-<a data-name="-817677663%2FFunctions%2F769193423" anchor-label="getJob" id="-817677663%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
+<a data-name="-1216911587%2FFunctions%2F769193423" anchor-label="invalidate" id="-1216911587%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
                 <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="get-job.html">getJob</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-817677663%2FFunctions%2F769193423"></span>
+                    <div class=""><span class="inline-flex"><a href="../../io.github.uinnn.interfaces.interfaces/-metadatable/invalidate.html">invalidate</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1216911587%2FFunctions%2F769193423"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
                       <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
 
   <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace block"><span data-unresolved-link="kotlinx.coroutines/Job///PointingToDeclaration/">Job</span> <a href="get-job.html">getJob</a>()<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">open fun <a href="../../io.github.uinnn.interfaces.interfaces/-metadatable/invalidate.html">invalidate</a>(key: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
   </div>
-<a data-name="-817677663%2FFunctions%2F769193423" anchor-label="getJob" id="-817677663%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="-817677663%2FFunctions%2F769193423" anchor-label="getJob" id="-817677663%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>The job of this worker instance.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="440081699%2FFunctions%2F769193423" anchor-label="getStorage" id="440081699%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="get-storage.html">getStorage</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="440081699%2FFunctions%2F769193423"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace block"><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentHashMap.html">ConcurrentHashMap</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a>, <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a>&gt; <a href="get-storage.html">getStorage</a>()<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="440081699%2FFunctions%2F769193423" anchor-label="getStorage" id="440081699%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="440081699%2FFunctions%2F769193423" anchor-label="getStorage" id="440081699%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>All registered metadata of this metadatable object.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-263840413%2FFunctions%2F769193423" anchor-label="includes" id="-263840413%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#-263840413%2FFunctions%2F769193423">includes</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-263840413%2FFunctions%2F769193423"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace block"><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html">Boolean</a> <a href="index.html#-263840413%2FFunctions%2F769193423">includes</a>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> key)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-263840413%2FFunctions%2F769193423" anchor-label="includes" id="-263840413%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="-263840413%2FFunctions%2F769193423" anchor-label="includes" id="-263840413%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>Returns if the specified key is in the storage of this metadata object.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="859754018%2FFunctions%2F769193423" anchor-label="interject" id="859754018%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#859754018%2FFunctions%2F769193423">interject</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="859754018%2FFunctions%2F769193423"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace block"><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a> <a href="index.html#859754018%2FFunctions%2F769193423">interject</a>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> key, <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a> value)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="859754018%2FFunctions%2F769193423" anchor-label="interject" id="859754018%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="859754018%2FFunctions%2F769193423" anchor-label="interject" id="859754018%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>Interject a metadata, this is, put a data or overwrite a existent data.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="1668114347%2FFunctions%2F769193423" anchor-label="introduce" id="1668114347%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#1668114347%2FFunctions%2F769193423">introduce</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1668114347%2FFunctions%2F769193423"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace block"><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a> <a href="index.html#1668114347%2FFunctions%2F769193423">introduce</a>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> key, <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a> value)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="1668114347%2FFunctions%2F769193423" anchor-label="introduce" id="1668114347%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="1668114347%2FFunctions%2F769193423" anchor-label="introduce" id="1668114347%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>Introduce a metadata, this is, put a data only if not exists in the storage.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="915792275%2FFunctions%2F769193423" anchor-label="invalidate" id="915792275%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#915792275%2FFunctions%2F769193423">invalidate</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="915792275%2FFunctions%2F769193423"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace block"><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a> <a href="index.html#915792275%2FFunctions%2F769193423">invalidate</a>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> key)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="915792275%2FFunctions%2F769193423" anchor-label="invalidate" id="915792275%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="915792275%2FFunctions%2F769193423" anchor-label="invalidate" id="915792275%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>Invalidates a metadata, this is, remove a existent metadata in the storage.</div></div>
+<a data-name="-1216911587%2FFunctions%2F769193423" anchor-label="invalidate" id="-1216911587%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="-1216911587%2FFunctions%2F769193423" anchor-label="invalidate" id="-1216911587%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>Invalidates a metadata, this is, remove a existent metadata in the storage.</div></div>
 </div>
                     </div>
                   </div>
@@ -216,33 +131,33 @@
 <a data-name="-1759736587%2FFunctions%2F769193423" anchor-label="launch" id="-1759736587%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
                 <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#-1759736587%2FFunctions%2F769193423">launch</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1759736587%2FFunctions%2F769193423"></span>
+                    <div class=""><span class="inline-flex"><a href="launch.html">launch</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1759736587%2FFunctions%2F769193423"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
                       <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
 
   <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace block"><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> <a href="index.html#-1759736587%2FFunctions%2F769193423">launch</a>()<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">open override fun <a href="launch.html">launch</a>()<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
   </div>
 <a data-name="-1759736587%2FFunctions%2F769193423" anchor-label="launch" id="-1759736587%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="-1759736587%2FFunctions%2F769193423" anchor-label="launch" id="-1759736587%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>Launchs the worker.</div></div>
 </div>
                     </div>
                   </div>
                 </div>
-<a data-name="407058154%2FFunctions%2F769193423" anchor-label="locate" id="407058154%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
+<a data-name="-66514572%2FFunctions%2F769193423" anchor-label="locate" id="-66514572%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
                 <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#407058154%2FFunctions%2F769193423">locate</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="407058154%2FFunctions%2F769193423"></span>
+                    <div class=""><span class="inline-flex"><a href="../../io.github.uinnn.interfaces.interfaces/-metadatable/locate.html">locate</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-66514572%2FFunctions%2F769193423"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
                       <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
 
   <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace block"><a href="../../io.github.uinnn.interfaces.interfaces/-metadatable/locate.html">T</a> <a href="index.html#407058154%2FFunctions%2F769193423">locate</a>&lt;T extends <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> key)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">open fun &lt;<a href="../../io.github.uinnn.interfaces.interfaces/-metadatable/locate.html">T</a>&gt; <a href="../../io.github.uinnn.interfaces.interfaces/-metadatable/locate.html">locate</a>(key: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>): <a href="../../io.github.uinnn.interfaces.interfaces/-metadatable/locate.html">T</a>?<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
   </div>
-<a data-name="407058154%2FFunctions%2F769193423" anchor-label="locate" id="407058154%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="407058154%2FFunctions%2F769193423" anchor-label="locate" id="407058154%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>Try locates a existent metadata, or null if the metadata not exists in the storage.</div></div>
+<a data-name="-66514572%2FFunctions%2F769193423" anchor-label="locate" id="-66514572%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="-66514572%2FFunctions%2F769193423" anchor-label="locate" id="-66514572%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>Try locates a existent metadata, or null if the metadata not exists in the storage.</div></div>
 </div>
                     </div>
                   </div>
@@ -250,84 +165,16 @@
 <a data-name="-1845885509%2FFunctions%2F769193423" anchor-label="resume" id="-1845885509%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
                 <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#-1845885509%2FFunctions%2F769193423">resume</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1845885509%2FFunctions%2F769193423"></span>
+                    <div class=""><span class="inline-flex"><a href="resume.html">resume</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1845885509%2FFunctions%2F769193423"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
                       <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
 
   <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace block"><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> <a href="index.html#-1845885509%2FFunctions%2F769193423">resume</a>()<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">open override fun <a href="resume.html">resume</a>()<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
   </div>
 <a data-name="-1845885509%2FFunctions%2F769193423" anchor-label="resume" id="-1845885509%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="-1845885509%2FFunctions%2F769193423" anchor-label="resume" id="-1845885509%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>Cancels the worker.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-571963930%2FFunctions%2F769193423" anchor-label="setAllow" id="-571963930%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="set-allow.html">setAllow</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-571963930%2FFunctions%2F769193423"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace block"><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> <a href="set-allow.html">setAllow</a>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html">Boolean</a> allow)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-571963930%2FFunctions%2F769193423" anchor-label="setAllow" id="-571963930%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="-571963930%2FFunctions%2F769193423" anchor-label="setAllow" id="-571963930%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>If this worker is able to work.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="1572868131%2FFunctions%2F769193423" anchor-label="setInterval" id="1572868131%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="set-interval.html">setInterval</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1572868131%2FFunctions%2F769193423"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace block"><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> <a href="set-interval.html">setInterval</a>(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.time/-duration/index.html">Duration</a> interval)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="1572868131%2FFunctions%2F769193423" anchor-label="setInterval" id="1572868131%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="1572868131%2FFunctions%2F769193423" anchor-label="setInterval" id="1572868131%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>The delay of this worker before he's works again.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-1972830068%2FFunctions%2F769193423" anchor-label="setJob" id="-1972830068%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="set-job.html">setJob</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1972830068%2FFunctions%2F769193423"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace block"><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> <a href="set-job.html">setJob</a>(<span data-unresolved-link="kotlinx.coroutines/Job///PointingToDeclaration/">Job</span> job)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-1972830068%2FFunctions%2F769193423" anchor-label="setJob" id="-1972830068%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="-1972830068%2FFunctions%2F769193423" anchor-label="setJob" id="-1972830068%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>The job of this worker instance.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="1858654170%2FFunctions%2F769193423" anchor-label="setStorage" id="1858654170%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="set-storage.html">setStorage</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1858654170%2FFunctions%2F769193423"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace block"><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> <a href="set-storage.html">setStorage</a>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentHashMap.html">ConcurrentHashMap</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a>, <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a>&gt; storage)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="1858654170%2FFunctions%2F769193423" anchor-label="setStorage" id="1858654170%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="1858654170%2FFunctions%2F769193423" anchor-label="setStorage" id="1858654170%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>All registered metadata of this metadatable object.</div></div>
 </div>
                     </div>
                   </div>
@@ -337,12 +184,12 @@
               <div class="table" data-togglable="Properties"><a data-name="-359978583%2FProperties%2F769193423" anchor-label="allow" id="-359978583%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
                 <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#-359978583%2FProperties%2F769193423">allow</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-359978583%2FProperties%2F769193423"></span>
+                    <div class=""><span class="inline-flex"><a href="allow.html">allow</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-359978583%2FProperties%2F769193423"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
                       <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="-359978583%2FProperties%2F769193423" anchor-label="allow" id="-359978583%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace block">private  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html">Boolean</a> <a href="index.html#-359978583%2FProperties%2F769193423">allow</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-359978583%2FProperties%2F769193423" anchor-label="allow" id="-359978583%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a>If this worker is able to work.</div></div></div>
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="-359978583%2FProperties%2F769193423" anchor-label="allow" id="-359978583%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace">open override var <a href="allow.html">allow</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-359978583%2FProperties%2F769193423" anchor-label="allow" id="-359978583%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a>If this worker is able to work.</div></div></div>
                       </div>
                     </div>
                   </div>
@@ -350,12 +197,12 @@
 <a data-name="-591115105%2FProperties%2F769193423" anchor-label="graphical" id="-591115105%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
                 <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#-591115105%2FProperties%2F769193423">graphical</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-591115105%2FProperties%2F769193423"></span>
+                    <div class=""><span class="inline-flex"><a href="graphical.html">graphical</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-591115105%2FProperties%2F769193423"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
                       <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="-591115105%2FProperties%2F769193423" anchor-label="graphical" id="-591115105%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace block">private final <a href="../../io.github.uinnn.interfaces/-graphical-user-interface/index.html">GraphicalUserInterface</a> <a href="index.html#-591115105%2FProperties%2F769193423">graphical</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-591115105%2FProperties%2F769193423" anchor-label="graphical" id="-591115105%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a>The graphical user interface owner of this worker.</div></div></div>
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="-591115105%2FProperties%2F769193423" anchor-label="graphical" id="-591115105%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace">open override val <a href="graphical.html">graphical</a>: <a href="../../io.github.uinnn.interfaces/-graphical-interface/index.html">GraphicalInterface</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-591115105%2FProperties%2F769193423" anchor-label="graphical" id="-591115105%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a>The graphical user interface owner of this worker.</div></div></div>
                       </div>
                     </div>
                   </div>
@@ -363,12 +210,12 @@
 <a data-name="-973370013%2FProperties%2F769193423" anchor-label="interval" id="-973370013%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
                 <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#-973370013%2FProperties%2F769193423">interval</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-973370013%2FProperties%2F769193423"></span>
+                    <div class=""><span class="inline-flex"><a href="interval.html">interval</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-973370013%2FProperties%2F769193423"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
                       <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="-973370013%2FProperties%2F769193423" anchor-label="interval" id="-973370013%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace block">private  <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.time/-duration/index.html">Duration</a> <a href="index.html#-973370013%2FProperties%2F769193423">interval</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-973370013%2FProperties%2F769193423" anchor-label="interval" id="-973370013%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a>The delay of this worker before he's works again.</div></div></div>
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="-973370013%2FProperties%2F769193423" anchor-label="interval" id="-973370013%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace">open override var <a href="interval.html">interval</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.time/-duration/index.html">Duration</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-973370013%2FProperties%2F769193423" anchor-label="interval" id="-973370013%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a>The delay of this worker before he's works again.</div></div></div>
                       </div>
                     </div>
                   </div>
@@ -376,12 +223,12 @@
 <a data-name="309337333%2FProperties%2F769193423" anchor-label="job" id="309337333%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
                 <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#309337333%2FProperties%2F769193423">job</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="309337333%2FProperties%2F769193423"></span>
+                    <div class=""><span class="inline-flex"><a href="job.html">job</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="309337333%2FProperties%2F769193423"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
                       <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="309337333%2FProperties%2F769193423" anchor-label="job" id="309337333%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace block">private  <span data-unresolved-link="kotlinx.coroutines/Job///PointingToDeclaration/">Job</span> <a href="index.html#309337333%2FProperties%2F769193423">job</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="309337333%2FProperties%2F769193423" anchor-label="job" id="309337333%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a>The job of this worker instance.</div></div></div>
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="309337333%2FProperties%2F769193423" anchor-label="job" id="309337333%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace">open override var <a href="job.html">job</a>: <span data-unresolved-link="kotlinx.coroutines/Job///PointingToDeclaration/">Job</span>? = null<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="309337333%2FProperties%2F769193423" anchor-label="job" id="309337333%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a>The job of this worker instance.</div></div></div>
                       </div>
                     </div>
                   </div>
@@ -389,12 +236,12 @@
 <a data-name="1556526455%2FProperties%2F769193423" anchor-label="storage" id="1556526455%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
                 <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#1556526455%2FProperties%2F769193423">storage</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1556526455%2FProperties%2F769193423"></span>
+                    <div class=""><span class="inline-flex"><a href="storage.html">storage</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1556526455%2FProperties%2F769193423"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
                       <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="1556526455%2FProperties%2F769193423" anchor-label="storage" id="1556526455%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace block">private  <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentHashMap.html">ConcurrentHashMap</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a>, <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a>&gt; <a href="index.html#1556526455%2FProperties%2F769193423">storage</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="1556526455%2FProperties%2F769193423" anchor-label="storage" id="1556526455%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a>All registered metadata of this metadatable object.</div></div></div>
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="1556526455%2FProperties%2F769193423" anchor-label="storage" id="1556526455%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace">open override var <a href="storage.html">storage</a>: <a href="../../io.github.uinnn.interfaces.interfaces/index.html#1474675182%2FClasslikes%2F769193423">Storage</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="1556526455%2FProperties%2F769193423" anchor-label="storage" id="1556526455%2FProperties%2F769193423" data-filterable-set=":dokkaHtml/main"></a>All registered metadata of this metadatable object.</div></div></div>
                       </div>
                     </div>
                   </div>

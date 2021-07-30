@@ -1,14 +1,15 @@
 package io.github.uinnn.interfaces.worker
 
-import io.github.uinnn.interfaces.GraphicalUserInterface
+import io.github.uinnn.interfaces.GraphicalInterface
 import io.github.uinnn.interfaces.interfaces.Metadatable
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
 import kotlin.math.max
 import kotlin.time.Duration
 
 /**
  * A worker is a updater for all's graphical users interfaces.
- * Any [GraphicalUserInterface] has a [AsynchronousWorker]
+ * Any [GraphicalInterface] has a [AsynchronousWorker]
  * by default worker.
  */
 interface Worker : Metadatable {
@@ -16,12 +17,12 @@ interface Worker : Metadatable {
   /**
    * The job of this worker instance.
    */
-  var job: Job
+  var job: Job?
 
   /**
    * The graphical user interface owner of this worker.
    */
-  val graphical: GraphicalUserInterface
+  val graphical: GraphicalInterface
 
   /**
    * If this worker is able to work.
@@ -60,15 +61,15 @@ fun Worker.resumeAndDeny() {
  * This is a internal API, but you can use in some cases.
  * Don't use it if you don't know what you're doing.
  */
-fun Worker.reconstruct() {
-  job = WorkerScope.launch(this)
+fun Worker.reconstructAsynchronous() {
+  job = SupervisorJob(WorkerScope.start(this))
   reconstructions++
 }
 
 /**
  * Gets the amount of this worker launcheds.
  */
-inline var Worker.launchs: Int
+var Worker.launchs: Int
   get() = locate("Launchs") ?: 0
   set(value) {
     interject("Launchs", max(1, value))
@@ -82,7 +83,7 @@ inline val Worker.isFirstLaunch: Boolean get() = launchs < 1
 /**
  * Gets the amount of this worker resumes.
  */
-inline var Worker.resumes: Int
+var Worker.resumes: Int
   get() = locate("Resumes") ?: 0
   set(value) {
     interject("Resumes", max(1, value))
@@ -96,7 +97,7 @@ inline val Worker.isFirstResume: Boolean get() = resumes < 1
 /**
  * Gets the amount of this worker reconstructions.
  */
-inline var Worker.reconstructions: Int
+var Worker.reconstructions: Int
   get() = locate("Reconstructions") ?: 0
   set(value) {
     interject("Reconstructions", max(1, value))
@@ -110,20 +111,20 @@ inline val Worker.isFirstReconstruct: Boolean get() = reconstructions < 1
 /**
  * Verifies if this worker can launch. This is equals a
  * ```kt
- * allow && !job.isActive
+ * allow || !job.isActive
  * ```
  */
-inline val Worker.canLaunch: Boolean get() = allow && !job.isActive
+inline val Worker.canLaunch: Boolean get() = allow || job?.isActive == false
 
 /**
  * Verifies if this worker is working.
  */
-inline val Worker.isWorking: Boolean get() = job.isActive
+inline val Worker.isWorking: Boolean get() = job?.isActive == true
 
 /**
  * Returns the amount of works this worker worked.
  */
-inline var Worker.workedAmount: Int
+var Worker.workedAmount: Int
   get() = locate("WorkedAmount") ?: 0
   set(value) {
     interject("WorkedAmount", max(1, value))

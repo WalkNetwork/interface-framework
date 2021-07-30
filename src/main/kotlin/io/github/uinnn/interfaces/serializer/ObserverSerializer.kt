@@ -28,7 +28,7 @@ object ObserverSerializer : KSerializer<Observers> {
         0 -> observers[ObserverKind.PRESS] = decodeBooleanElement(descriptor, index)
         1 -> observers[ObserverKind.PRESS_CANCELLABLE] = decodeBooleanElement(descriptor, index)
         2 -> observers[ObserverKind.ACCESS] = decodeBooleanElement(descriptor, index)
-        3 -> observers[ObserverKind.UNCCESS] = decodeBooleanElement(descriptor, index)
+        3 -> observers[ObserverKind.UNCESS] = decodeBooleanElement(descriptor, index)
         4 -> observers[ObserverKind.PICKUP] = decodeBooleanElement(descriptor, index)
         5 -> observers[ObserverKind.DRAG] = decodeBooleanElement(descriptor, index)
         else -> break
@@ -42,7 +42,7 @@ object ObserverSerializer : KSerializer<Observers> {
       encodeBooleanElement(descriptor, 0, value.getOrDefault(ObserverKind.PRESS, true))
       encodeBooleanElement(descriptor, 1, value.getOrDefault(ObserverKind.PRESS_CANCELLABLE, true))
       encodeBooleanElement(descriptor, 2, value.getOrDefault(ObserverKind.ACCESS, true))
-      encodeBooleanElement(descriptor, 3, value.getOrDefault(ObserverKind.UNCCESS, true))
+      encodeBooleanElement(descriptor, 3, value.getOrDefault(ObserverKind.UNCESS, true))
       encodeBooleanElement(descriptor, 4, value.getOrDefault(ObserverKind.PICKUP, false))
       encodeBooleanElement(descriptor, 5, value.getOrDefault(ObserverKind.DRAG, false))
     }

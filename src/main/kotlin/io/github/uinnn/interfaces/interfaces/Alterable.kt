@@ -1,8 +1,9 @@
 package io.github.uinnn.interfaces.interfaces
 
 import io.github.uinnn.interfaces.Engine
+import io.github.uinnn.interfaces.common.Action
 
-typealias AlterAction = Engine.() -> Unit
+typealias AlterAction = Action<Engine>
 
 /**
  * Represents a alterable object for engines.

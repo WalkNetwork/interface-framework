@@ -1,8 +1,9 @@
 package io.github.uinnn.interfaces.common
 
 import io.github.uinnn.interfaces.Engine
+import io.github.uinnn.interfaces.EngineBuilder
 import io.github.uinnn.interfaces.Engines
-import io.github.uinnn.interfaces.GraphicalUserInterface
+import io.github.uinnn.interfaces.GraphicalInterface
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryEvent
@@ -10,8 +11,6 @@ import org.bukkit.event.inventory.InventoryInteractEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.material.MaterialData
-
-typealias Filter<T> = (T) -> Boolean
 
 /**
  * Fills all slots of the inventory with gived item.
@@ -38,15 +37,15 @@ fun Inventory.fill(data: MaterialData, replaces: Boolean = false) = fill(data.to
  * Gets a graphical user interface from a inventory
  * or nulls, if the inventory is not a interface.
  */
-fun Inventory.interfaceOrNull(): GraphicalUserInterface? {
-  return if (holder is GraphicalUserInterface) holder as GraphicalUserInterface else null
+fun Inventory.interfaceOrNull(): GraphicalInterface? {
+  return if (holder is GraphicalInterface) holder as GraphicalInterface else null
 }
 
 /**
  * Gets a graphical user interface from a inventory of a
  * inventory event or nulls, if the inventory is not a interface.
  */
-fun InventoryEvent.interfaceOrNull(): GraphicalUserInterface? = inventory.interfaceOrNull()
+fun InventoryEvent.interfaceOrNull(): GraphicalInterface? = inventory.interfaceOrNull()
 
 /**
  * Casts who clicked this inventory event as Player
@@ -76,5 +75,10 @@ fun slotAt(line: Int, slot: Int) = startSlot(line) + slot - 1
 /**
  * Converts this ItemStack to a engine.
  */
-fun ItemStack.toEngine(slot: Int = 0): Engine = Engines.from(this, slot)
+fun ItemStack.asEngine(slot: Int = 0): Engine = Engines.from(this, slot)
+
+/**
+ * Creates a new engine builder from this item stack.
+ */
+fun ItemStack.asEngineBuilder(): EngineBuilder = EngineBuilder.from(this)
 

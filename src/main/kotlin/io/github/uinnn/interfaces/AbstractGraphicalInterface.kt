@@ -5,9 +5,13 @@ import io.github.uinnn.interfaces.interfaces.*
 import io.github.uinnn.interfaces.worker.AsynchronousWorker
 import io.github.uinnn.interfaces.worker.Worker
 import org.bukkit.Bukkit
+import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
 
-abstract class AbstractGraphicalInterface(title: String, lines: Int) : GraphicalUserInterface {
+/**
+ * A abstract implementation of a [GraphicalInterface].
+ */
+abstract class AbstractGraphicalInterface(title: String, lines: Int) : GraphicalInterface {
   override var model: Inventory = Bukkit.createInventory(this, lines * 9, title)
   override var engineStack: EngineStack = EngineStack()
   override var worker: Worker = AsynchronousWorker(this)
@@ -17,8 +21,9 @@ abstract class AbstractGraphicalInterface(title: String, lines: Int) : Graphical
   override var uncessors: AccessSet = AccessSet()
   override var storage: Storage = Storage()
   override var observers: Observers = Observers()
-  override var users: UserSet = UserSet()
-  
+  override lateinit var owner: Player
+  override var isOpen: Boolean = false
+
   init {
     defaultObservers()
     if (hasBackground) {
@@ -27,4 +32,7 @@ abstract class AbstractGraphicalInterface(title: String, lines: Int) : Graphical
   }
 }
 
+/**
+ * A simple implementation of a [GraphicalInterface].
+ */
 class SimpleGraphicalInterface(title: String, lines: Int) : AbstractGraphicalInterface(title, lines)

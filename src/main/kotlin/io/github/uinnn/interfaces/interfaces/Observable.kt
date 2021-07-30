@@ -41,7 +41,7 @@ interface Observable {
  * All possible kind of observer can be trigerred.
  */
 enum class ObserverKind {
-  PRESS, PRESS_CANCELLABLE, UNCCESS, ACCESS, PICKUP, DRAG,
+  PRESS, PRESS_CANCELLABLE, UNCESS, ACCESS, PICKUP, DRAG,
 }
 
 /**
@@ -56,7 +56,7 @@ fun Observable.defaultObservers() = apply {
   allow(ObserverKind.PRESS)
   allow(ObserverKind.PRESS_CANCELLABLE)
   allow(ObserverKind.ACCESS)
-  allow(ObserverKind.UNCCESS)
+  allow(ObserverKind.UNCESS)
   negate(ObserverKind.DRAG)
   negate(ObserverKind.PICKUP)
 }

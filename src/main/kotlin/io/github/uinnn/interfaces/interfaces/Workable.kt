@@ -1,8 +1,9 @@
 package io.github.uinnn.interfaces.interfaces
 
-import io.github.uinnn.interfaces.GraphicalUserInterface
+import io.github.uinnn.interfaces.GraphicalInterface
+import io.github.uinnn.interfaces.common.SuspendableAction
 
-typealias WorkerAction = suspend GraphicalUserInterface.() -> Unit
+typealias WorkerAction = SuspendableAction<GraphicalInterface>
 typealias WorkSet = HashSet<WorkerAction>
 
 /**

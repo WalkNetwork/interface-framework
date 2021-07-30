@@ -1,13 +1,14 @@
 package io.github.uinnn.interfaces.worker
 
-import io.github.uinnn.interfaces.GraphicalUserInterface
+import io.github.uinnn.interfaces.GraphicalInterface
+import io.github.uinnn.interfaces.interfaces.Storage
 import kotlinx.coroutines.Job
 import kotlin.time.Duration
 
 /**
  * A worker default class. This class works
  * everything in async mode. By default a
- * [GraphicalUserInterface] NOT allows a worker to work
+ * [GraphicalInterface] NOT allows a worker to work
  * just because that consumes more server processing.
  * You can change if a worker is allowed to work changing
  * the [allow] property. Also by defaults, the interval
@@ -18,10 +19,25 @@ import kotlin.time.Duration
  * to execute the default bukkit scheduler sync task.
  */
 class AsynchronousWorker(
-  graphical: GraphicalUserInterface,
-  allow: Boolean = false,
-  interval: Duration = Duration.seconds(1)
-) : AbstractWorker(graphical, allow, interval) {
-  override var job: Job = WorkerScope.launch(this)
-}
+  override val graphical: GraphicalInterface,
+  override var allow: Boolean = false,
+  override var interval: Duration = Duration.seconds(1)
+) : Worker {
+  override var storage: Storage = Storage()
+  override var job: Job? = null
 
+  override fun launch() {
+    if (!allow) return
+    if (job == null)
+      job = WorkerScope.start(this)
+    if (isWorking) return
+    job!!.start()
+  }
+
+  override fun resume() {
+    if (job == null) return
+    if (!isWorking) return
+    job!!.cancel()
+    job = null
+  }
+}

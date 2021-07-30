@@ -1,6 +1,6 @@
 plugins {
-  kotlin("jvm") version "1.5.20"
-  kotlin("plugin.serialization") version "1.5.20"
+  kotlin("jvm") version "1.5.21"
+  kotlin("plugin.serialization") version "1.5.21"
   id("java")
   id("com.github.johnrengelman.shadow") version "6.0.0"
   id("maven-publish")
@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "io.github.uinnn"
-version = "1.1"
+version = "1.2"
 
 repositories {
   mavenCentral()
@@ -20,9 +20,8 @@ repositories {
 dependencies {
   compileOnly("com.single.api:spigot:1.8.9")
   compileOnly(kotlin("stdlib-jdk8"))
-  compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
+  compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1")
   compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-core:1.2.2")
-  dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.5.0")
 }
 
 nexusPublishing {
@@ -94,7 +93,8 @@ tasks {
       "-Xopt-in=kotlin.time.ExperimentalTime," +
         "kotlin.ExperimentalStdlibApi," +
         "kotlinx.coroutines.DelicateCoroutinesApi," +
-        "kotlinx.coroutines.ExperimentalCoroutinesApi,"
+        "kotlinx.coroutines.ExperimentalCoroutinesApi," +
+        "kotlinx.coroutines.InternalCoroutinesApi"
   }
 
   shadowJar {

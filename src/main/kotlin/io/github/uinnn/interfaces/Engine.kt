@@ -2,74 +2,121 @@ package io.github.uinnn.interfaces
 
 import io.github.uinnn.interfaces.interfaces.*
 import org.bukkit.Material
-import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.material.MaterialData
+import java.util.concurrent.ConcurrentHashMap
 
-typealias EngineStack = HashMap<Int, Engine>
+typealias EngineStack = ConcurrentHashMap<Int, Engine>
 
-open class Engine : ItemStack, Alterable, Renderable, Pressable, Visible, Metadatable, Workable {
-  var graphical: GraphicalUserInterface? = null
+/**
+ * A engine is a more extensible [ItemStack]. Supporting everything
+ * when working with [GraphicalInterface] and [ScrollableGraphicalInterface].
+ * This class supports:
+ * * Renders [Renderable]
+ * * Press [Pressable]
+ * * Alter [Alterable]
+ * * Visibility [Visible]
+ * * Metadata [Metadatable]
+ * * Work [Workable]
+ * * Scroll [Scrollable]
+ */
+open class Engine : ItemStack, Alterable, Renderable, Pressable, Visible, Metadatable, Workable, Scrollable {
+  var graphical: GraphicalInterface? = null
   override var works: WorkSet = WorkSet()
   override var renders: RenderSet = RenderSet()
   override var pressSet: PressSet = PressSet()
   override var storage: Storage = Storage()
-  
+  override var scrollers: ScrollSet = ScrollSet()
+
   var slot: Int = 0
     set(value) {
       field = value
       alter(this)
     }
-  
+
   override var isVisible: Boolean = true
     set(value) {
-      if (value) graphical?.setItem(slot, this)
-      else graphical?.setItem(slot, null)
+      graphical?.setItem(slot, if (value) this else null)
       field = value
     }
-  
+
   constructor(type: Material) : super(type)
   constructor(data: MaterialData) : this(data.itemType, 1, data.data.toInt())
   constructor(type: Material, amount: Int) : super(type, amount)
   constructor(type: Material, amount: Int, damage: Int) : super(type, amount, damage.toShort())
   constructor(stack: ItemStack) : super(stack)
-  
+
   override fun alter(engine: Engine): Engine {
     if (!isVisible) return this
     graphical?.setItem(slot, engine)
     return engine
   }
-  
+
   override fun press(event: InventoryClickEvent) {
     if (graphical == null || !isVisible) return
     pressSet.forEach { press ->
       press(event, graphical!!)
     }
   }
-  
-  override fun render(player: Player) {
+
+  override fun render() {
     if (graphical == null) return
     renders.forEach { render ->
-      render(graphical!!, player)
+      render(graphical!!)
     }
   }
-  
+
   override suspend fun work() {
     if (graphical == null) return
-    works.forEach { work ->
-      work(graphical!!)
+    works.forEach { action ->
+      action(graphical!!)
     }
   }
-  
-  fun relocate(slot: Int): Engine {
-    this.slot = slot
-    return this
+
+  override fun scroll() {
+    scrollers.forEach { scroll ->
+      scroll(graphical as ScrollableGraphicalInterface)
+    }
   }
 }
 
+/**
+ * Changes the slot of this engine and returns itself
+ */
+fun Engine.relocate(slot: Int): Engine {
+  this.slot = slot
+  return this
+}
+
+/**
+ * A metadata used to know if this engine is
+ * persistent or not. Most commonly used in
+ * [ScrollableGraphicalInterface].
+ */
 inline var Engine.isPersistent: Boolean
   get() = locate("Persistent") ?: false
   set(value) {
     interject("Persistent", value)
   }
+
+/**
+ * Registers a handlers to scrollers and renders
+ * of this scrollable graphical interface.
+ * This will be only applied if the graphical of
+ * this engine is a [ScrollableGraphicalInterface].
+ */
+fun Engine.onScrollAndRender(action: ScrollRenderAction) {
+  onScroll { action(this) }
+  onRender { action(graphical as ScrollableGraphicalInterface) }
+}
+
+/**
+ * Returns a mutable engine builder of this engine.
+ */
+fun Engine.builder(): EngineBuilder = EngineBuilder.from(this)
+
+/**
+ * Returns a immutable engine builder of this engine.
+ */
+fun Engine.builderImmutable(): EngineBuilder = EngineBuilder.fromImmutable(this)

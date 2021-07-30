@@ -1,9 +1,10 @@
 package io.github.uinnn.interfaces.interfaces
 
-import io.github.uinnn.interfaces.GraphicalUserInterface
+import io.github.uinnn.interfaces.GraphicalInterface
+import io.github.uinnn.interfaces.common.MultiAction
 import org.bukkit.event.inventory.InventoryClickEvent
 
-typealias PressAction = InventoryClickEvent.(GraphicalUserInterface) -> Unit
+typealias PressAction = MultiAction<InventoryClickEvent, GraphicalInterface>
 typealias PressSet = HashSet<PressAction>
 
 /**
@@ -13,7 +14,8 @@ typealias PressSet = HashSet<PressAction>
 interface Pressable {
 
   /**
-   * All registered press of this pressable object.
+   * All registered press handlers
+   * of this pressable object.
    */
   var pressSet: PressSet
 

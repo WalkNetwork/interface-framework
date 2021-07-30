@@ -6,8 +6,8 @@ typealias Storage = ConcurrentHashMap<String, Any>
 
 /**
  * Represents a metadatable object for graphical user interfaces or engines.
- * This is, the object will be able to store metadata of any type
- * with a String as key.
+ * This is, the object will be able to store metadata of [Any] (type-safe) type
+ * with a [String] as key.
  */
 interface Metadatable {
 

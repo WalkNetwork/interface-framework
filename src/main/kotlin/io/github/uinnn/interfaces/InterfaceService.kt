@@ -1,12 +1,12 @@
 package io.github.uinnn.interfaces
 
-import io.github.uinnn.interfaces.interfaces.ObserverKind
 import io.github.uinnn.interfaces.common.interfaceOrNull
+import io.github.uinnn.interfaces.interfaces.ObserverKind
 import org.bukkit.Bukkit
-import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
+import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.event.inventory.InventoryDragEvent
 import org.bukkit.event.inventory.InventoryOpenEvent
 import org.bukkit.event.player.PlayerPickupItemEvent
@@ -51,10 +51,10 @@ object InterfaceService : Listener {
   }
 
   @EventHandler
-  fun onClose(event: InventoryOpenEvent) {
+  fun onClose(event: InventoryCloseEvent) {
     val graphical = event.interfaceOrNull() ?: return
-    if (graphical.permits(ObserverKind.UNCCESS)) {
-      graphical.uncess(event.player as Player, false)
+    if (graphical.permits(ObserverKind.UNCESS)) {
+      graphical.uncess(false)
     } else {
       Bukkit.getScheduler().runTaskLater(plugin, {
         event.player.openInventory(graphical)
@@ -69,4 +69,8 @@ object InterfaceService : Listener {
   }
 }
 
+/**
+ * Loads all services of a interface can offer
+ * with the this plugin as owner.
+ */
 fun Plugin.loadInterfaceService() = InterfaceService.load(this)
