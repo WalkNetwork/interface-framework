@@ -10,6 +10,7 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.material.MaterialData
+import kotlin.math.max
 
 /**
  * A graphical user interface is a more extensible [Inventory].
@@ -49,9 +50,10 @@ interface GraphicalInterface : Interface, Accessible, Renderable, Workable, Obse
     accessors.forEach { accessor ->
       accessor(this)
     }
-    if (isClosed) worker.start()
+    worker.start()
     owner.openInventory(this)
     isOpen = true
+    accesseds++
   }
 
   override fun uncess(close: Boolean) {
@@ -61,6 +63,7 @@ interface GraphicalInterface : Interface, Accessible, Renderable, Workable, Obse
     if (close) owner.closeInventory()
     worker.cancel()
     isOpen = false
+    uncesseds++
   }
 
   override fun render() {
@@ -245,6 +248,7 @@ fun GraphicalInterface.renderInterface() {
   renders.forEach { action ->
     action(this)
   }
+  rendereds++
 }
 
 /**
@@ -301,6 +305,33 @@ fun GraphicalInterface.asScrollable(): ScrollableGraphicalInterface = this as Sc
 /**
  * Gets the background as icon if not null or default.
  */
-fun GraphicalInterface.backgroundOrDefault(default: ItemStack?): ItemStack? {
+fun GraphicalInterface.backgroundOrDefault(default: ItemStack? = null): ItemStack? {
   return if (hasBackground) background!!.toItemStack(1) else default
 }
+
+/**
+ * Returns the accesseds amount of this graphical interface.
+ */
+var GraphicalInterface.accesseds: Int
+  get() = locate("Accesseds") ?: 0
+  set(value) {
+    interject("Accesseds", max(1, value))
+  }
+
+/**
+ * Returns the uncesseds amount of this graphical interface.
+ */
+var GraphicalInterface.uncesseds: Int
+  get() = locate("Uncesseds") ?: 0
+  set(value) {
+    interject("Uncesseds", max(1, value))
+  }
+
+/**
+ * Returns the amount of renders that this engines makes.
+ */
+var GraphicalInterface.rendereds: Int
+  get() = locate("Rendereds") ?: 0
+  set(value) {
+    interject("Rendereds", max(1, value))
+  }

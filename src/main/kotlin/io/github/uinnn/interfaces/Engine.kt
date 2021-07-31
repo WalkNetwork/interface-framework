@@ -6,6 +6,7 @@ import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.material.MaterialData
 import java.util.concurrent.ConcurrentHashMap
+import kotlin.math.max
 
 typealias EngineStack = ConcurrentHashMap<Int, Engine>
 
@@ -31,7 +32,9 @@ open class Engine : ItemStack, Alterable, Renderable, Pressable, Visible, Metada
 
   var slot: Int = 0
     set(value) {
+      isVisible = false
       field = value
+      isVisible = true
       alter(this)
     }
 
@@ -60,6 +63,7 @@ open class Engine : ItemStack, Alterable, Renderable, Pressable, Visible, Metada
     pressSet.forEach { press ->
       press(event, graphical!!)
     }
+    presseds++
   }
 
   override fun render() {
@@ -67,6 +71,7 @@ open class Engine : ItemStack, Alterable, Renderable, Pressable, Visible, Metada
     renders.forEach { render ->
       render(graphical!!)
     }
+    rendereds++
   }
 
   override suspend fun work() {
@@ -80,6 +85,7 @@ open class Engine : ItemStack, Alterable, Renderable, Pressable, Visible, Metada
     scrollers.forEach { scroll ->
       scroll(graphical as ScrollableGraphicalInterface)
     }
+    scrolleds++
   }
 }
 
@@ -95,10 +101,37 @@ fun Engine.relocate(slot: Int): Engine = apply {
  * persistent or not. Most commonly used in
  * [ScrollableGraphicalInterface].
  */
-inline var Engine.isPersistent: Boolean
+var Engine.isPersistent: Boolean
   get() = locate("Persistent") ?: false
   set(value) {
     interject("Persistent", value)
+  }
+
+/**
+ * Returns the amount of renders that this engines makes.
+ */
+var Engine.rendereds: Int
+  get() = locate("Rendereds") ?: 0
+  set(value) {
+    interject("Rendereds", max(1, value))
+  }
+
+/**
+ * Returns the amount of scrolls that this engines makes.
+ */
+var Engine.scrolleds: Int
+  get() = locate("Scrolleds") ?: 0
+  set(value) {
+    interject("Scrolleds", max(1, value))
+  }
+
+/**
+ * Returns the amount of presseds that this engines makes.
+ */
+var Engine.presseds: Int
+  get() = locate("Presseds") ?: 0
+  set(value) {
+    interject("Presseds", max(1, value))
   }
 
 /**
@@ -121,3 +154,8 @@ fun Engine.builder(): EngineBuilder = EngineBuilder.from(this)
  * Returns a immutable engine builder of this engine.
  */
 fun Engine.builderImmutable(): EngineBuilder = EngineBuilder.fromImmutable(this)
+
+/**
+ * Uninstall this engine from the graphical interface.
+ */
+fun Engine.uninstall() = graphical?.uninstall(slot)

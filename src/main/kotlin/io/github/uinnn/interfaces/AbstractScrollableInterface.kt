@@ -4,8 +4,8 @@ import io.github.uinnn.interfaces.common.fill
 import io.github.uinnn.interfaces.interfaces.*
 import io.github.uinnn.interfaces.mapper.Mapper
 import io.github.uinnn.interfaces.mapper.PartialMapper
-import io.github.uinnn.interfaces.schematic.StandardSchematic
 import io.github.uinnn.interfaces.schematic.Schematic
+import io.github.uinnn.interfaces.schematic.StandardSchematic
 import io.github.uinnn.interfaces.worker.AsynchronousWorker
 import io.github.uinnn.interfaces.worker.Worker
 import org.bukkit.Bukkit

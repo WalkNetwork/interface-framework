@@ -110,6 +110,12 @@ $dokka.location:io.github.uinnn.interfaces.schematic//includes/io.github.uinnn.i
 $dokka.location:io.github.uinnn.interfaces.schematic//includes/io.github.uinnn.interfaces.schematic.Schematic#kotlin.collections.List[kotlin.Int]/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces.schematic/includes.html
 $dokka.location:io.github.uinnn.interfaces.schematic//isInRange/io.github.uinnn.interfaces.schematic.Schematic#kotlin.Int/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces.schematic/is-in-range.html
 $dokka.location:io.github.uinnn.interfaces.schematic//schematic/kotlin.Int#kotlin.Int/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces.schematic/schematic.html
+$dokka.location:io.github.uinnn.interfaces.schematic/EmptySchematic///PointingToDeclaration/interface-framework/io.github.uinnn.interfaces.schematic/-empty-schematic/index.html
+$dokka.location:io.github.uinnn.interfaces.schematic/EmptySchematic/EmptySchematic/#kotlin.Int#kotlin.Int#java.util.HashSet[kotlin.Int]#java.util.HashSet[kotlin.Int]/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces.schematic/-empty-schematic/-empty-schematic.html
+$dokka.location:io.github.uinnn.interfaces.schematic/EmptySchematic/exclude/#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces.schematic/-empty-schematic/exclude.html
+$dokka.location:io.github.uinnn.interfaces.schematic/EmptySchematic/include/#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces.schematic/-empty-schematic/include.html
+$dokka.location:io.github.uinnn.interfaces.schematic/EmptySchematic/last/#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces.schematic/-empty-schematic/last.html
+$dokka.location:io.github.uinnn.interfaces.schematic/EmptySchematic/start/#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces.schematic/-empty-schematic/start.html
 $dokka.location:io.github.uinnn.interfaces.schematic/Schematic///PointingToDeclaration/interface-framework/io.github.uinnn.interfaces.schematic/-schematic/index.html
 $dokka.location:io.github.uinnn.interfaces.schematic/Schematic/exclude/#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces.schematic/-schematic/exclude.html
 $dokka.location:io.github.uinnn.interfaces.schematic/Schematic/include/#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces.schematic/-schematic/include.html
@@ -167,6 +173,7 @@ $dokka.location:io.github.uinnn.interfaces.worker/WorkerScope/coroutineContext/#
 $dokka.location:io.github.uinnn.interfaces.worker/WorkerScope/create/#io.github.uinnn.interfaces.worker.Worker#kotlin.Int/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces.worker/-worker-scope/create.html
 $dokka.location:io.github.uinnn.interfaces.worker/WorkerScope/create/#io.github.uinnn.interfaces.worker.Worker/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces.worker/-worker-scope/create.html
 $dokka.location:io.github.uinnn.interfaces////PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/index.html
+$dokka.location:io.github.uinnn.interfaces//accesseds/io.github.uinnn.interfaces.GraphicalInterface#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/accesseds.html
 $dokka.location:io.github.uinnn.interfaces//asScrollable/io.github.uinnn.interfaces.GraphicalInterface#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/as-scrollable.html
 $dokka.location:io.github.uinnn.interfaces//background/io.github.uinnn.interfaces.GraphicalInterface#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/background.html
 $dokka.location:io.github.uinnn.interfaces//backgroundOrDefault/io.github.uinnn.interfaces.GraphicalInterface#org.bukkit.inventory.ItemStack?/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/background-or-default.html
@@ -196,15 +203,19 @@ $dokka.location:io.github.uinnn.interfaces//onScrollAndRender/io.github.uinnn.in
 $dokka.location:io.github.uinnn.interfaces//onScrollAndRender/io.github.uinnn.interfaces.ScrollableGraphicalInterface#kotlin.Function1[io.github.uinnn.interfaces.ScrollableGraphicalInterface,kotlin.Unit]/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/on-scroll-and-render.html
 $dokka.location:io.github.uinnn.interfaces//pages/io.github.uinnn.interfaces.ScrollableGraphicalInterface#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/pages.html
 $dokka.location:io.github.uinnn.interfaces//parent/io.github.uinnn.interfaces.GraphicalInterface#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/parent.html
+$dokka.location:io.github.uinnn.interfaces//presseds/io.github.uinnn.interfaces.Engine#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/presseds.html
 $dokka.location:io.github.uinnn.interfaces//previous/io.github.uinnn.interfaces.ScrollableGraphicalInterface#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/previous.html
 $dokka.location:io.github.uinnn.interfaces//relocate/io.github.uinnn.interfaces.Engine#kotlin.Int/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/relocate.html
 $dokka.location:io.github.uinnn.interfaces//renderAll/io.github.uinnn.interfaces.GraphicalInterface#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/render-all.html
 $dokka.location:io.github.uinnn.interfaces//renderEngines/io.github.uinnn.interfaces.GraphicalInterface#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/render-engines.html
 $dokka.location:io.github.uinnn.interfaces//renderInterface/io.github.uinnn.interfaces.GraphicalInterface#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/render-interface.html
+$dokka.location:io.github.uinnn.interfaces//rendereds/io.github.uinnn.interfaces.Engine#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/rendereds.html
+$dokka.location:io.github.uinnn.interfaces//rendereds/io.github.uinnn.interfaces.GraphicalInterface#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/rendereds.html
 $dokka.location:io.github.uinnn.interfaces//scrollAll/io.github.uinnn.interfaces.ScrollableGraphicalInterface#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/scroll-all.html
 $dokka.location:io.github.uinnn.interfaces//scrollDown/io.github.uinnn.interfaces.ScrollableGraphicalInterface#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/scroll-down.html
 $dokka.location:io.github.uinnn.interfaces//scrollSize/io.github.uinnn.interfaces.ScrollableGraphicalInterface#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/scroll-size.html
 $dokka.location:io.github.uinnn.interfaces//scrollUp/io.github.uinnn.interfaces.ScrollableGraphicalInterface#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/scroll-up.html
+$dokka.location:io.github.uinnn.interfaces//scrolleds/io.github.uinnn.interfaces.Engine#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/scrolleds.html
 $dokka.location:io.github.uinnn.interfaces//scrolleds/io.github.uinnn.interfaces.ScrollableGraphicalInterface#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/scrolleds.html
 $dokka.location:io.github.uinnn.interfaces//select/io.github.uinnn.interfaces.GraphicalInterface#kotlin.Int/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/select.html
 $dokka.location:io.github.uinnn.interfaces//selectAll/io.github.uinnn.interfaces.GraphicalInterface#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/select-all.html
@@ -215,6 +226,8 @@ $dokka.location:io.github.uinnn.interfaces//selectOrNull/io.github.uinnn.interfa
 $dokka.location:io.github.uinnn.interfaces//setSize/io.github.uinnn.interfaces.GraphicalInterface#kotlin.Int/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/set-size.html
 $dokka.location:io.github.uinnn.interfaces//setTitle/io.github.uinnn.interfaces.GraphicalInterface#kotlin.String/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/set-title.html
 $dokka.location:io.github.uinnn.interfaces//startSlot/io.github.uinnn.interfaces.ScrollableGraphicalInterface#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/start-slot.html
+$dokka.location:io.github.uinnn.interfaces//uncesseds/io.github.uinnn.interfaces.GraphicalInterface#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/uncesseds.html
+$dokka.location:io.github.uinnn.interfaces//uninstall/io.github.uinnn.interfaces.Engine#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/uninstall.html
 $dokka.location:io.github.uinnn.interfaces//uninstallAll/io.github.uinnn.interfaces.GraphicalInterface#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/uninstall-all.html
 $dokka.location:io.github.uinnn.interfaces//uninstallAll/io.github.uinnn.interfaces.GraphicalInterface#kotlin.Function1[io.github.uinnn.interfaces.Engine,kotlin.Boolean]/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/uninstall-all.html
 $dokka.location:io.github.uinnn.interfaces//uninstallAllNonPersistents/io.github.uinnn.interfaces.GraphicalInterface#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/uninstall-all-non-persistents.html
@@ -281,6 +294,7 @@ $dokka.location:io.github.uinnn.interfaces/EngineBuilder.Companion/fromImmutable
 $dokka.location:io.github.uinnn.interfaces/EngineBuilder.Companion/of/#org.bukkit.Material/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/-engine-builder/-companion/of.html
 $dokka.location:io.github.uinnn.interfaces/EngineBuilder.Companion/of/#org.bukkit.material.MaterialData/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/-engine-builder/-companion/of.html
 $dokka.location:io.github.uinnn.interfaces/EngineBuilder///PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/-engine-builder/index.html
+$dokka.location:io.github.uinnn.interfaces/EngineBuilder/alter/#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/-engine-builder/alter.html
 $dokka.location:io.github.uinnn.interfaces/EngineBuilder/build/#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/-engine-builder/build.html
 $dokka.location:io.github.uinnn.interfaces/EngineBuilder/buildImmutable/#/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/-engine-builder/build-immutable.html
 $dokka.location:io.github.uinnn.interfaces/EngineBuilder/flags/#kotlin.Array[org.bukkit.inventory.ItemFlag]/PointingToDeclaration/interface-framework/io.github.uinnn.interfaces/-engine-builder/flags.html

@@ -266,5 +266,3 @@ fun ScrollableGraphicalInterface.defaultScrollUpEngine(): Engine {
     }
   }.build()
 }
-
-

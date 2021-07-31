@@ -137,6 +137,15 @@ class EngineBuilder private constructor(private var model: Engine) {
   }
 
   /**
+   * Alters the changes made in this engine builder
+   * and sets to the graphical interface of the model engine.
+   */
+  fun alter(): EngineBuilder {
+    model.alter(model)
+    return this
+  }
+
+  /**
    * Build the actual engine.
    * ### Note:
    * This is a mutable build.
@@ -144,8 +153,9 @@ class EngineBuilder private constructor(private var model: Engine) {
    * this is, if you call this function, and changes the engine
    * with this engine builder, will be reflected to a already builded
    * engine. If you want a immutable build, use [buildImmutable].
+   * Automatically alters the engine in the graphical interface.
    */
-  fun build(): Engine = model
+  fun build(): Engine = alter().model
 
   /**
    * Build the actual engine as copy.

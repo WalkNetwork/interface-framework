@@ -70,7 +70,7 @@ fun Worker.reconstruct() {
  */
 var Worker.launchs: Int
   get() = locate("Launchs") ?: 0
-  set(value) {
+  internal set(value) {
     interject("Launchs", max(1, value))
   }
 
@@ -84,7 +84,7 @@ inline val Worker.isFirstLaunch: Boolean get() = launchs < 1
  */
 var Worker.resumes: Int
   get() = locate("Resumes") ?: 0
-  set(value) {
+  internal set(value) {
     interject("Resumes", max(1, value))
   }
 
@@ -98,7 +98,7 @@ inline val Worker.isFirstResume: Boolean get() = resumes < 1
  */
 var Worker.reconstructions: Int
   get() = locate("Reconstructions") ?: 0
-  set(value) {
+  internal set(value) {
     interject("Reconstructions", max(1, value))
   }
 
@@ -125,6 +125,6 @@ inline val Worker.isWorking: Boolean get() = job.isActive
  */
 var Worker.workedAmount: Int
   get() = locate("WorkedAmount") ?: 0
-  set(value) {
+  internal set(value) {
     interject("WorkedAmount", max(1, value))
   }
