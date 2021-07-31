@@ -32,7 +32,9 @@ Just then, that's why I made this complete framework! Thus making life easier fo
 
 --- 
 
-### See [documentation](https://uinnn.github.io/interface-framework/)
+### How to use:
+If you are interested how to use this framework see the [wiki](https://github.com/uinnn/interface-framework/wiki)
+or see the dokka [documentation](https://uinnn.github.io/interface-framework/)
 
 ---
 
