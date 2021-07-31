@@ -23,21 +23,18 @@ class AsynchronousWorker(
   override var allow: Boolean = false,
   override var interval: Duration = Duration.seconds(1)
 ) : Worker {
+  override var job: Job = WorkerScope.create(this)
   override var storage: Storage = Storage()
-  override var job: Job? = null
 
-  override fun launch() {
-    if (!allow) return
-    if (job == null)
-      job = WorkerScope.start(this)
-    if (isWorking) return
-    job!!.start()
+  override fun start() {
+    if (!canLaunch) return
+    if (!isFirstLaunch) reconstruct()
+    job.start()
+    launchs++
   }
 
-  override fun resume() {
-    if (job == null) return
+  override fun cancel() {
     if (!isWorking) return
-    job!!.cancel()
-    job = null
+    job.cancel()
   }
 }

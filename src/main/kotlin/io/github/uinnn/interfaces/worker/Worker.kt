@@ -3,7 +3,6 @@ package io.github.uinnn.interfaces.worker
 import io.github.uinnn.interfaces.GraphicalInterface
 import io.github.uinnn.interfaces.interfaces.Metadatable
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.SupervisorJob
 import kotlin.math.max
 import kotlin.time.Duration
 
@@ -17,7 +16,7 @@ interface Worker : Metadatable {
   /**
    * The job of this worker instance.
    */
-  var job: Job?
+  var job: Job
 
   /**
    * The graphical user interface owner of this worker.
@@ -35,23 +34,23 @@ interface Worker : Metadatable {
   var interval: Duration
 
   /**
-   * Launchs the worker. This is, starts
+   * Starts the worker. This is, starts
    * the worker to work and updates this [graphical].
    */
-  fun launch()
+  fun start()
 
   /**
    * Cancels the worker. This is, if the worker
    * is started, will be stopped.
    */
-  fun resume()
+  fun cancel()
 }
 
 /**
  * Resumes and denies this worker the possibility of working.
  */
-fun Worker.resumeAndDeny() {
-  resume()
+fun Worker.cancelAndDeny() {
+  cancel()
   allow = false
 }
 
@@ -61,8 +60,8 @@ fun Worker.resumeAndDeny() {
  * This is a internal API, but you can use in some cases.
  * Don't use it if you don't know what you're doing.
  */
-fun Worker.reconstructAsynchronous() {
-  job = SupervisorJob(WorkerScope.start(this))
+fun Worker.reconstruct() {
+  job = WorkerScope.create(this)
   reconstructions++
 }
 
@@ -114,12 +113,12 @@ inline val Worker.isFirstReconstruct: Boolean get() = reconstructions < 1
  * allow || !job.isActive
  * ```
  */
-inline val Worker.canLaunch: Boolean get() = allow || job?.isActive == false
+inline val Worker.canLaunch: Boolean get() = allow || !job.isActive
 
 /**
  * Verifies if this worker is working.
  */
-inline val Worker.isWorking: Boolean get() = job?.isActive == true
+inline val Worker.isWorking: Boolean get() = job.isActive
 
 /**
  * Returns the amount of works this worker worked.

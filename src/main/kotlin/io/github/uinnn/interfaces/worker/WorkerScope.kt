@@ -17,12 +17,12 @@ object WorkerScope : CoroutineScope {
    * cancellament of the coroutine. You can changes the delay changing
    * the interval of the worker. This is used in [AsynchronousWorker].
    */
-  fun start(worker: Worker): Job {
+  fun create(worker: Worker): Job {
     return async(start = CoroutineStart.LAZY) {
       while (isActive) {
+        delay(worker.interval)
         worker.graphical.work()
         worker.workedAmount++
-        delay(worker.interval)
       }
     }
   }
@@ -32,12 +32,12 @@ object WorkerScope : CoroutineScope {
    * running at a limited amount of times, specified by [times].
    * You can changes the delay changing the interval of the worker.
    */
-  fun start(worker: Worker, times: Int): Job {
+  fun create(worker: Worker, times: Int): Job {
     return async(start = CoroutineStart.LAZY) {
       repeat(times) {
+        delay(worker.interval)
         worker.graphical.work()
         worker.workedAmount++
-        delay(worker.interval)
       }
     }
   }

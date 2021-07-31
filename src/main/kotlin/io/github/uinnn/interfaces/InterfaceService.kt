@@ -64,7 +64,7 @@ object InterfaceService : Listener {
 
   @EventHandler
   fun onPickup(event: PlayerPickupItemEvent) {
-    val graphical = event.player.openInventory.topInventory.interfaceOrNull() ?: return
+    val graphical = event.player.interfaceOrNull() ?: return
     event.isCancelled = graphical.permits(ObserverKind.PICKUP).not()
   }
 }

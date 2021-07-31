@@ -8,6 +8,7 @@ import io.github.uinnn.interfaces.worker.Worker
 import kotlinx.serialization.Serializable
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
+import org.bukkit.inventory.ItemStack
 import org.bukkit.material.MaterialData
 
 /**
@@ -37,7 +38,7 @@ import org.bukkit.material.MaterialData
  * @see ScrollableGraphicalInterface
  */
 @Serializable(GraphicalInterfaceSerializer::class)
-interface GraphicalInterface : Interface, Accessible, Renderable, Metadatable, Workable, Observable {
+interface GraphicalInterface : Interface, Accessible, Renderable, Workable, Observable {
   var engineStack: EngineStack
   var worker: Worker
 
@@ -48,7 +49,7 @@ interface GraphicalInterface : Interface, Accessible, Renderable, Metadatable, W
     accessors.forEach { accessor ->
       accessor(this)
     }
-    if (isClosed) worker.launch()
+    if (isClosed) worker.start()
     owner.openInventory(this)
     isOpen = true
   }
@@ -58,7 +59,7 @@ interface GraphicalInterface : Interface, Accessible, Renderable, Metadatable, W
       uncessor(this)
     }
     if (close) owner.closeInventory()
-    worker.resume()
+    worker.cancel()
     isOpen = false
   }
 
@@ -295,4 +296,11 @@ fun GraphicalInterface.copy(): GraphicalInterface {
  * Converts this [GraphicalInterface]
  * in to a [ScrollableGraphicalInterface].
  */
-fun GraphicalInterface.scrollable(): ScrollableGraphicalInterface = this as ScrollableGraphicalInterface
+fun GraphicalInterface.asScrollable(): ScrollableGraphicalInterface = this as ScrollableGraphicalInterface
+
+/**
+ * Gets the background as icon if not null or default.
+ */
+fun GraphicalInterface.backgroundOrDefault(default: ItemStack?): ItemStack? {
+  return if (hasBackground) background!!.toItemStack(1) else default
+}

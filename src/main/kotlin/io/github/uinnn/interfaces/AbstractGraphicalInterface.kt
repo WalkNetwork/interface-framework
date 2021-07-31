@@ -33,6 +33,6 @@ abstract class AbstractGraphicalInterface(title: String, lines: Int) : Graphical
 }
 
 /**
- * A simple implementation of a [GraphicalInterface].
+ * A standard implementation of a [GraphicalInterface].
  */
-class SimpleGraphicalInterface(title: String, lines: Int) : AbstractGraphicalInterface(title, lines)
+class StandardGraphicalInterface(title: String, lines: Int) : AbstractGraphicalInterface(title, lines)

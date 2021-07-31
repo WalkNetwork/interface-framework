@@ -12,7 +12,7 @@ object Interfaces {
    * Creates a empty [GraphicalInterface].
    */
   fun empty(): GraphicalInterface {
-    return SimpleGraphicalInterface("", 1)
+    return StandardGraphicalInterface("", 1)
   }
 
   /**
@@ -20,7 +20,7 @@ object Interfaces {
    * title and lines specified.
    */
   fun create(title: String, lines: Int): GraphicalInterface {
-    return SimpleGraphicalInterface(title, lines)
+    return StandardGraphicalInterface(title, lines)
   }
 
   /**
@@ -29,7 +29,7 @@ object Interfaces {
    * to build this interface.
    */
   inline fun create(title: String, lines: Int, action: InterfaceAction): GraphicalInterface {
-    return SimpleGraphicalInterface(title, lines).apply(action)
+    return StandardGraphicalInterface(title, lines).apply(action)
   }
 
   /**
@@ -37,7 +37,7 @@ object Interfaces {
    * with title and lines specified.
    */
   fun workable(title: String, lines: Int): GraphicalInterface {
-    return SimpleGraphicalInterface(title, lines).apply {
+    return StandardGraphicalInterface(title, lines).apply {
       worker.allow = true
     }
   }
@@ -56,7 +56,7 @@ object Interfaces {
    * a parent, title and lines specified.
    */
   fun parent(title: String, lines: Int, parent: GraphicalInterface): GraphicalInterface {
-    return SimpleGraphicalInterface(title, lines).apply {
+    return StandardGraphicalInterface(title, lines).apply {
       this.parent = parent
     }
   }
@@ -80,7 +80,7 @@ object Interfaces {
    * with title and lines specified.
    */
   fun scrollable(title: String, lines: Int): ScrollableGraphicalInterface {
-    return SimpleScrollableInterface(title, lines)
+    return StandardScrollableInterface(title, lines)
   }
 
   /**
@@ -89,6 +89,6 @@ object Interfaces {
    * [ScrollableInterfaceAction] to build this interface.
    */
   inline fun scrollable(title: String, lines: Int, action: ScrollableInterfaceAction): ScrollableGraphicalInterface {
-    return SimpleScrollableInterface(title, lines).apply(action)
+    return StandardScrollableInterface(title, lines).apply(action)
   }
 }

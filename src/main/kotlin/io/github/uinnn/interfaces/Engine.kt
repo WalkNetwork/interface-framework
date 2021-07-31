@@ -37,7 +37,9 @@ open class Engine : ItemStack, Alterable, Renderable, Pressable, Visible, Metada
 
   override var isVisible: Boolean = true
     set(value) {
-      graphical?.setItem(slot, if (value) this else null)
+      graphical?.let {
+        it.setItem(slot, if (value) this else it.backgroundOrDefault(null))
+      }
       field = value
     }
 
@@ -84,9 +86,8 @@ open class Engine : ItemStack, Alterable, Renderable, Pressable, Visible, Metada
 /**
  * Changes the slot of this engine and returns itself
  */
-fun Engine.relocate(slot: Int): Engine {
+fun Engine.relocate(slot: Int): Engine = apply {
   this.slot = slot
-  return this
 }
 
 /**

@@ -4,7 +4,7 @@ import io.github.uinnn.interfaces.common.fill
 import io.github.uinnn.interfaces.interfaces.*
 import io.github.uinnn.interfaces.mapper.Mapper
 import io.github.uinnn.interfaces.mapper.PartialMapper
-import io.github.uinnn.interfaces.schematic.DefaultSchematic
+import io.github.uinnn.interfaces.schematic.StandardSchematic
 import io.github.uinnn.interfaces.schematic.Schematic
 import io.github.uinnn.interfaces.worker.AsynchronousWorker
 import io.github.uinnn.interfaces.worker.Worker
@@ -28,7 +28,7 @@ abstract class AbstractScrollableInterface(title: String, lines: Int) : Scrollab
   override var observers: Observers = Observers()
   override var scrollDownEngine: Engine = defaultScrollDownEngine()
   override var scrollUpEngine: Engine = defaultScrollUpEngine()
-  override var schematic: Schematic = DefaultSchematic()
+  override var schematic: Schematic = StandardSchematic()
   override var scrollableEngines: ScrollableEngines = ScrollableEngines()
   override var page: Int = 1
   override var mapper: Mapper = PartialMapper
@@ -43,6 +43,6 @@ abstract class AbstractScrollableInterface(title: String, lines: Int) : Scrollab
 }
 
 /**
- * A simple implementation of a [ScrollableGraphicalInterface].
+ * A standard implementation of a [ScrollableGraphicalInterface].
  */
-class SimpleScrollableInterface(title: String, lines: Int) : AbstractScrollableInterface(title, lines)
+class StandardScrollableInterface(title: String, lines: Int) : AbstractScrollableInterface(title, lines)

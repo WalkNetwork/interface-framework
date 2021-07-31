@@ -1,7 +1,11 @@
 package io.github.uinnn.interfaces
 
+import io.github.uinnn.interfaces.interfaces.Metadatable
+import net.minecraft.server.v1_8_R3.ChatMessage
+import net.minecraft.server.v1_8_R3.PacketPlayOutOpenWindow
 import org.bukkit.Bukkit
 import org.bukkit.Material
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer
 import org.bukkit.entity.HumanEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryType
@@ -9,13 +13,12 @@ import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.InventoryHolder
 import org.bukkit.inventory.ItemStack
 
-typealias UserSet = HashSet<Player>
 
 /**
  * A model class thats is used as base for
  * all graphical users interfaces.
  */
-interface Interface : Inventory, InventoryHolder {
+interface Interface : Inventory, InventoryHolder, Metadatable {
   var model: Inventory
   var owner: Player
   var isOpen: Boolean
@@ -93,3 +96,23 @@ inline val Interface.lines get() = size / 9
  * Verifies if this user interface is closed.
  */
 inline val Interface.isClosed get() = !isOpen
+
+/**
+ * Gets the current client title of this interface.
+ * Note thats this is only changes the client, not the server title.
+ * If the interface not has a client title the server title will be shown.
+ */
+var Interface.clientTitle: String
+  get() = locate("ClientTitle") ?: title
+  set(value) {
+    (owner as CraftPlayer).handle.apply {
+      playerConnection.sendPacket(PacketPlayOutOpenWindow(
+        activeContainer.windowId,
+        "minecraft:chest",
+        ChatMessage(value),
+        size
+      ))
+      updateInventory(activeContainer)
+    }
+    interject("ClientTitle", value)
+  }

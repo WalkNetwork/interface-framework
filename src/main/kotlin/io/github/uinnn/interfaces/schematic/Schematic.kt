@@ -41,7 +41,7 @@ interface Schematic {
  * and the specified [last] as columns.
  */
 infix fun Int.schematic(last: Int): Schematic {
-  return DefaultSchematic(this, last)
+  return StandardSchematic(this, last)
 }
 
 /**

@@ -1,8 +1,5 @@
 package io.github.uinnn.interfaces.common
 
-import io.github.uinnn.interfaces.Engine
-import io.github.uinnn.interfaces.EngineBuilder
-import io.github.uinnn.interfaces.Engines
 import io.github.uinnn.interfaces.GraphicalInterface
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -11,6 +8,11 @@ import org.bukkit.event.inventory.InventoryInteractEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.material.MaterialData
+
+/**
+ * Verifies if this inventory has space for a item.
+ */
+inline val Inventory.hasSpace get() = firstEmpty() != -1
 
 /**
  * Fills all slots of the inventory with gived item.
@@ -71,14 +73,3 @@ fun lastSlot(line: Int) = line * 9 - 1
  * ```
  */
 fun slotAt(line: Int, slot: Int) = startSlot(line) + slot - 1
-
-/**
- * Converts this ItemStack to a engine.
- */
-fun ItemStack.asEngine(slot: Int = 0): Engine = Engines.from(this, slot)
-
-/**
- * Creates a new engine builder from this item stack.
- */
-fun ItemStack.asEngineBuilder(): EngineBuilder = EngineBuilder.from(this)
-
