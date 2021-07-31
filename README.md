@@ -17,7 +17,7 @@ Is a very complete framework to create inventories in spigot with kotlin!
 ### Objective 📝
 As you spend time programming as a Bukkit/Spigot developer, you realize that some things should be implemented to make development even easier, don't you think?
 And one of those things was precisely inventories! Something of extreme importance! 
-Just then, that's why I made this framework complete! Thus making life easier for many!
+Just then, that's why I made this complete framework! Thus making life easier for many!
 
 ### Supports:
 * Easily creation of interfaces. ✔️
