@@ -20,9 +20,9 @@ And one of those things was precisely inventories! Something of extreme importan
 Just then, that's why I made this complete framework! Thus making life easier for many!
 
 ### Supports:
-* Easily creation of interfaces. ✔️
+* Graphical interfaces. ✔️
 * Scrollable interfaces. ✔️
-* Easily creation of engines. ✔️
+* Engines. ✔️
 * A lot of listeners. ✔️
 * Observable bukkit-events, allowing or negating the cancellament of event. ✔️
 * Schematics. ✔️
