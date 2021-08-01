@@ -8,7 +8,7 @@
   <img align="center" src="https://img.shields.io/static/v1?style=for-the-badge&label=maven-central&message=1.3.1&color=orange"/>
 </a>
 <a href="https://github.com/uinnn/interface-framework">
-  <img align="center" src="https://img.shields.io/static/v1?style=for-the-badge&label=license&message=General-Public-License&color=success"/>
+  <img align="center" src="https://img.shields.io/static/v1?style=for-the-badge&label=license&message=MIT License&color=success"/>
 </a>
 
 # interface-framework
