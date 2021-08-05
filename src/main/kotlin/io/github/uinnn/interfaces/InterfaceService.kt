@@ -21,13 +21,13 @@ object InterfaceService : Listener {
 
   /**
    * Loads all services of a interface can offer
-   * with the specified plugin as owner.
+   * with the this plugin as owner.
    */
-  fun load(plugin: Plugin) {
-    if (this::plugin.isInitialized) return
+  fun startup(plugin: Plugin) {
     this.plugin = plugin
     Bukkit.getPluginManager().registerEvents(this, plugin)
   }
+
 
   @EventHandler
   fun onOpen(event: InventoryOpenEvent) {
@@ -73,4 +73,4 @@ object InterfaceService : Listener {
  * Loads all services of a interface can offer
  * with the this plugin as owner.
  */
-fun Plugin.loadInterfaceService() = InterfaceService.load(this)
+fun Plugin.loadInterfaceService() = InterfaceService.startup(this)

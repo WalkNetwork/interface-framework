@@ -2,7 +2,7 @@ package io.github.uinnn.interfaces.schematic
 
 /**
  * The default schematic implementation when mapping
- * a paginated graphical interface.
+ * a scrollable graphical interface.
  */
 class StandardSchematic(
   override var start: Int = 10,

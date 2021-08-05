@@ -1,7 +1,7 @@
 package io.github.uinnn.interfaces.serializer
 
 import io.github.uinnn.interfaces.GraphicalInterface
-import io.github.uinnn.interfaces.Interfaces
+import io.github.uinnn.interfaces.InterfaceFactory
 import io.github.uinnn.interfaces.common.fill
 import io.github.uinnn.interfaces.setSize
 import io.github.uinnn.interfaces.setTitle
@@ -27,7 +27,7 @@ object GraphicalInterfaceSerializer : KSerializer<GraphicalInterface> {
   }
   
   override fun deserialize(decoder: Decoder) = decoder.decodeStructure(descriptor) {
-    val graphical = Interfaces.empty()
+    val graphical = InterfaceFactory.empty()
     var enableBackground = false
     lateinit var background: MaterialData
     while (true) {

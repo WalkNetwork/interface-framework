@@ -1,5 +1,9 @@
 package io.github.uinnn.interfaces
 
+import io.github.uinnn.interfaces.interfaces.PressAction
+import io.github.uinnn.interfaces.interfaces.RenderAction
+import io.github.uinnn.interfaces.interfaces.ScrollAction
+import io.github.uinnn.interfaces.interfaces.WorkerAction
 import org.bukkit.Material
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
@@ -10,10 +14,10 @@ typealias EngineAction = Engine.() -> Unit
 typealias ItemMetaAction = ItemMeta.() -> Unit
 
 /**
- * A utility class to building engines to use
+ * A factory object to building engines to use
  * with graphical user interfaces.
  */
-object Engines {
+object EngineFactory {
 
   /**
    * Creates a empty engine with specified slot.
@@ -80,6 +84,42 @@ class EngineBuilder private constructor(private var model: Engine) {
     meta.apply(action)
     model.itemMeta = meta
     return this
+  }
+
+  /**
+   * Transforms the engine adding a [onPress] event handler.
+   */
+  fun onPress(action: PressAction): EngineBuilder {
+    return transform {
+      onPress(action)
+    }
+  }
+
+  /**
+   * Transforms the engine adding a [onRender] event handler.
+   */
+  fun onRender(action: RenderAction): EngineBuilder {
+    return transform {
+      onRender(action)
+    }
+  }
+
+  /**
+   * Transforms the engine adding a [onWork] event handler.
+   */
+  fun onWork(action: WorkerAction): EngineBuilder {
+    return transform {
+      onWork(action)
+    }
+  }
+
+  /**
+   * Transforms the engine adding a [onScroll] event handler.
+   */
+  fun onScroll(action: ScrollAction): EngineBuilder {
+    return transform {
+      onScroll(action)
+    }
   }
 
   /**
@@ -165,7 +205,7 @@ class EngineBuilder private constructor(private var model: Engine) {
    * be able to change the builded model after calling this function.
    * If you want a mutable build, use [build].
    */
-  fun buildImmutable(): Engine = Engines.copy(model)
+  fun buildImmutable(): Engine = EngineFactory.copy(model)
 
   /**
    * Companion object to build new instances
@@ -177,14 +217,14 @@ class EngineBuilder private constructor(private var model: Engine) {
      * Creates a empty engine builder.
      */
     fun empty(): EngineBuilder {
-      return EngineBuilder(Engines.empty())
+      return EngineBuilder(EngineFactory.empty())
     }
 
     /**
      * Creates a engine builder with specified material.
      */
     fun of(material: Material): EngineBuilder {
-      return EngineBuilder(Engines.create(material))
+      return EngineBuilder(EngineFactory.create(material))
     }
 
     /**
@@ -198,7 +238,7 @@ class EngineBuilder private constructor(private var model: Engine) {
      * Creates a engine builder from a ItemStack.
      */
     fun from(item: ItemStack): EngineBuilder {
-      return EngineBuilder(Engines.from(item))
+      return EngineBuilder(EngineFactory.from(item))
     }
 
     /**
@@ -217,7 +257,7 @@ class EngineBuilder private constructor(private var model: Engine) {
      * be immutable, this is, a copy of the specified engine.
      */
     fun fromImmutable(engine: Engine): EngineBuilder {
-      return EngineBuilder(Engines.copy(engine))
+      return EngineBuilder(EngineFactory.copy(engine))
     }
   }
 }

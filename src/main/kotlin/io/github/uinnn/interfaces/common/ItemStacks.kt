@@ -2,13 +2,13 @@ package io.github.uinnn.interfaces.common
 
 import io.github.uinnn.interfaces.Engine
 import io.github.uinnn.interfaces.EngineBuilder
-import io.github.uinnn.interfaces.Engines
+import io.github.uinnn.interfaces.EngineFactory
 import org.bukkit.inventory.ItemStack
 
 /**
  * Converts this ItemStack to a engine.
  */
-fun ItemStack.asEngine(slot: Int = 0): Engine = Engines.from(this, slot)
+fun ItemStack.asEngine(slot: Int = 0): Engine = EngineFactory.from(this, slot)
 
 /**
  * Creates a new engine builder from this item stack.
@@ -19,7 +19,7 @@ fun ItemStack.asEngineBuilder(): EngineBuilder = EngineBuilder.from(this)
  * Converts a immutable of this item stack to a engine.
  * Without reflecting the changes to this item stack.
  */
-fun ItemStack.asImmutableEngine(slot: Int = 0): Engine = Engines.copy(asEngine(slot))
+fun ItemStack.asImmutableEngine(slot: Int = 0): Engine = EngineFactory.copy(asEngine(slot))
 
 /**
  * Creates a new engine builder from this item stack.

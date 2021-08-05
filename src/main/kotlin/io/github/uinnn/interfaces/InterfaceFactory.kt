@@ -4,9 +4,17 @@ typealias InterfaceAction = GraphicalInterface.() -> Unit
 typealias ScrollableInterfaceAction = ScrollableGraphicalInterface.() -> Unit
 
 /**
- * A utility class to creating new interfaces.
+ * A factory object to creating new interfaces.
  */
-object Interfaces {
+object InterfaceFactory {
+
+  /**
+   * Creates a [GraphicalInterface] without any slots.
+   * only title is visible.
+   */
+  fun nothing(title: String): GraphicalInterface {
+    return StandardGraphicalInterface(title, 0)
+  }
 
   /**
    * Creates a empty [GraphicalInterface].

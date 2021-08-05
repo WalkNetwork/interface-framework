@@ -112,7 +112,7 @@ fun GraphicalInterface.install(engine: Engine): Engine = install(engine.slot, en
 /**
  * Install e engine copy to this [GraphicalInterface].
  */
-fun GraphicalInterface.installCopy(engine: Engine): Engine = install(Engines.copy(engine))
+fun GraphicalInterface.installCopy(engine: Engine): Engine = install(EngineFactory.copy(engine))
 
 /**
  * Installs all engines of a collection
@@ -283,7 +283,7 @@ suspend fun GraphicalInterface.workAll() {
  */
 @Deprecated("Requires setting engines in the interface")
 fun GraphicalInterface.copy(): GraphicalInterface {
-  val copy = Interfaces.create(title, lines)
+  val copy = InterfaceFactory.create(title, lines)
   copy.owner = owner
   copy.model = model
   copy.engineStack = engineStack
