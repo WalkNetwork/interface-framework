@@ -5,7 +5,7 @@
   <img align="center" src="https://img.shields.io/github/v/release/uinnn/interface-framework?color=yellow&label=interface-framework&style=for-the-badge"/>
 </a>
 <a href="https://github.com/uinnn/interface-framework">
-  <img align="center" src="https://img.shields.io/github/v/release/uinnn/interface-framework?color=yellow&label=maven-central&style=for-the-badge"/>
+  <img align="center" src="https://img.shields.io/github/v/release/uinnn/interface-framework?color=ff69b4&label=maven-central&style=for-the-badge"/>
 </a>
 <a href="https://github.com/uinnn/interface-framework">
   <img align="center" src="https://img.shields.io/static/v1?style=for-the-badge&label=license&message=MIT License&color=success"/>
