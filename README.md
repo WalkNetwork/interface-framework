@@ -2,13 +2,13 @@
   <img align="center" src="https://img.shields.io/static/v1?style=for-the-badge&label=author&message=uinnn&color=informational"/>
 </a>
 <a href="https://github.com/uinnn/interface-framework">
-  <img align="center" src="https://img.shields.io/static/v1?style=for-the-badge&label=version&message=1.3v&color=ff69b4"/>
+  <img align="center" src="https://img.shields.io/static/v1?style=for-the-badge&label=version&message=1.3.2v&color=ff69b4"/>
 </a>
 <a href="https://github.com/uinnn/interface-framework">
-  <img align="center" src="https://img.shields.io/static/v1?style=for-the-badge&label=maven-central&message=1.3&color=orange"/>
+  <img align="center" src="https://img.shields.io/static/v1?style=for-the-badge&label=maven-central&message=1.3.2&color=orange"/>
 </a>
 <a href="https://github.com/uinnn/interface-framework">
-  <img align="center" src="https://img.shields.io/static/v1?style=for-the-badge&label=license&message=General-Public-License&color=success"/>
+  <img align="center" src="https://img.shields.io/static/v1?style=for-the-badge&label=license&message=MIT License&color=success"/>
 </a>
 
 # interface-framework
@@ -20,9 +20,9 @@ And one of those things was precisely inventories! Something of extreme importan
 Just then, that's why I made this complete framework! Thus making life easier for many!
 
 ### Supports:
-* Easily creation of interfaces. ✔️
+* Graphical interfaces. ✔️
 * Scrollable interfaces. ✔️
-* Easily creation of engines. ✔️
+* Engines. ✔️
 * A lot of listeners. ✔️
 * Observable bukkit-events, allowing or negating the cancellament of event. ✔️
 * Schematics. ✔️
@@ -39,12 +39,12 @@ The `interface-framework` is in the central maven repository. Thus making things
 
 ### Gradle Kotlin DSL
 ```gradle
-implementation("io.github.uinnn:interface-framework:1.3")
+implementation("io.github.uinnn:interface-framework:1.3.2")
 ```
 
 ### Gradle
 ```gradle
-implementation 'io.github.uinnn:interface-framework:1.3'
+implementation 'io.github.uinnn:interface-framework:1.3.2'
 ```
 
 ### Maven
@@ -52,7 +52,7 @@ implementation 'io.github.uinnn:interface-framework:1.3'
 <dependency>
   <groupId>io.github.uinnn</groupId>
   <artifactId>interface-framework</artifactId>
-  <version>1.3</version>
+  <version>1.3.2</version>
 </dependency>
 ```
 
