@@ -11,6 +11,8 @@
   <img align="center" src="https://img.shields.io/static/v1?style=for-the-badge&label=license&message=MIT License&color=success"/>
 </a>
 
+# This documentation is outdated.
+
 # interface-framework
 Is a very complete framework to create inventories in spigot with kotlin!
 
