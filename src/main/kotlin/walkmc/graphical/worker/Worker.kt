@@ -11,6 +11,7 @@ import kotlin.time.*
  * Any [IGraphical] has a [AsyncWorker]
  * by default worker.
  */
+@Deprecated("Workers are now replaced by Tickable.")
 interface Worker : Metadatable {
 	
 	/**

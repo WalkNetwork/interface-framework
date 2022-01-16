@@ -7,6 +7,7 @@ import kotlin.coroutines.*
  * A worker scope for creating jobs with kotlin coroutines.
  * @see CoroutineScope
  */
+@Deprecated("Workers are now replaced by Tickable.")
 object WorkerScope : CoroutineScope {
 	override val coroutineContext: CoroutineContext = EmptyCoroutineContext
 	
@@ -18,6 +19,7 @@ object WorkerScope : CoroutineScope {
 	 * You can change the delay changing the interval of the worker.
 	 * This is used in [AsyncWorker].
 	 */
+	@Deprecated("Workers are now replaced by Tickable.")
 	fun create(worker: Worker): Job {
 		return async(start = CoroutineStart.LAZY) {
 			while (isActive) {
@@ -33,6 +35,7 @@ object WorkerScope : CoroutineScope {
 	 * running at a limited amount of times, specified by [times].
 	 * You can change the delay changing the interval of the worker.
 	 */
+	@Deprecated("Workers are now replaced by Tickable.")
 	fun create(worker: Worker, times: Int): Job {
 		return async(start = CoroutineStart.LAZY) {
 			repeat(times) {
