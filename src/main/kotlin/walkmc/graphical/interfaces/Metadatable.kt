@@ -51,4 +51,7 @@ interface Metadatable {
 	fun <T> acquire(key: String): Result<T> = runCatching {
 		storage[key] as T
 	}
+	
+	operator fun get(key: String) = storage[key]
+	operator fun set(key: String, value: Any) = interject(key, value)
 }

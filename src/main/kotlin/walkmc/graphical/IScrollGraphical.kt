@@ -74,19 +74,19 @@ interface IScrollGraphical : IGraphical, Scrollable {
 		if (to < 1 || hasScrolled && to > scrollSize)
 			return
 		
-		val mapped = mapper.map(this, source)
-		
 		// evict out of index error
-		if (mapped.isEmpty())
+		if (source.isEmpty()) {
+			uninstallAllNonPersistents()
 			return
+		}
+		
+		val mapped = mapper.map(this, source)
 		
 		page = to
 		pages = mapped
 		
 		val engines = currentEngines
-		if (hasScrolled) {
-			uninstallAllNonPersistents()
-		}
+		if (hasScrolled) uninstallAllNonPersistents()
 		
 		val limit = installPerScroll
 		var installed = 0

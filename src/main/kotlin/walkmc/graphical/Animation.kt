@@ -8,7 +8,7 @@ interface GraphicalAnimation : Function<IGraphical> {
 	/**
 	 * The animate function that this animation object will perform.
 	 */
-	suspend fun animate(graphical: IGraphical)
+	fun animate(graphical: IGraphical)
 }
 
 /**
@@ -19,14 +19,14 @@ interface EngineAnimation : Function<Engine> {
 	/**
 	 * The animate function that this animation object will perform.
 	 */
-	suspend fun animate(graphical: IGraphical, engine: Engine)
+	fun animate(graphical: IGraphical, engine: Engine)
 }
 
 /**
  * Adds an animation to this graphical.
  */
 fun IGraphical.addAnimation(animation: GraphicalAnimation) {
-	onWork {
+	onTick {
 		animation.animate(this)
 	}
 }
@@ -35,7 +35,25 @@ fun IGraphical.addAnimation(animation: GraphicalAnimation) {
  * Adds an animation to this engine.
  */
 fun Engine.addAnimation(animation: EngineAnimation) {
-	onWork {
+	onTick {
+		animation.animate(this, this@addAnimation)
+	}
+}
+
+/**
+ * Adds an animation to this graphical.
+ */
+fun IGraphical.addAnimation(tick: Int, animation: GraphicalAnimation) {
+	onTick {
+		if (ticks % tick == 0) animation.animate(this)
+	}
+}
+
+/**
+ * Adds an animation to this engine.
+ */
+fun Engine.addAnimation(tick: Int, animation: EngineAnimation) {
+	onTick(tick) {
 		animation.animate(this, this@addAnimation)
 	}
 }

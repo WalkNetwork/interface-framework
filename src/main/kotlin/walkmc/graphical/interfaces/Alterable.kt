@@ -1,5 +1,6 @@
 package walkmc.graphical.interfaces
 
+import org.bukkit.inventory.*
 import walkmc.graphical.*
 import walkmc.graphical.common.*
 
@@ -18,12 +19,21 @@ interface Alterable {
 	fun alter(engine: Engine): Engine
 	
 	/**
+	 * Alter the current engine with a updated new engine.
+	 */
+	fun alter(item: ItemStack): ItemStack
+	
+	/**
 	 * Alter the current engine with
 	 * a updated new engine with a action.
 	 */
-	fun alter(engine: Engine, action: AlterAction): Engine {
-		return alter(engine.apply(action))
-	}
+	fun alter(engine: Engine, action: AlterAction) = alter(engine.apply(action))
+	
+	/**
+	 * Alter the current engine with
+	 * a updated new engine with a action.
+	 */
+	fun alter(item: ItemStack, action: ItemStack.() -> Unit) = alter(item.apply(action))
 }
 
 /**

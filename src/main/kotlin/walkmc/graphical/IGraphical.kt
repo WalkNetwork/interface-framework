@@ -37,8 +37,10 @@ import kotlin.math.*
  * @see IScrollGraphical
  */
 @Serializable(GraphicalSerializer::class)
-interface IGraphical : Interface, Accessible, Renderable, Workable, Observable {
+interface IGraphical : Interface, Accessible, Renderable, Workable, Observable, Tickable {
 	var engineStack: EngineStack
+	
+	@Deprecated("Workers are now replaced by Tickable.")
 	var worker: Worker
 	
 	override fun access(player: Player) {
@@ -46,25 +48,25 @@ interface IGraphical : Interface, Accessible, Renderable, Workable, Observable {
 		owner.closeInventory()
 		
 		render()
-		for (accessor in accessors)
-			accessor(this)
+		for (accessor in accessors) accessor(this)
 		
-		worker.start()
+		if (worker.allow) worker.start()
 		owner.openInventory(this)
 		isOpen = true
 		accesseds++
 	}
 	
 	override fun uncess(close: Boolean) {
-		for (unc in uncessors)
-			unc(this)
-		
-		if (close)
-			owner.closeInventory()
-		
+		for (unc in uncessors) unc(this)
+		if (close) owner.closeInventory()
 		worker.cancel()
 		isOpen = false
 		uncesseds++
+	}
+	
+	override fun tick() {
+		ticks++
+		tickAll()
 	}
 	
 	override fun render() = renderAll()
@@ -115,16 +117,12 @@ fun IGraphical.installCopy(engine: Engine): Engine = install(engine.clone().toEn
  * Installs all engines of the specified [engines]
  * to this [IGraphical].
  */
-fun IGraphical.installAll(engines: Iterable<Engine>) = engines.onEach { engine ->
-	install(engine)
-}
+fun IGraphical.installAll(engines: Iterable<Engine>) = engines.onEach { install(it) }
 
 /**
  * Uninstalls all engines of this [IGraphical].
  */
-fun IGraphical.uninstallAll() = engineStack.onEach { engine ->
-	uninstall(engine.key)
-}
+fun IGraphical.uninstallAll() = engineStack.onEach { uninstall(it.key) }
 
 /**
  * Uninstalls all engines of this [IGraphical]
@@ -140,9 +138,7 @@ inline fun IGraphical.uninstallAll(filter: Filter<Engine>) = engineStack.onEach 
  * Uninstalls all not persistents engines
  * of this [IGraphical].
  */
-fun IGraphical.uninstallAllNonPersistents() = uninstallAll { engine ->
-	!engine.isPersistent
-}
+fun IGraphical.uninstallAllNonPersistents() = uninstallAll { !it.isPersistent }
 
 /**
  * Selects an existent engine of this [IGraphical].
@@ -170,17 +166,13 @@ inline fun IGraphical.selectAll(filter: Filter<Engine>) = engineStack.values.fil
  * Selects all current engines of this [IGraphical]
  * if the engine is persistent.
  */
-fun IGraphical.selectAllPersistents() = selectAll { engine ->
-	engine.isPersistent
-}
+fun IGraphical.selectAllPersistents() = selectAll { it.isPersistent }
 
 /**
  * Selects all current engines of this [IGraphical]
  * if the engine is not persistent.
  */
-fun IGraphical.selectAllNonPersistents() = selectAll { engine ->
-	!engine.isPersistent
-}
+fun IGraphical.selectAllNonPersistents() = selectAll { !it.isPersistent }
 
 /**
  * Try locates the background storage data
@@ -224,32 +216,45 @@ val IGraphical.hasParent get() = parent != null
  * to a specified player.
  */
 fun IGraphical.renderEngines() {
-	for (engine in selectAll()) engine.render()
+	for (engine in engineStack.values) engine.render()
 }
 
 /**
  * Works all engines of this [IGraphical].
  */
+@Deprecated("Workers are now replaced by Tickable.")
 suspend fun IGraphical.workEngines() {
-	for (engine in selectAll()) engine.work()
+	for (engine in engineStack.values) engine.work()
+}
+
+/**
+ * Ticks all engines of this [IGraphical].
+ */
+fun IGraphical.tickEngines() {
+	for (engine in engineStack.values) engine.tick()
 }
 
 /**
  * Renders this [IGraphical] to a specified player.
  */
 fun IGraphical.renderInterface() {
-	for (rnd in renders)
-		rnd()
-	
+	for (rnd in renders) rnd()
 	rendereds++
 }
 
 /**
  * Works this [IGraphical].
  */
+@Deprecated("Workers are now replaced by Tickable.")
 suspend fun IGraphical.workInterface() {
-	for (work in works)
-		work()
+	for (work in works) work()
+}
+
+/**
+ * Ticks this [IGraphical].
+ */
+fun IGraphical.tickInterface() {
+	for (tick in tickers) tick()
 }
 
 /**
@@ -262,9 +267,19 @@ fun IGraphical.renderAll() {
 }
 
 /**
+ * Ticks everything of this [IGraphical]
+ * This includes the interface and engines.
+ */
+fun IGraphical.tickAll() {
+	tickInterface()
+	tickEngines()
+}
+
+/**
  * Works everything of this [IGraphical].
  * This includes the interface and engines.
  */
+@Deprecated("Workers are now replaced by Tickable.")
 suspend fun IGraphical.workAll() {
 	workInterface()
 	workEngines()
@@ -309,3 +324,10 @@ var IGraphical.rendereds: Int
 	set(value) {
 		interject("Rendereds", max(1, value))
 	}
+
+/**
+ * Sets the current item in the cursor of the owner.
+ */
+fun IGraphical.cursor(item: ItemStack) {
+	owner.itemOnCursor = item
+}

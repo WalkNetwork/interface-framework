@@ -1,9 +1,11 @@
 package walkmc.graphical.worker
 
 import kotlinx.coroutines.*
+import walkmc.extensions.*
 import walkmc.graphical.*
 import walkmc.graphical.interfaces.*
 import kotlin.time.*
+import kotlin.time.Duration.Companion.seconds
 import java.util.concurrent.*
 
 /**
@@ -19,10 +21,11 @@ import java.util.concurrent.*
  * If you want for example run a sync task you need
  * to execute the default bukkit scheduler sync task.
  */
+@Deprecated("Workers are now replaced by Tickable.")
 class AsyncWorker(
 	override val graphical: IGraphical,
 	override var allow: Boolean = false,
-	override var interval: Duration = Duration.seconds(1),
+	override var interval: Duration = 1.seconds,
 ) : Worker {
 	override var job: Job = WorkerScope.create(this)
 	override var storage: Storage = ConcurrentHashMap()
@@ -30,6 +33,7 @@ class AsyncWorker(
 	override fun start() {
 		if (!canLaunch) return
 		if (!isFirstLaunch) reconstruct()
+		logWarning("§e[interface-framework] Workers are deprecated, please replace by Tickable interface.")
 		job.start()
 		launchs++
 	}

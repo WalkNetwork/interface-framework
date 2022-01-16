@@ -5,6 +5,7 @@ import org.bukkit.event.*
 import org.bukkit.event.inventory.*
 import org.bukkit.event.player.*
 import org.bukkit.plugin.*
+import walkmc.event.*
 import walkmc.extensions.*
 import walkmc.graphical.common.*
 import walkmc.graphical.interfaces.*
@@ -28,6 +29,13 @@ object InterfaceService : Listener {
 		Bukkit.getPluginManager().registerEvents(this, plugin)
 	}
 	
+	@EventHandler
+	fun onTick(event: InventoryTickEvent) {
+		val graphical = event.interfaceOrNull() ?: return
+		if (graphical.allowTick && graphical.ticks % graphical.tickDelay == 0) {
+			graphical.tick()
+		}
+	}
 	
 	@EventHandler
 	fun onOpen(event: InventoryOpenEvent) {

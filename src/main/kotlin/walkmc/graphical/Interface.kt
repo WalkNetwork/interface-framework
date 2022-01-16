@@ -7,7 +7,6 @@ import org.bukkit.entity.*
 import org.bukkit.event.inventory.*
 import org.bukkit.inventory.*
 import org.bukkit.inventory.ItemStack
-import walkmc.extensions.*
 import walkmc.graphical.interfaces.*
 
 /**

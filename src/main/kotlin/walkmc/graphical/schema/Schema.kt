@@ -62,8 +62,9 @@ fun Schema.includes(vararg includer: Int): Schema = includes(includer.toSet())
  * includer to this schematic.
  */
 infix fun Schema.includes(includer: Iterable<Int>): Schema = apply {
-	include += includer
-	exclude.removeAll(includer)
+	val set = includer.toSet() // for performance
+	include += set
+	exclude.removeAll(set)
 }
 
 /**
@@ -85,8 +86,9 @@ fun Schema.excludes(vararg excluder: Int): Schema = excludes(excluder.toSet())
  * excluder to this schematic.
  */
 infix fun Schema.excludes(excluder: Iterable<Int>): Schema = apply {
-	exclude.addAll(excluder)
-	include.removeAll(excluder)
+	val set = excluder.toSet() // for performance
+	exclude.addAll(set)
+	include.removeAll(set)
 }
 
 /**

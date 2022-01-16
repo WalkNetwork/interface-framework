@@ -8,15 +8,23 @@ import walkmc.extensions.*
 import walkmc.graphical.interfaces.*
 
 /**
+ * Creates a new empty engine.
+ */
+fun emptyEngine() = newEngine(Materials.AIR, 1)
+
+/**
  * Creates a new engine by the specified type and amount.
  */
-inline fun newEngine(type: Materials, amount: Int = 1) = Engine(type, amount)
+fun newEngine(type: Materials, amount: Int = 1) =
+	Engine(type).apply {
+		this.amount = amount
+	}
 
 /**
  * Creates a new engine by the specified type, name and amount.
  */
 fun newEngine(type: Materials, name: String, amount: Int = 1) =
-	Engine(type, amount).apply {
+	newEngine(type, amount).apply {
 		name(name)
 	}
 
@@ -24,7 +32,7 @@ fun newEngine(type: Materials, name: String, amount: Int = 1) =
  * Creates a new engine by the specified type, lore and amount.
  */
 fun newEngine(type: Materials, lore: List<String>, amount: Int = 1) =
-	Engine(type, amount).apply {
+	newEngine(type, amount).apply {
 		lore(lore)
 	}
 
@@ -32,7 +40,7 @@ fun newEngine(type: Materials, lore: List<String>, amount: Int = 1) =
  * Creates a new engine by the specified type, name, lore and amount.
  */
 fun newEngine(type: Materials, name: String, lore: List<String>, amount: Int = 1) =
-	Engine(type, amount).apply {
+	newEngine(type, amount).apply {
 		name(name)
 		lore(lore)
 	}
@@ -40,13 +48,16 @@ fun newEngine(type: Materials, name: String, lore: List<String>, amount: Int = 1
 /**
  * Creates a new engine by the specified type and amount.
  */
-inline fun newEngine(model: ItemStack, amount: Int = 1) = Engine(model, amount)
+fun newEngine(model: ItemStack, amount: Int = 1) =
+	Engine(model).apply {
+		this.amount = amount
+	}
 
 /**
  * Creates a new engine by the specified type, name and amount.
  */
 fun newEngine(model: ItemStack, name: String, amount: Int = 1) =
-	Engine(model, amount).apply {
+	newEngine(model, amount).apply {
 		name(name)
 	}
 
@@ -54,7 +65,7 @@ fun newEngine(model: ItemStack, name: String, amount: Int = 1) =
  * Creates a new engine by the specified type, lore and amount.
  */
 fun newEngine(model: ItemStack, lore: List<String>, amount: Int = 1) =
-	Engine(model, amount).apply {
+	newEngine(model, amount).apply {
 		lore(lore)
 	}
 
@@ -62,7 +73,7 @@ fun newEngine(model: ItemStack, lore: List<String>, amount: Int = 1) =
  * Creates a new engine by the specified type, name, lore and amount.
  */
 fun newEngine(model: ItemStack, name: String, lore: List<String>, amount: Int = 1) =
-	Engine(model, amount).apply {
+	newEngine(model, amount).apply {
 		name(name)
 		lore(lore)
 	}
@@ -71,13 +82,13 @@ fun newEngine(model: ItemStack, name: String, lore: List<String>, amount: Int = 
  * Builds a new engine by the specified type and amount.
  */
 inline fun buildEngine(type: Materials, amount: Int = 1, builder: Engine.() -> Unit) =
-	Engine(type, amount).apply(builder)
+	newEngine(type, amount).apply(builder)
 
 /**
  * Builds a new engine by the specified type, name and amount.
  */
 inline fun buildEngine(type: Materials, name: String, amount: Int = 1, builder: Engine.() -> Unit) =
-	Engine(type, amount).apply {
+	newEngine(type, amount).apply {
 		name(name)
 		builder()
 	}
@@ -86,7 +97,7 @@ inline fun buildEngine(type: Materials, name: String, amount: Int = 1, builder: 
  * Builds a new engine by the specified type, lore and amount.
  */
 inline fun buildEngine(type: Materials, lore: List<String>, amount: Int = 1, builder: Engine.() -> Unit) =
-	Engine(type, amount).apply {
+	newEngine(type, amount).apply {
 		lore(lore)
 		builder()
 	}
@@ -100,7 +111,7 @@ inline fun buildEngine(
 	lore: List<String>,
 	amount: Int = 1,
 	builder: Engine.() -> Unit,
-) = Engine(type, amount).apply {
+) = newEngine(type, amount).apply {
 	name(name)
 	lore(lore)
 	builder()
@@ -110,13 +121,13 @@ inline fun buildEngine(
  * Creates a new engine by the specified type and amount.
  */
 inline fun buildEngine(model: ItemStack, amount: Int = 1, builder: Engine.() -> Unit) =
-	Engine(model, amount).apply(builder)
+	newEngine(model, amount).apply(builder)
 
 /**
  * Creates a new engine by the specified type, name and amount.
  */
 inline fun buildEngine(model: ItemStack, name: String, amount: Int = 1, builder: Engine.() -> Unit) =
-	Engine(model, amount).apply {
+	newEngine(model, amount).apply {
 		name(name)
 		builder()
 	}
@@ -125,7 +136,7 @@ inline fun buildEngine(model: ItemStack, name: String, amount: Int = 1, builder:
  * Creates a new engine by the specified type, lore and amount.
  */
 inline fun buildEngine(model: ItemStack, lore: List<String>, amount: Int = 1, builder: Engine.() -> Unit) =
-	Engine(model, amount).apply {
+	newEngine(model, amount).apply {
 		lore(lore)
 		builder()
 	}
@@ -139,7 +150,7 @@ inline fun buildEngine(
 	lore: List<String>,
 	amount: Int = 1,
 	builder: Engine.() -> Unit,
-) = Engine(model, amount).apply {
+) = newEngine(model, amount).apply {
 	name(name)
 	lore(lore)
 	builder()
@@ -149,7 +160,7 @@ inline fun buildEngine(
  * Builds the newly created empty engine with the specified [block].
  */
 inline fun buildEngine(block: Engine.() -> Unit): Engine {
-	return Engine(Materials.AIR, 1).apply(block)
+	return newEngine(Materials.AIR, 1).apply(block)
 }
 
 /**
@@ -164,25 +175,24 @@ fun Engine.applyRenderization(
 	onPress: Boolean = false,
 	block: Engine.() -> Unit
 ) {
-	if (onRender) {
-		onRender {
-			alter(block)
-		}
-	}
-	
-	if (onWork) {
-		onWork {
-			alter(block)
-		}
-	}
-	
-	if (onPress) {
-		onPress {
-			alter(block)
-		}
-	}
+	if (onRender) onRender { alter(block) }
+	if (onWork) onWork { alter(block) }
+	if (onPress) onPress { alter(block) }
 }
 
+/**
+ * Applies the given renderization [block] that is used to be rendered.
+ *
+ * @param render if the renderization is applied on render
+ * @param work if the renderization is applied on work
+ * @param press if the renderization is applied on press
+ */
+fun Engine.doRender(
+	render: Boolean = true,
+	work: Boolean = true,
+	press: Boolean = true,
+	block: Engine.() -> Unit
+) = applyRenderization(render, work, press, block)
 
 /**
  * Creates a new graphical by the specified title and size.

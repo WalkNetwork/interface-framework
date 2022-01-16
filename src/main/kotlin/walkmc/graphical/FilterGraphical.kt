@@ -1,56 +1,69 @@
 package walkmc.graphical
 
+import walkmc.*
+import walkmc.collections.*
+import walkmc.extensions.*
 import walkmc.graphical.common.*
+import walkmc.graphical.dsl.*
+
+typealias FilterPair<T> = Pair<String, Filter<T>>
 
 /**
  * A graphical interface with compatibility to filter their engines and indexes.
  */
-abstract class FilterGraphical<T>(title: String, size: Int = 4) : IndexGraphical<T>(title, size) {
-	
-	/**
-	 * The comparator used to sorts and compares the ranking indexes between this filter graphical.
-	 */
-	open var filter: Filter<T>? = null
-	
-	/**
-	 * The limit that this filter graphical can sort. By default it's [Int.MAX_VALUE].
-	 */
-	open var limit: Int = Int.MAX_VALUE
-	
-	override fun indexes() {
-		source.removeIf { !it.isPersistent }
-		
-		val values = if (filter == null) indexes else indexes.filter(filter!!)
-		
-		source += values
-			.take(limit)
-			.mapIndexed { index, rank -> buildIndex(rank, index) }
-	}
-	
-	/**
-	 * Disables the filter of this filter graphical, this is, that this graphical
-	 * will not more filter for any indexes.
-	 *
-	 * It's responsability of the user to call [updatePage] to update the page.
-	 */
-	fun disableFilter(update: Boolean = true) {
-		filter = null
-		indexes()
-		
-		if (update)
-			scrollTo()
-	}
-	
-	/**
-	 * Filters this filter graphical indexes and updates them.
-	 *
-	 * It's responsability of the user to call [updatePage] to update the page.
-	 */
-	fun filtering(update: Boolean = true, filter: (T) -> Boolean) {
-		this.filter = filter
-		indexes()
-		
-		if (update)
-			scrollTo()
-	}
+abstract class FilterGraphical<T>(title: String, size: Int = 6) : IndexGraphical<T>(title, size) {
+   
+   open var options = IndexList<FilterPair<T>>()
+   open var limit = Int.MAX_VALUE
+   open var isFilterDisabled = false
+   
+   val currentFilter get() = options.currentOrNull()?.second
+   val texts get() = options.map { it.first }
+   val filters get() = options.map { it.second }
+   
+   open var filterEngine = filterEngine(midSlot(lines), newItem(Materials.HOPPER, "§dFiltro")) {}
+   
+   override fun indexes() {
+      val values = if (isFilterDisabled || currentFilter == null) {
+         indexes.toList().take(limit)
+      } else {
+         indexes.filter(currentFilter!!).take(limit)
+      }
+   
+      isEmpty = values.isEmpty()
+      source.removeIf { !it.isPersistent }
+      source += values.mapIndexed { index, value -> buildIndex(value, index) }
+   }
+   
+   fun toNextFilter() {
+      options.toNextOrFirst()
+      scrollIndexing()
+   }
+   
+   fun toPreviousFilter() {
+      options.toPreviousOrLast()
+      scrollIndexing()
+   }
+   
+   fun disableFilter() {
+      isFilterDisabled = true
+      scrollIndexing()
+   }
+   
+   fun enableFilter() {
+      isFilterDisabled = false
+      scrollIndexing()
+   }
+   
+   fun addFilter(text: String, filter: Filter<T>) = options.add(text to filter)
+   fun addNoFilter(text: String) = addFilter(text) { true }
+}
+
+/**
+ * An standard implementation of [FilterGraphical].
+ */
+class StandardFilterGraphical<T>(title: String, size: Int) : FilterGraphical<T>(title, size) {
+   override fun buildIndex(value: T, index: Int): Engine {
+      return buildIndexCallback!!.invoke(value, index)
+   }
 }

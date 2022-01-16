@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "io.github.uinnn"
-version = "1.8.1"
+version = "1.9.0"
 
 repositories {
 	mavenLocal()
@@ -18,10 +18,10 @@ repositories {
 }
 
 dependencies {
-	compileOnly("io.github.uinnn:walk-server:2.1.0")
+	compileOnly("io.github.uinnn:walk-server:2.3.20")
 	compileOnly(kotlin("stdlib-jdk8"))
-	compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
-	compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-core:1.3.0")
+	compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+	compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-core:1.3.2")
 }
 
 nexusPublishing {

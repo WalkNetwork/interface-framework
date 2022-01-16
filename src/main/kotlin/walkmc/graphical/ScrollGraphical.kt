@@ -34,6 +34,11 @@ abstract class ScrollGraphical(title: String, lines: Int) : IScrollGraphical {
 	override lateinit var owner: Player
 	override var isOpen: Boolean = false
 	
+	override var tickers: TickSet = LinkedHashSet()
+	override var ticks: Int = 0
+	override var tickDelay: Int = 1
+	override var allowTick: Boolean = true
+	
 	init {
 		defaultObservers()
 		if (hasBackground)

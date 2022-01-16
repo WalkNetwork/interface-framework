@@ -1,70 +1,78 @@
 package walkmc.graphical
 
+import walkmc.*
+import walkmc.collections.*
+import walkmc.extensions.*
+import walkmc.graphical.common.*
+import walkmc.graphical.dsl.*
+
+typealias SortPair<T> = Pair<String, Comparator<T>>
+
 /**
  * A graphical interface with compatibility to sort their engines and indexes.
  */
-abstract class SortGraphical<T>(title: String, size: Int = 4) : IndexGraphical<T>(title, size) {
-	
-	/**
-	 * The comparator used to sorts and compares the ranking indexes between this sort graphical.
-	 */
-	open var comparator: Comparator<T>? = null
-	
-	/**
-	 * The limit that this sort graphical can sort. By default it's [Int.MAX_VALUE].
-	 */
-	open var limit: Int = Int.MAX_VALUE
-	
-	override fun indexes() {
-		source.removeIf { !it.isPersistent }
-		
-		val values = if (comparator == null) indexes else indexes.sortedWith(comparator!!)
-		
-		source += values
-			.take(limit)
-			.mapIndexed { index, rank -> buildIndex(rank, index) }
-	}
-	
-	/**
-	 * Disables the sort of this filter graphical, this is, that this graphical
-	 * will not more sort for any indexes.
-	 *
-	 * It's responsability of the user to call [updatePage] to update the page.
-	 */
-	fun disableSort(update: Boolean = true) {
-		comparator = null
-		indexes()
-		
-		if (update)
-			scrollTo()
-	}
-	
-	/**
-	 * Compares this filter graphical indexes and updates them.
-	 *
-	 * It's responsability of the user to call [updatePage] to update the page.
-	 */
-	fun sorting(comparator: Comparator<T>, update: Boolean = true) {
-		this.comparator = comparator
-		indexes()
-		
-		if (update)
-			scrollTo()
-	}
-	
-	/**
-	 * Compares this filter graphical indexes and updates them.
-	 *
-	 * It's responsability of the user to call [updatePage] to update the page.
-	 */
-	inline fun sorting(update: Boolean = true, crossinline comparator: (T) -> Comparable<*>) =
-		sorting(compareBy(comparator), update)
-	
-	/**
-	 * Compares this filter graphical indexes and updates them.
-	 *
-	 * It's responsability of the user to call [updatePage] to update the page.
-	 */
-	inline fun sortingDescending(update: Boolean = true, crossinline comparator: (T) -> Comparable<*>) =
-		sorting(compareByDescending(comparator), update)
+abstract class SortGraphical<T>(title: String, size: Int = 6) : IndexGraphical<T>(title, size) {
+   
+   open var options = IndexList<SortPair<T>>()
+   open var limit = Int.MAX_VALUE
+   open var isSorterDisabled = false
+   
+   val currentSorter get() = options.currentOrNull()?.second
+   val texts get() = options.map { it.first }
+   val sorters get() = options.map { it.second }
+   
+   open var sorterEngine = sorterEngine(midSlot(lines), newItem(Materials.HOPPER, "§dOrdem")) {}
+   
+   override fun indexes() {
+      val values = if (isSorterDisabled || currentSorter == null) {
+         indexes.toList().take(limit)
+      } else {
+         indexes.sortedWith(currentSorter!!).take(limit)
+      }
+   
+      isEmpty = values.isEmpty()
+      source.removeIf { !it.isPersistent }
+      source += values.mapIndexed { index, value -> buildIndex(value, index) }
+   }
+   
+   fun toNextSorter() {
+      options.toNextOrFirst()
+      scrollIndexing()
+   }
+   
+   fun toPreviousSorter() {
+      options.toPreviousOrLast()
+      scrollIndexing()
+   }
+   
+   fun disableSorter() {
+      isSorterDisabled = true
+      scrollIndexing()
+   }
+   
+   fun enableSorter() {
+      isSorterDisabled = false
+      scrollIndexing()
+   }
+   
+   fun addSorter(text: String, comparator: Comparator<T>) {
+      options.add(text to comparator)
+   }
+   
+   inline fun addSorter(text: String, crossinline comparator: (T) -> Comparable<*>) {
+      addSorter(text, compareBy(comparator))
+   }
+   
+   inline fun addSorterDescending(text: String, crossinline comparator: (T) -> Comparable<*>) {
+      addSorter(text, compareByDescending(comparator))
+   }
+}
+
+/**
+ * A standard implementation of [SortGraphical].
+ */
+class StandardSortGraphical<T>(title: String, size: Int) : SortGraphical<T>(title, size) {
+   override fun buildIndex(value: T, index: Int): Engine {
+      return buildIndexCallback!!.invoke(value, index)
+   }
 }
