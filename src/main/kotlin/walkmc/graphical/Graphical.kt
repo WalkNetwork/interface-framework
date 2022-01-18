@@ -3,7 +3,6 @@ package walkmc.graphical
 import org.bukkit.*
 import org.bukkit.entity.*
 import org.bukkit.inventory.*
-import walkmc.graphical.common.*
 import walkmc.graphical.interfaces.*
 import walkmc.graphical.worker.*
 import java.util.concurrent.*
@@ -31,9 +30,7 @@ abstract class Graphical(title: String, lines: Int) : IGraphical {
 	
 	init {
 		defaultObservers()
-		if (hasBackground) {
-			fill(background!!.data)
-		}
+		fillBackground()
 	}
 }
 

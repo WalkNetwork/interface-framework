@@ -1,5 +1,6 @@
 package walkmc.graphical.mapper
 
+import walkmc.extensions.collections.*
 import walkmc.graphical.*
 
 /**
@@ -8,6 +9,6 @@ import walkmc.graphical.*
  */
 object SingularMapper : Mapper {
 	override fun map(graphical: IScrollGraphical, engines: Source): Scrollers {
-		return engines.windowed(graphical.installPerScroll, 1, true)
+		return engines.singulared(graphical.installPerPage)
 	}
 }

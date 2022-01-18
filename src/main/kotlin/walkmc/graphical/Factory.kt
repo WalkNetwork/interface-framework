@@ -193,25 +193,3 @@ fun Engine.doRender(
 	press: Boolean = true,
 	block: Engine.() -> Unit
 ) = applyRenderization(render, work, press, block)
-
-/**
- * Creates a new graphical by the specified title and size.
- */
-inline fun newGraphical(title: String, size: Int): IGraphical = StandardGraphical(title, size)
-
-/**
- * Creates a new scroll graphical by the specified title and size.
- */
-inline fun newScrollGraphical(title: String, size: Int): IScrollGraphical = StandardScrollGraphical(title, size)
-
-/**
- * Builds a new graphical by the specified title and size.
- */
-inline fun buildGraphical(title: String, size: Int, builder: IGraphical.() -> Unit): IGraphical =
-	StandardGraphical(title, size).apply(builder)
-
-/**
- * Builds a new scroll graphical by the specified title and size.
- */
-inline fun buildScrollGraphical(title: String, size: Int, builder: IScrollGraphical.() -> Unit): IScrollGraphical =
-	StandardScrollGraphical(title, size).apply(builder)

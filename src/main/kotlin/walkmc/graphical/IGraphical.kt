@@ -331,3 +331,28 @@ var IGraphical.rendereds: Int
 fun IGraphical.cursor(item: ItemStack) {
 	owner.itemOnCursor = item
 }
+
+/**
+ * Fills the background of this graphical with the given [item].
+ */
+fun IGraphical.fillBackground(item: ItemStack) {
+	for (i in 0 until size) {
+		val engine = engineStack[i] ?: continue
+		if (engine.isVisible) continue
+		
+		setItem(i, item)
+	}
+}
+
+/**
+ * Fills the background of this graphical with the given [material].
+ */
+fun IGraphical.fillBackground(material: Materials) = fillBackground(material.toItem())
+
+/**
+ * Fills the background of this graphical with the given material in [background].
+ */
+fun IGraphical.fillBackground() {
+	val background = background ?: return
+	fillBackground(background)
+}

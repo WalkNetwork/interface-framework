@@ -21,6 +21,9 @@ inline fun ItemStack.toFilterEngine() = FilterEngine(this)
 inline fun ItemStack.toSorterEngine() = SorterEngine(this)
 inline fun ItemStack.toEmptyIndexEngine() = EmptyIndexEngine(this)
 inline fun ItemStack.toAccessEngine() = AccessEngine(this)
+inline fun ItemStack.toScrollUpEngine() = ScrollUpEngine(this)
+inline fun ItemStack.toScrollDownEngine() = ScrollDownEngine(this)
+
 
 /**
  * Copies this item stack applying the new name of them.

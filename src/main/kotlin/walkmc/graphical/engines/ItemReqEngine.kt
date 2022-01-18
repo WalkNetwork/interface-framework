@@ -35,8 +35,8 @@ open class ItemReqEngine : Engine {
    }
    
    override fun notifyChange() {
-      val value = findAvailable()
-      if (value == null) super.notifyChange() else alter(value.value)
+      val available = findAvailable()
+      if (available == null) super.notifyChange() else alter(available.value)
    }
    
    override fun handleRender() {

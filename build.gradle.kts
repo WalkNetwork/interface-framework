@@ -17,8 +17,8 @@ repositories {
 }
 
 dependencies {
-	compileOnly("io.github.uinnn:walk-server:2.3.30")
-	compileOnly(kotlin("stdlib-jdk8"))
+	api("io.github.uinnn:walk-server:2.3.30")
+	api(kotlin("stdlib-jdk8"))
 	compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
 	compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-core:1.3.2")
 }

@@ -22,7 +22,7 @@ abstract class FilterGraphical<T>(title: String, size: Int = 6) : IndexGraphical
    val texts get() = options.map { it.first }
    val filters get() = options.map { it.second }
    
-   open var filterEngine = filterEngine(midSlot(lines), newItem(Materials.HOPPER, "§dFiltro")) {}
+   open var filterEngine = filterEngine(midSlot(lines), newItem(Materials.HOPPER, "§dFiltro"))
    
    override fun indexes() {
       val values = if (isFilterDisabled || currentFilter == null) {
@@ -65,7 +65,7 @@ abstract class FilterGraphical<T>(title: String, size: Int = 6) : IndexGraphical
 }
 
 /**
- * An standard implementation of [FilterGraphical].
+ * A standard implementation of [FilterGraphical].
  */
 class StandardFilterGraphical<T>(title: String, size: Int) : FilterGraphical<T>(title, size) {
    override fun buildIndex(value: T, index: Int): Engine {

@@ -13,7 +13,7 @@ abstract class IndexGraphical<T>(title: String, size: Int = 6) : ScrollGraphical
    internal var buildIndexCallback: ((T, Int) -> Engine)? = null
    
    open var isEmpty = false
-   open var emptyEngine = makeEngine(midSlot(size / 2), EmptyIndexEngine.default()) {}
+   open var emptyEngine = makeEngine(midSlot(size / 2), EmptyIndexEngine.default())
    
    /**
     * A list holding the index values. This is used to map this indexable graphical.
@@ -37,7 +37,7 @@ abstract class IndexGraphical<T>(title: String, size: Int = 6) : ScrollGraphical
    // index graphical has special case for scrolling
    override fun scrollTo(to: Int) {
       // fast non possible or equals scroll
-      if (to < 1 || hasScrolled && to > scrollSize)
+      if (to < 1 || hasScrolled && to > pageCount)
          return
       
       if (isEmpty) {
@@ -61,7 +61,7 @@ abstract class IndexGraphical<T>(title: String, size: Int = 6) : ScrollGraphical
       val engines = currentEngines
       if (hasScrolled) uninstallAllNonPersistents()
       
-      val limit = installPerScroll
+      val limit = installPerPage
       var installed = 0
       for (index in schema) {
          if (installed >= limit || installed >= engines.size)
@@ -84,8 +84,8 @@ abstract class IndexGraphical<T>(title: String, size: Int = 6) : ScrollGraphical
       this.buildIndexCallback = callback
    }
    
-   fun notifyIfEmpty() {
-      if (isEmpty) install(emptyEngine)
+   inline fun editEmpty(block: EmptyIndexEngine.() -> Unit) {
+      emptyEngine.apply(block).notifyChange()
    }
    
    fun withEmptyEngine(engine: EmptyIndexEngine): IndexGraphical<T> {

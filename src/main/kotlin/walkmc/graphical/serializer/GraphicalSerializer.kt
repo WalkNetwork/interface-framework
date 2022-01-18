@@ -19,7 +19,7 @@ object GraphicalSerializer : KSerializer<IGraphical> {
 	}
 	
 	override fun deserialize(decoder: Decoder) = decoder.decodeStructure(descriptor) {
-		val graphical = newGraphical("", 1)
+		val graphical = StandardGraphical("", 1)
 		var enableBackground = false
 		lateinit var background: MaterialData
 		

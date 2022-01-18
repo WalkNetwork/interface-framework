@@ -1,7 +1,7 @@
 package walkmc.graphical
 
-import walkmc.*
 import walkmc.graphical.common.*
+import walkmc.graphical.engines.*
 import walkmc.graphical.interfaces.*
 import walkmc.graphical.mapper.*
 import walkmc.graphical.schema.*
@@ -17,21 +17,21 @@ typealias ScrollRenderAction = Action<IScrollGraphical>
  * This is equals to a paginated inventory. This not stores all pages
  * in a separed graphical interface in a list, this map in runtime
  * all [source] and the [schema] and [mapper] will decide
- * when showing a engine.
+ * when showing an engine.
  */
 interface IScrollGraphical : IGraphical, Scrollable {
 	
 	/**
-	 * Represents a engine used to scroll down
+	 * Represents an engine used to scroll down
 	 * this scrollable graphical interface.
 	 */
-	var scrollDownEngine: Engine
+	var scrollDownEngine: ScrollDownEngine
 	
 	/**
-	 * Represents a engine used to scroll up
+	 * Represents an engine used to scroll up
 	 * this scrollable graphical interface.
 	 */
-	var scrollUpEngine: Engine
+	var scrollUpEngine: ScrollUpEngine
 	
 	/**
 	 * The schematic used for mapping all scrollable engines
@@ -44,13 +44,13 @@ interface IScrollGraphical : IGraphical, Scrollable {
 	 * all engines in this scrollable graphical interface.
 	 * ### Note:
 	 * This is different of [engineStack] because engineStack just
-	 * stores all current engines, so for example, if i have a scrollable
+	 * stores all current engines, so for example, if I have a scrollable
 	 * graphical interface with two pages and my current page is one, the
-	 * [engineStack] only will shows the engines of my current page, while
+	 * [engineStack] only will show the engines of my current page, while
 	 * [source] will show all pages.
 	 * This not includes [scrollUpEngine] and [scrollDownEngine] engine.
 	 * To not includes a scrollable engine in the mapper, just adds the
-	 * [isPersistent] metadata to a engine.
+	 * [isPersistent] metadata to an engine.
 	 */
 	var source: Source
 	
@@ -65,13 +65,18 @@ interface IScrollGraphical : IGraphical, Scrollable {
 	var page: Int
 	
 	/**
+	 * The scroll amount that's this graphical has maden.
+	 */
+	var scrolleds: Int
+	
+	/**
 	 * Scrolls this [IScrollGraphical] to a certain page.
 	 * If a [to] is less than 0, equals than [page] or is greather
-	 * than [scrollSize] nothing will be do.
+	 * than [pageCount] nothing will be done.
 	 */
 	fun scrollTo(to: Int = 1) {
 		// fast non possible or equals scroll
-		if (to < 1 || hasScrolled && to > scrollSize)
+		if (to < 1 || hasScrolled && to > pageCount)
 			return
 		
 		// evict out of index error
@@ -80,22 +85,20 @@ interface IScrollGraphical : IGraphical, Scrollable {
 			return
 		}
 		
-		val mapped = mapper.map(this, source)
-		
 		page = to
+		val mapped = mapper.map(this, source)
 		pages = mapped
 		
 		val engines = currentEngines
 		if (hasScrolled) uninstallAllNonPersistents()
 		
-		val limit = installPerScroll
+		val limit = installPerPage
 		var installed = 0
 		for (index in schema) {
 			if (installed >= limit || installed >= engines.size)
 				break
 			
-			install(index, engines[installed])
-			installed++
+			install(index, engines[installed++])
 		}
 		
 		if (!hasScrolled) {
@@ -108,21 +111,22 @@ interface IScrollGraphical : IGraphical, Scrollable {
 	}
 	
 	override fun scroll() {
-		for (scroll in scrollers)
-			scroll(this)
+		for (scroll in scrollers) scroll(this)
 	}
-	
-	override fun install(slot: Int, engine: Engine): Engine {
-		return super.install(slot, engine).apply {
-			graphical = this@IScrollGraphical
-		}
-	}
-	
-	override fun install(slot: Int, engine: Engine, action: AlterAction): Engine {
-		return super.install(slot, engine, action).apply {
-			graphical = this@IScrollGraphical
-		}
-	}
+}
+
+/**
+ * Edits the scroll up engine of this graphical.
+ */
+inline fun IScrollGraphical.editScrollUp(block: ScrollUpEngine.() -> Unit) {
+	scrollUpEngine.apply(block).notifyChange()
+}
+
+/**
+ * Edits the scroll up engine of this graphical.
+ */
+inline fun IScrollGraphical.editScrollDown(block: ScrollDownEngine.() -> Unit) {
+	scrollDownEngine.apply(block).notifyChange()
 }
 
 /**
@@ -167,16 +171,16 @@ var IScrollGraphical.pages: Scrollers
 inline val IScrollGraphical.currentEngines get() = pages[page - 1]
 
 /**
- * Returns the amount of pages thats this
+ * Returns the amount of pages that's this
  * scrollable graphical interface contains.
  */
-inline val IScrollGraphical.scrollSize get() = pages.size
+inline val IScrollGraphical.pageCount get() = pages.size
 
 /**
  * Returns if this scrollable graphical interface
  * is in the first page.
  */
-inline val IScrollGraphical.isFirstScroll get() = page <= 1
+inline val IScrollGraphical.isFirstPage get() = page <= 1
 
 /**
  * Returns the scroll page that is the previous of the current.
@@ -186,23 +190,13 @@ inline val IScrollGraphical.previous get() = max(1, page - 1)
 /**
  * Returns the scroll page that is the next of the current.
  */
-inline val IScrollGraphical.next get() = min(scrollSize, page + 1)
+inline val IScrollGraphical.next get() = min(pageCount, page + 1)
 
 /**
  * Returns if this scrollable graphical interface
  * is in the last page.
  */
-inline val IScrollGraphical.isLastScroll get() = page >= pages.size
-
-/**
- * Gets the amount of this scrollable
- * graphical interface draws.
- */
-var IScrollGraphical.scrolleds: Int
-	get() = locate("Scrolleds") ?: 0
-	set(value) {
-		interject("Scrolleds", max(1, value))
-	}
+inline val IScrollGraphical.isLastPage get() = page >= pages.size
 
 /**
  * Returns if this scrollable graphical interface never drewed.
@@ -213,18 +207,8 @@ inline val IScrollGraphical.hasScrolled get() = scrolleds >= 1
  * Returns the amount of engines that a scrollable
  * graphical interface can install per page.
  */
-val IScrollGraphical.installPerScroll: Int
-	get() = schema.count()
-
-/**
- * Returns the last mappable column of this scrollable graphical interface.
- */
-inline val IScrollGraphical.lastSlot get() = schema.last
-
-/**
- * Returns the first mappable column of this scrollable graphical interface.
- */
-inline val IScrollGraphical.startSlot get() = schema.start
+inline val IScrollGraphical.installPerPage: Int
+	get() = schema.size
 
 /**
  * Registers a handlers to scrollers and renders
@@ -233,30 +217,4 @@ inline val IScrollGraphical.startSlot get() = schema.start
 fun IScrollGraphical.onScrollAndRender(action: ScrollRenderAction) {
 	onScroll { action(this) }
 	onRender { action(this@onScrollAndRender) }
-}
-
-/**
- * Creates a new default scroll down engine. Thats contains the
- * basic funcionality to scrolling down a [IScrollGraphical].
- */
-fun IScrollGraphical.defaultScrollDownEngine(): Engine {
-	return buildEngine(Materials.ARROW, "§c◀ Voltar", listOf("§7Clique para voltar á página anterior.")) {
-		slot = startSlot(lines)
-		isPersistent = true
-		onPress { scrollDown() }
-		onScroll { turnVisibility(!isFirstScroll) }
-	}
-}
-
-/**
- * Creates a new default scroll up engine. Thats contains the
- * basic funcionality to scrolling up a [IScrollGraphical].
- */
-fun IScrollGraphical.defaultScrollUpEngine(): Engine {
-	return buildEngine(Materials.ARROW, "§aAvançar ▶", listOf("§7Clique para ir á próxima página.")) {
-		slot = lastSlot(lines)
-		isPersistent = true
-		onPress { scrollUp() }
-		onScroll { turnVisibility(!isLastScroll) }
-	}
 }

@@ -1,7 +1,9 @@
 package walkmc.graphical
 
 import org.bukkit.*
+import org.bukkit.entity.*
 import org.bukkit.event.*
+import org.bukkit.event.entity.*
 import org.bukkit.event.inventory.*
 import org.bukkit.event.player.*
 import org.bukkit.plugin.*
@@ -11,15 +13,15 @@ import walkmc.graphical.common.*
 import walkmc.graphical.interfaces.*
 
 /**
- * A object instance for registering all
+ * An object instance for registering all
  * interfaces services.
  */
 object InterfaceService : Listener {
 	lateinit var plugin: Plugin
 	
 	/**
-	 * Loads all services of a interface can offer
-	 * with the this plugin as owner.
+	 * Loads all services of an interface can offer
+	 * with the plugin as owner.
 	 */
 	fun startup(plugin: Plugin) {
 		if (this::plugin.isInitialized)
@@ -40,13 +42,13 @@ object InterfaceService : Listener {
 	@EventHandler
 	fun onOpen(event: InventoryOpenEvent) {
 		val graphical = event.interfaceOrNull() ?: return
-		event.isCancelled = graphical.permits(ObserverKind.ACCESS).not()
+		event.isCancelled = !graphical.permits(ObserverKind.ACCESS)
 	}
 	
 	@EventHandler
 	fun onDrag(event: InventoryDragEvent) {
 		val graphical = event.interfaceOrNull() ?: return
-		event.isCancelled = graphical.permits(ObserverKind.DRAG).not()
+		event.isCancelled = !graphical.permits(ObserverKind.DRAG)
 	}
 	
 	@EventHandler
@@ -73,12 +75,20 @@ object InterfaceService : Listener {
 	@EventHandler
 	fun onPickup(event: PlayerPickupItemEvent) {
 		val graphical = event.player.interfaceOrNull() ?: return
-		event.isCancelled = graphical.permits(ObserverKind.PICKUP).not()
+		event.isCancelled = !graphical.permits(ObserverKind.PICKUP)
+	}
+	
+	@EventHandler
+	fun onDamage(event: EntityDamageEvent) {
+		val entity = event.entity
+		if (entity !is Player) return
+		val graphical = entity.interfaceOrNull() ?: return
+		event.isCancelled = !graphical.permits(ObserverKind.DAMAGE)
 	}
 }
 
 /**
- * Loads all services of a interface can offer
- * with the this plugin as owner.
+ * Loads all services of an interface can offer
+ * with the plugin as owner.
  */
 fun Plugin.loadInterfaceService() = InterfaceService.startup(this)

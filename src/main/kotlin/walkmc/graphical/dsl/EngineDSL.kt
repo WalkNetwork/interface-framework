@@ -398,7 +398,7 @@ fun SortGraphical<*>.sorterEngine(slot: Int, model: ItemStack) =
 /**
  * Installs an access engine in the specified [slot] applying [block].
  */
-fun IGraphical.accessEngine(slot: Int, material: Materials, block: AccessEngine.() -> Unit) =
+inline fun IGraphical.accessEngine(slot: Int, material: Materials, block: AccessEngine.() -> Unit) =
    makeEngine(slot, AccessEngine(material), block)
 
 /**
@@ -418,3 +418,59 @@ fun IGraphical.accessEngine(slot: Int, material: Materials) =
  */
 fun IGraphical.accessEngine(slot: Int, model: ItemStack) =
    makeEngine(slot, AccessEngine(model))
+
+//
+// Scroll Up Engines
+//
+
+/**
+ * Installs a scroll up engine in the specified [slot] applying [block].
+ */
+inline fun IScrollGraphical.scrollUpEngine(slot: Int, material: Materials, block: ScrollUpEngine.() -> Unit) =
+   makeEngine(slot, ScrollUpEngine(material), block)
+
+/**
+ * Installs a scroll up engine in the specified [slot] applying [block].
+ */
+inline fun IScrollGraphical.scrollUpEngine(slot: Int, model: ItemStack, block: ScrollUpEngine.() -> Unit) =
+   makeEngine(slot, ScrollUpEngine(model), block)
+
+/**
+ * Installs a scroll up engine in the specified [slot].
+ */
+fun IScrollGraphical.scrollUpEngine(slot: Int, material: Materials) =
+   makeEngine(slot, ScrollUpEngine(material))
+
+/**
+ * Installs a scroll up engine in the specified [slot].
+ */
+fun IScrollGraphical.scrollUpEngine(slot: Int, model: ItemStack) =
+   makeEngine(slot, ScrollUpEngine(model))
+
+//
+// Scroll Down Engines
+//
+
+/**
+ * Installs a scroll down engine in the specified [slot] applying [block].
+ */
+inline fun IScrollGraphical.scrollDownEngine(slot: Int, material: Materials, block: ScrollDownEngine.() -> Unit) =
+   makeEngine(slot, ScrollDownEngine(material), block)
+
+/**
+ * Installs a scroll down engine in the specified [slot] applying [block].
+ */
+inline fun IScrollGraphical.scrollDownEngine(slot: Int, model: ItemStack, block: ScrollDownEngine.() -> Unit) =
+   makeEngine(slot, ScrollDownEngine(model), block)
+
+/**
+ * Installs a scroll down engine in the specified [slot].
+ */
+fun IScrollGraphical.scrollDownEngine(slot: Int, material: Materials) =
+   makeEngine(slot, ScrollDownEngine(material))
+
+/**
+ * Installs a scroll down engine in the specified [slot].
+ */
+fun IScrollGraphical.scrollDownEngine(slot: Int, model: ItemStack) =
+   makeEngine(slot, ScrollDownEngine(model))
