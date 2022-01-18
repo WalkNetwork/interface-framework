@@ -6,6 +6,8 @@ import walkmc.*
 import walkmc.graphical.*
 import walkmc.graphical.common.*
 
+typealias LoreRequestor<T> = T.() -> Iterable<String>
+
 /**
  * An implementation of [Engine] for easily creation of sorter engines.
  *
@@ -17,33 +19,61 @@ open class SorterEngine : Engine {
    
    val graph get() = graphical as SortGraphical<*>
    
+   protected open var header: LoreRequestor<SorterEngine> = {
+      setOf("§7Ordene a seleção", "§7dos elementos.", "")
+   }
+   
+   protected var footer: LoreRequestor<SorterEngine> = {
+      setOf("", if (graph.isSorterDisabled) "§cOrdem desativada." else "§aClique para ordenar.")
+   }
+   
+   protected var current: SorterEngine.(String, Int) -> Iterable<String> = { text, _ ->
+      setOf(" §b➟ $text")
+   }
+   
+   protected var background: SorterEngine.(String, Int) -> Iterable<String> = { text, _ ->
+      setOf("   §8$text")
+   }
+   
    init {
       isPersistent = true
+   }
+   
+   fun requestHeader(requestor: LoreRequestor<SorterEngine>) {
+      header = requestor
+   }
+   
+   fun requestFooter(requestor: LoreRequestor<SorterEngine>) {
+      footer = requestor
+   }
+   
+   fun requestCurrent(requestor: SorterEngine.(String, Int) -> Iterable<String>) {
+      current = requestor
+   }
+   
+   fun requestBackground(requestor: SorterEngine.(String, Int) -> Iterable<String>) {
+      background = requestor
    }
    
    /**
     * The header lore to be mapped.
     */
-   open fun withHeader(): Iterable<String> =
-      listOf("§7Ordene a seleção", "§7dos elementos.", "")
+   open fun withHeader() = header()
    
    /**
     * The footer lore to be mapped.
     */
-   open fun withFooter(): Iterable<String> =
-      listOf("", if (graph.isSorterDisabled) "§cOrdem desativada." else "§aClique para ordenar.")
+   open fun withFooter() = footer()
    
    /**
     * The current sorter lore to be mapped.
     */
-   open fun withCurrentSorter(text: String, index: Int): Iterable<String> =
-      listOf(" §b➟ $text")
+   open fun withCurrentSorter(text: String, index: Int) = current(this, text, index)
    
    /**
     * The background sorter lore to be mapped.
     */
-   open fun withBackgroundSorter(text: String, index: Int): Iterable<String> =
-      listOf("   §8$text")
+   open fun withBackgroundSorter(text: String, index: Int) = background(this, text, index)
    
    /**
     * The sorter shown text lore to be mapped.
@@ -59,7 +89,7 @@ open class SorterEngine : Engine {
    }
    
    override fun notifyChange() {
-      alter(newWithLore(withHeader() + withSorter() + withFooter()))
+      alter(copyWithLore(withHeader() + withSorter() + withFooter()))
    }
    
    override fun handleClick(event: InventoryClickEvent) {

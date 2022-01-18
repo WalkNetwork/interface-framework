@@ -5,6 +5,7 @@ import walkmc.collections.*
 import walkmc.extensions.*
 import walkmc.graphical.common.*
 import walkmc.graphical.dsl.*
+import walkmc.graphical.engines.*
 
 typealias SortPair<T> = Pair<String, Comparator<T>>
 
@@ -53,6 +54,10 @@ abstract class SortGraphical<T>(title: String, size: Int = 6) : IndexGraphical<T
    fun enableSorter() {
       isSorterDisabled = false
       scrollIndexing()
+   }
+   
+   inline fun editSorter(block: SorterEngine.() -> Unit) {
+      sorterEngine.apply(block)
    }
    
    fun addSorter(text: String, comparator: Comparator<T>) {

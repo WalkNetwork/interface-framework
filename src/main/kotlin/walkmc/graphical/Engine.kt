@@ -26,6 +26,7 @@ typealias EngineStack = ConcurrentHashMap<Int, Engine>
  */
 open class Engine : ItemStack, Alterable, Renderable, Pressable, Visible, Metadatable, Workable, Scrollable, Tickable {
    constructor(type: Materials, amount: Int = 1) : super(type.toItem(amount))
+   constructor(stack: ItemStack, amount: Int = 1) : super(stack) { this.amount = amount }
    constructor(stack: ItemStack) : super(stack)
    
    open var graphical: IGraphical? = null
@@ -47,8 +48,8 @@ open class Engine : ItemStack, Alterable, Renderable, Pressable, Visible, Metada
          
          val graph = graphical
          if (graph != null) {
-            graph.setItem(slot, graph.backgroundOrDefault())
-            graph.setItem(value, this)
+            graph.uninstall(field)
+            graph.install(value, this)
          }
          
          field = value
@@ -352,84 +353,6 @@ inline fun Engine.onWorkAt(amount: Int, crossinline action: WorkerAction) =
 @Deprecated("Workers are now replaced by Tickable.")
 inline fun Engine.onFirstWork(crossinline action: WorkerAction) =
    onWork { if (workedAmount == 0) action() }
-
-/**
- * Adds a new tick listener that's will be executed every [amount] of ticks.
- */
-inline fun Engine.onTick(amount: Int, crossinline action: TickAction) =
-   onTick { if (ticks % amount == 0) action() }
-
-/**
- * Adds a new tick listener that's will be executed every tick in the specified [range].
- */
-inline fun Engine.onTick(range: IntRange, crossinline action: TickAction) =
-   onTick { if (ticks in range) action() }
-
-/**
- * Adds a new tick listener that's will be executed every tick in the specified range.
- */
-inline fun Engine.onTick(startRange: Int, endRange: Int, crossinline action: TickAction) =
-   onTick(startRange..endRange, action)
-
-/**
- * Adds a new tick listener that's will be executed in the first tick.
- */
-inline fun Engine.onFirstTick(crossinline action: TickAction) =
-   onTick { if (ticks == 0) action() }
-
-/**
- * Adds a new tick listener that's will be executed in the first [amount] of ticks.
- */
-inline fun Engine.onFirstTick(amount: Int, crossinline action: TickAction) =
-   onTick { if (ticks == amount) action() }
-
-/**
- * Adds a new tick listener that's will be executed every second, or 20 ticks.
- */
-inline fun Engine.onEverySecond(crossinline action: TickAction) =
-   onTick { if (ticks % 20 == 0) action() }
-
-/**
- * Adds a new tick listener that's will be executed [amount] of seconds.
- */
-inline fun Engine.onEverySecond(amount: Int, crossinline action: TickAction) =
-   onTick { if (ticks % (amount * 20) == 0) action() }
-
-/**
- * Adds a new tick listener that's will be executed in the first second.
- */
-inline fun Engine.onFirstSecond(crossinline action: TickAction) =
-   onTick { if (ticks == 20) action() }
-
-/**
- * Adds a new tick listener that's will be executed in the first [amount] of seconds.
- */
-inline fun Engine.onFirstSecond(amount: Int, crossinline action: TickAction) =
-   onTick { if (ticks == amount * 20) action() }
-
-/**
- * Adds a new tick listener that's will be executed every minute, or 60 ticks, or 1200 ticks.
- */
-inline fun Engine.onEveryMinute(crossinline action: TickAction) =
-   onTick { if (ticks % 1200 == 0) action() }
-
-/**
- * Adds a new tick listener that's will be executed [amount] of minutes.
- */
-inline fun Engine.onEveryMinute(amount: Int, crossinline action: TickAction) =
-   onTick { if (ticks % (amount * 1200) == 0) action() }
-
-/**
- * Adds a new tick listener that's will be executed in the first minute.
- */
-inline fun Engine.onFirstMinute(crossinline action: TickAction) =
-   onTick { if (ticks == 1200) action() }
-
-/**
- * Adds a new tick listener that's will be executed in the first [amount] of minutes.
- */
-inline fun Engine.onFirstMinute(amount: Int, crossinline action: TickAction) =
-   onTick { if (ticks == amount * 1200) action() }
 
 /**
  * Adds a new tick listener that's will show this engine in the first [amount] of ticks

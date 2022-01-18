@@ -13,7 +13,7 @@ abstract class IndexGraphical<T>(title: String, size: Int = 6) : ScrollGraphical
    internal var buildIndexCallback: ((T, Int) -> Engine)? = null
    
    open var isEmpty = false
-   open var emptyEngine = makeEngine(midSlot(size / 2), IndexEmptyEngine.default()) {}
+   open var emptyEngine = makeEngine(midSlot(size / 2), EmptyIndexEngine.default()) {}
    
    /**
     * A list holding the index values. This is used to map this indexable graphical.
@@ -88,7 +88,7 @@ abstract class IndexGraphical<T>(title: String, size: Int = 6) : ScrollGraphical
       if (isEmpty) install(emptyEngine)
    }
    
-   fun withEmptyEngine(engine: IndexEmptyEngine): IndexGraphical<T> {
+   fun withEmptyEngine(engine: EmptyIndexEngine): IndexGraphical<T> {
       emptyEngine.alter(engine)
       return this
    }

@@ -6,11 +6,10 @@ plugins {
 	id("maven-publish")
 	id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
 	id("signing")
-	id("org.jetbrains.dokka") version "1.5.0"
 }
 
 group = "io.github.uinnn"
-version = "1.9.0"
+version = "1.9.2"
 
 repositories {
 	mavenLocal()
@@ -18,7 +17,7 @@ repositories {
 }
 
 dependencies {
-	compileOnly("io.github.uinnn:walk-server:2.3.20")
+	compileOnly("io.github.uinnn:walk-server:2.3.30")
 	compileOnly(kotlin("stdlib-jdk8"))
 	compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
 	compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-core:1.3.2")
@@ -61,6 +60,7 @@ tasks {
 				groupId = "io.github.uinnn"
 				artifactId = "interface-framework"
 				version = project.version.toString()
+				
 				pom {
 					name.set("interface-framework")
 					description.set("a complex and complete interface (inventory) framework write in kotlin for spigot use!")
@@ -90,6 +90,9 @@ tasks {
 	}
 	
 	compileKotlin {
+		targetCompatibility = "1.8"
+		sourceCompatibility = "1.8"
+		
 		kotlinOptions.freeCompilerArgs +=
 			"-Xopt-in=kotlin.time.ExperimentalTime," +
 				"kotlin.ExperimentalStdlibApi," +

@@ -5,15 +5,17 @@ import org.bukkit.inventory.*
 import walkmc.*
 import walkmc.graphical.*
 
+typealias Req<T> = (T) -> Boolean
+
 /**
  * An implementation of [Engine] that's limit's the actions
  * of an engine if a requirement is not done.
  */
-open class RequirementEngine : Engine {
+open class ReqEngine : Engine {
    constructor(type: Materials, amount: Int = 1) : super(type, amount)
    constructor(stack: ItemStack) : super(stack)
    
-   open var requirement: (RequirementEngine) -> Boolean = { true }
+   open var requirement: Req<ReqEngine> = { true }
    
    open var limitVisibility = true
    open var limitClick = true
@@ -21,14 +23,14 @@ open class RequirementEngine : Engine {
    open var limitTick = true
    open var limitScroll = true
    
-   open var successCallback: (RequirementEngine.() -> Unit)? = null
-   open var failureCallback: (RequirementEngine.() -> Unit)? = null
+   open var successCallback: (ReqEngine.() -> Unit)? = null
+   open var failureCallback: (ReqEngine.() -> Unit)? = null
    
-   fun onSuccess(callback: RequirementEngine.() -> Unit) {
+   fun onSuccess(callback: ReqEngine.() -> Unit) {
       successCallback = callback
    }
    
-   fun onFailure(callback: RequirementEngine.() -> Unit) {
+   fun onFailure(callback: ReqEngine.() -> Unit) {
       failureCallback = callback
    }
    
@@ -62,7 +64,7 @@ open class RequirementEngine : Engine {
    /**
     * Sets the requirement of this engine.
     */
-   infix fun require(block: (RequirementEngine) -> Boolean): RequirementEngine {
+   infix fun require(block: (ReqEngine) -> Boolean): ReqEngine {
       requirement = block
       return this
    }

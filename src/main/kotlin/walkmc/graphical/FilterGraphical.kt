@@ -5,6 +5,7 @@ import walkmc.collections.*
 import walkmc.extensions.*
 import walkmc.graphical.common.*
 import walkmc.graphical.dsl.*
+import walkmc.graphical.engines.*
 
 typealias FilterPair<T> = Pair<String, Filter<T>>
 
@@ -53,6 +54,10 @@ abstract class FilterGraphical<T>(title: String, size: Int = 6) : IndexGraphical
    fun enableFilter() {
       isFilterDisabled = false
       scrollIndexing()
+   }
+   
+   inline fun editFilter(block: FilterEngine.() -> Unit) {
+      filterEngine.apply(block)
    }
    
    fun addFilter(text: String, filter: Filter<T>) = options.add(text to filter)

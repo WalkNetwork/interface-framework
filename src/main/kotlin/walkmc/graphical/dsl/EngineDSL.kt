@@ -3,7 +3,6 @@ package walkmc.graphical.dsl
 import org.bukkit.inventory.*
 import walkmc.*
 import walkmc.graphical.*
-import walkmc.graphical.common.*
 import walkmc.graphical.engines.*
 
 //
@@ -19,10 +18,10 @@ inline fun <T : Engine> IGraphical.makeEngine(slot: Int, engine: T, block: T.() 
 }
 
 /**
- * Install an engine in the specified [slot] applying [block].
+ * Install an engine in the specified [slot].
  */
-inline fun <T : Engine> IGraphical.makeEngine(x: Int, y: Int, engine: T, block: T.() -> Unit): T {
-   install(slotAt(x, y), engine.apply(block))
+fun <T : Engine> IGraphical.makeEngine(slot: Int, engine: T): T {
+   install(slot, engine)
    return engine
 }
 
@@ -43,16 +42,14 @@ inline fun IGraphical.engine(slot: Int, model: ItemStack, block: Engine.() -> Un
    makeEngine(slot, Engine(model), block)
 
 /**
- * Installs a simple engine in the specified [slot] applying [block].
+ * Installs a simple engine in the specified [slot].
  */
-inline fun IGraphical.engine(x: Int, y: Int, material: Materials, block: Engine.() -> Unit) =
-   makeEngine(x, y, Engine(material), block)
+fun IGraphical.engine(slot: Int, material: Materials) = makeEngine(slot, Engine(material))
 
 /**
- * Installs a simple engine in the specified [slot] applying [block].
+ * Installs a simple engine in the specified [slot].
  */
-inline fun IGraphical.engine(x: Int, y: Int, model: ItemStack, block: Engine.() -> Unit) =
-   makeEngine(x, y, Engine(model), block)
+fun IGraphical.engine(slot: Int, model: ItemStack) = makeEngine(slot, Engine(model))
 
 //
 // Cycles Engines
@@ -71,16 +68,16 @@ inline fun IGraphical.cycleEngine(slot: Int, model: ItemStack, block: CycleEngin
    makeEngine(slot, CycleEngine(model), block)
 
 /**
- * Installs a cycle engine in the specified [slot] applying [block].
+ * Installs a cycle engine in the specified [slot].
  */
-inline fun IGraphical.cycleEngine(x: Int, y: Int, material: Materials, block: CycleEngine.() -> Unit) =
-   makeEngine(x, y, CycleEngine(material), block)
+fun IGraphical.cycleEngine(slot: Int, material: Materials) =
+   makeEngine(slot, CycleEngine(material))
 
 /**
- * Installs a cycle engine in the specified [slot] applying [block].
+ * Installs a cycle engine in the specified [slot].
  */
-inline fun IGraphical.cycleEngine(x: Int, y: Int, model: ItemStack, block: CycleEngine.() -> Unit) =
-   makeEngine(x, y, CycleEngine(model), block)
+fun IGraphical.cycleEngine(slot: Int, model: ItemStack) =
+   makeEngine(slot, CycleEngine(model))
 
 //
 // Cycles Material Engines
@@ -99,16 +96,16 @@ inline fun IGraphical.cycleMaterialEngine(slot: Int, model: ItemStack, block: Cy
    makeEngine(slot, CycleMaterialEngine(model), block)
 
 /**
- * Installs a cycle material engine in the specified [slot] applying [block].
+ * Installs a cycle material engine in the specified [slot].
  */
-inline fun IGraphical.cycleMaterialEngine(x: Int, y: Int, material: Materials, block: CycleMaterialEngine.() -> Unit) =
-   makeEngine(slotAt(x, y), CycleMaterialEngine(material), block)
+fun IGraphical.cycleMaterialEngine(slot: Int, material: Materials) =
+   makeEngine(slot, CycleMaterialEngine(material))
 
 /**
- * Installs a cycle material engine in the specified [slot] applying [block].
+ * Installs a cycle material engine in the specified [slot].
  */
-inline fun IGraphical.cycleMaterialEngine(x: Int, y: Int, model: ItemStack, block: CycleMaterialEngine.() -> Unit) =
-   makeEngine(slotAt(x, y), CycleMaterialEngine(model), block)
+fun IGraphical.cycleMaterialEngine(slot: Int, model: ItemStack) =
+   makeEngine(slot, CycleMaterialEngine(model))
 
 //
 // Toggle Engines
@@ -127,16 +124,16 @@ inline fun IGraphical.toggleEngine(slot: Int, model: ItemStack, block: ToggleEng
    makeEngine(slot, ToggleEngine(model), block)
 
 /**
- * Installs a toggle engine in the specified [slot] applying [block].
+ * Installs a toggle engine in the specified [slot].
  */
-inline fun IGraphical.toggleEngine(x: Int, y: Int, material: Materials, block: ToggleEngine.() -> Unit) =
-   makeEngine(x, y, ToggleEngine(material), block)
+fun IGraphical.toggleEngine(slot: Int, material: Materials) =
+   makeEngine(slot, ToggleEngine(material))
 
 /**
- * Installs a toggle engine in the specified [slot] applying [block].
+ * Installs a toggle engine in the specified [slot].
  */
-inline fun IGraphical.toggleEngine(x: Int, y: Int, model: ItemStack, block: ToggleEngine.() -> Unit) =
-   makeEngine(x, y, ToggleEngine(model), block)
+fun IGraphical.toggleEngine(slot: Int, model: ItemStack) =
+   makeEngine(slot, ToggleEngine(model))
 
 //
 // Toggle Filter Engines
@@ -157,18 +154,16 @@ inline fun FilterGraphical<*>.toggleFilterEngine(
 ) = makeEngine(slot, ToggleFilterEngine(model), block)
 
 /**
- * Installs a toggle filter engine in the specified [slot] applying [block].
+ * Installs a toggle filter engine in the specified [slot].
  */
-inline fun FilterGraphical<*>.toggleFilterEngine(
-   x: Int, y: Int, material: Materials, block: ToggleFilterEngine.() -> Unit
-) = makeEngine(x, y, ToggleFilterEngine(material), block)
+fun FilterGraphical<*>.toggleFilterEngine(slot: Int, material: Materials) =
+   makeEngine(slot, ToggleFilterEngine(material))
 
 /**
- * Installs a toggle filter engine in the specified [slot] applying [block].
+ * Installs a toggle filter engine in the specified [slot].
  */
-inline fun FilterGraphical<*>.toggleFilterEngine(
-   x: Int, y: Int, model: ItemStack, block: ToggleFilterEngine.() -> Unit
-) = makeEngine(x, y, ToggleFilterEngine(model), block)
+fun FilterGraphical<*>.toggleFilterEngine(slot: Int, model: ItemStack) =
+   makeEngine(slot, ToggleFilterEngine(model))
 
 //
 // Toggle Sorter Engines
@@ -189,17 +184,16 @@ inline fun SortGraphical<*>.toggleSorterEngine(
 ) = makeEngine(slot, ToggleSorterEngine(model), block)
 
 /**
- * Installs a toggle sorter engine in the specified [slot] applying [block].
+ * Installs a toggle sorter engine in the specified [slot].
  */
-inline fun SortGraphical<*>.toggleSorterEngine(
-   x: Int, y: Int, material: Materials, block: ToggleSorterEngine.() -> Unit
-) = makeEngine(x, y, ToggleSorterEngine(material), block)
+fun SortGraphical<*>.toggleSorterEngine(slot: Int, material: Materials) =
+   makeEngine(slot, ToggleSorterEngine(material))
 
 /**
- * Installs a toggle sorter engine in the specified [slot] applying [block].
+ * Installs a toggle sorter engine in the specified [slot].
  */
-inline fun SortGraphical<*>.toggleSorterEngine(x: Int, y: Int, model: ItemStack, block: ToggleSorterEngine.() -> Unit) =
-   makeEngine(x, y, ToggleSorterEngine(model), block)
+fun SortGraphical<*>.toggleSorterEngine(slot: Int, model: ItemStack) =
+   makeEngine(slot, ToggleSorterEngine(model))
 
 //
 // Requirement Engines
@@ -208,26 +202,54 @@ inline fun SortGraphical<*>.toggleSorterEngine(x: Int, y: Int, model: ItemStack,
 /**
  * Installs a requirement engine in the specified [slot] applying [block].
  */
-inline fun IGraphical.reqEngine(slot: Int, material: Materials, block: RequirementEngine.() -> Unit) =
-   makeEngine(slot, RequirementEngine(material), block)
+inline fun IGraphical.reqEngine(slot: Int, material: Materials, block: ReqEngine.() -> Unit) =
+   makeEngine(slot, ReqEngine(material), block)
 
 /**
  * Installs a requirement engine in the specified [slot] applying [block].
  */
-inline fun IGraphical.reqEngine(slot: Int, model: ItemStack, block: RequirementEngine.() -> Unit) =
-   makeEngine(slot, RequirementEngine(model), block)
+inline fun IGraphical.reqEngine(slot: Int, model: ItemStack, block: ReqEngine.() -> Unit) =
+   makeEngine(slot, ReqEngine(model), block)
 
 /**
- * Installs a requirement engine in the specified [slot] applying [block].
+ * Installs a requirement engine in the specified [slot].
  */
-inline fun IGraphical.reqEngine(x: Int, y: Int, material: Materials, block: RequirementEngine.() -> Unit) =
-   makeEngine(x, y, RequirementEngine(material), block)
+fun IGraphical.reqEngine(slot: Int, material: Materials) =
+   makeEngine(slot, ReqEngine(material))
 
 /**
- * Installs a requirement engine in the specified [slot] applying [block].
+ * Installs a requirement engine in the specified [slot].
  */
-inline fun IGraphical.reqEngine(x: Int, y: Int, model: ItemStack, block: RequirementEngine.() -> Unit) =
-   makeEngine(x, y, RequirementEngine(model), block)
+fun IGraphical.reqEngine(slot: Int, model: ItemStack) =
+   makeEngine(slot, ReqEngine(model))
+
+//
+// Item Requirement Engines
+//
+
+/**
+ * Installs a item requirement engine in the specified [slot] applying [block].
+ */
+inline fun IGraphical.reqItemEngine(slot: Int, material: Materials, block: ItemReqEngine.() -> Unit) =
+   makeEngine(slot, ItemReqEngine(material), block)
+
+/**
+ * Installs a item requirement engine in the specified [slot] applying [block].
+ */
+inline fun IGraphical.reqItemEngine(slot: Int, model: ItemStack, block: ItemReqEngine.() -> Unit) =
+   makeEngine(slot, ItemReqEngine(model), block)
+
+/**
+ * Installs a item requirement engine in the specified [slot].
+ */
+fun IGraphical.reqItemEngine(slot: Int, material: Materials) =
+   makeEngine(slot, ItemReqEngine(material))
+
+/**
+ * Installs a item requirement engine in the specified [slot].
+ */
+fun IGraphical.reqItemEngine(slot: Int, model: ItemStack) =
+   makeEngine(slot, ItemReqEngine(model))
 
 //
 // Count Engines
@@ -246,16 +268,16 @@ inline fun IGraphical.countEngine(slot: Int, model: ItemStack, block: CountEngin
    makeEngine(slot, CountEngine(model), block)
 
 /**
- * Installs a count engine in the specified [slot] applying [block].
+ * Installs a count engine in the specified [slot].
  */
-inline fun IGraphical.countEngine(x: Int, y: Int, material: Materials, block: CountEngine.() -> Unit) =
-   makeEngine(x, y, CountEngine(material), block)
+fun IGraphical.countEngine(slot: Int, material: Materials) =
+   makeEngine(slot, CountEngine(material))
 
 /**
- * Installs a count engine in the specified [slot] applying [block].
+ * Installs a count engine in the specified [slot].
  */
-inline fun IGraphical.countEngine(x: Int, y: Int, model: ItemStack, block: CountEngine.() -> Unit) =
-   makeEngine(x, y, CountEngine(model), block)
+fun IGraphical.countEngine(slot: Int, model: ItemStack) =
+   makeEngine(slot, CountEngine(model))
 
 //
 // Amount Count Engines
@@ -274,16 +296,16 @@ inline fun IGraphical.amountCountEngine(slot: Int, model: ItemStack, block: Amou
    makeEngine(slot, AmountCountEngine(model), block)
 
 /**
- * Installs an amount count engine in the specified [slot] applying [block].
+ * Installs an amount count engine in the specified [slot].
  */
-inline fun IGraphical.amountCountEngine(x: Int, y: Int, material: Materials, block: AmountCountEngine.() -> Unit) =
-   makeEngine(x, y, AmountCountEngine(material), block)
+fun IGraphical.amountCountEngine(slot: Int, material: Materials) =
+   makeEngine(slot, AmountCountEngine(material))
 
 /**
- * Installs an amount count engine in the specified [slot] applying [block].
+ * Installs an amount count engine in the specified [slot].
  */
-inline fun IGraphical.amountCountEngine(x: Int, y: Int, model: ItemStack, block: AmountCountEngine.() -> Unit) =
-   makeEngine(x, y, AmountCountEngine(model), block)
+fun IGraphical.amountCountEngine(slot: Int, model: ItemStack) =
+   makeEngine(slot, AmountCountEngine(model))
 
 //
 // Processor Engines
@@ -302,16 +324,16 @@ inline fun IGraphical.processorEngine(slot: Int, model: ItemStack, block: Proces
    makeEngine(slot, ProcessorEngine(model), block)
 
 /**
- * Installs a processor engine in the specified [slot] applying [block].
+ * Installs a processor engine in the specified [slot].
  */
-inline fun IGraphical.processorEngine(x: Int, y: Int, material: Materials, block: ProcessorEngine.() -> Unit) =
-   makeEngine(x, y, ProcessorEngine(material), block)
+fun IGraphical.processorEngine(slot: Int, material: Materials) =
+   makeEngine(slot, ProcessorEngine(material))
 
 /**
- * Installs a processor engine in the specified [slot] applying [block].
+ * Installs a processor engine in the specified [slot].
  */
-inline fun IGraphical.processorEngine(x: Int, y: Int, model: ItemStack, block: ProcessorEngine.() -> Unit) =
-   makeEngine(x, y, ProcessorEngine(model), block)
+fun IGraphical.processorEngine(slot: Int, model: ItemStack) =
+   makeEngine(slot, ProcessorEngine(model))
 
 //
 // Filter Engines
@@ -330,18 +352,16 @@ inline fun FilterGraphical<*>.filterEngine(slot: Int, model: ItemStack, block: F
    makeEngine(slot, FilterEngine(model), block)
 
 /**
- * Installs a filter engine in the specified [slot] applying [block].
+ * Installs a filter engine in the specified [slot].
  */
-inline fun FilterGraphical<*>.filterEngine(
-   x: Int, y: Int, material: Materials, block: FilterEngine.() -> Unit
-) = makeEngine(x, y, FilterEngine(material), block)
+fun FilterGraphical<*>.filterEngine(slot: Int, material: Materials) =
+   makeEngine(slot, FilterEngine(material))
 
 /**
- * Installs a filter engine in the specified [slot] applying [block].
+ * Installs a filter engine in the specified [slot].
  */
-inline fun FilterGraphical<*>.filterEngine(
-   x: Int, y: Int, model: ItemStack, block: FilterEngine.() -> Unit
-) = makeEngine(x, y, FilterEngine(model), block)
+fun FilterGraphical<*>.filterEngine(slot: Int, model: ItemStack) =
+   makeEngine(slot, FilterEngine(model))
 
 //
 // Sorter Engines
@@ -360,15 +380,41 @@ inline fun SortGraphical<*>.sorterEngine(slot: Int, model: ItemStack, block: Sor
    makeEngine(slot, SorterEngine(model), block)
 
 /**
- * Installs a sorter engine in the specified [slot] applying [block].
+ * Installs a sorter engine in the specified [slot].
  */
-inline fun SortGraphical<*>.sorterEngine(
-   x: Int, y: Int, material: Materials, block: SorterEngine.() -> Unit
-) = makeEngine(x, y, SorterEngine(material), block)
+fun SortGraphical<*>.sorterEngine(slot: Int, material: Materials) =
+   makeEngine(slot, SorterEngine(material))
 
 /**
- * Installs a sorter engine in the specified [slot] applying [block].
+ * Installs a sorter engine in the specified [slot].
  */
-inline fun SortGraphical<*>.sorterEngine(
-   x: Int, y: Int, model: ItemStack, block: SorterEngine.() -> Unit
-) = makeEngine(x, y, SorterEngine(model), block)
+fun SortGraphical<*>.sorterEngine(slot: Int, model: ItemStack) =
+   makeEngine(slot, SorterEngine(model))
+
+//
+// Access Engines
+//
+
+/**
+ * Installs an access engine in the specified [slot] applying [block].
+ */
+fun IGraphical.accessEngine(slot: Int, material: Materials, block: AccessEngine.() -> Unit) =
+   makeEngine(slot, AccessEngine(material), block)
+
+/**
+ * Installs an access engine in the specified [slot] applying [block].
+ */
+inline fun IGraphical.accessEngine(slot: Int, model: ItemStack, block: AccessEngine.() -> Unit) =
+   makeEngine(slot, AccessEngine(model), block)
+
+/**
+ * Installs an access engine in the specified [slot].
+ */
+fun IGraphical.accessEngine(slot: Int, material: Materials) =
+   makeEngine(slot, AccessEngine(material))
+
+/**
+ * Installs an access engine in the specified [slot].
+ */
+fun IGraphical.accessEngine(slot: Int, model: ItemStack) =
+   makeEngine(slot, AccessEngine(model))

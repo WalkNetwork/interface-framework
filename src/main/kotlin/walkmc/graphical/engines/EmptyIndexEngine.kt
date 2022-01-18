@@ -5,19 +5,19 @@ import walkmc.*
 import walkmc.extensions.*
 import walkmc.graphical.*
 
-open class IndexEmptyEngine : RequirementEngine {
+open class EmptyIndexEngine : ReqEngine {
    constructor(type: Materials, amount: Int = 1) : super(type, amount)
    constructor(stack: ItemStack) : super(stack)
    
    val graph get() = graphical as IndexGraphical<*>
    
-   override var requirement: (RequirementEngine) -> Boolean = { graph.isEmpty }
+   override var requirement: (ReqEngine) -> Boolean = { graph.isEmpty }
    
    init {
       isPersistent = true
    }
    
    companion object {
-      fun default() = IndexEmptyEngine(newItem(Materials.BARRIER, "§cVazio."))
+      fun default() = EmptyIndexEngine(newItem(Materials.BARRIER, "§cVazio."))
    }
 }

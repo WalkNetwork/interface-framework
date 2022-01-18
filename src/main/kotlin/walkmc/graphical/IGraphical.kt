@@ -98,7 +98,7 @@ interface IGraphical : Interface, Accessible, Renderable, Workable, Observable, 
 	 * corresponding by the slot.
 	 */
 	fun uninstall(slot: Int) {
-		setItem(slot, null)
+		setItem(slot, backgroundOrDefault())
 		engineStack.remove(slot)
 	}
 }
@@ -254,7 +254,7 @@ suspend fun IGraphical.workInterface() {
  * Ticks this [IGraphical].
  */
 fun IGraphical.tickInterface() {
-	for (tick in tickers) tick()
+	for (ticker in tickers) ticker()
 }
 
 /**

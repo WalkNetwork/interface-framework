@@ -17,33 +17,77 @@ open class FilterEngine : Engine {
    
    val graph get() = graphical as FilterGraphical<*>
    
+   protected open var header: LoreRequestor<FilterEngine> = {
+      setOf("§7Ordene a seleção", "§7dos elementos.", "")
+   }
+   
+   protected var footer: LoreRequestor<FilterEngine> = {
+      setOf("", if (graph.isFilterDisabled) "§cOrdem desativada." else "§aClique para ordenar.")
+   }
+   
+   protected var current: FilterEngine.(String, Int) -> Iterable<String> = { text, _ ->
+      setOf(" §b➟ $text")
+   }
+   
+   protected var background: FilterEngine.(String, Int) -> Iterable<String> = { text, _ ->
+      setOf("   §8$text")
+   }
+   
    init {
       isPersistent = true
+   }
+   
+   fun requestHeader(requestor: LoreRequestor<FilterEngine>) {
+      header = requestor
+   }
+   
+   fun requestFooter(requestor: LoreRequestor<FilterEngine>) {
+      footer = requestor
+   }
+   
+   fun requestHeader(requestor: Iterable<String>) {
+      header = { requestor }
+   }
+   
+   fun requestFooter(requestor: Iterable<String>) {
+      footer = { requestor }
+   }
+   
+   fun requestHeader(vararg requestor: String) {
+      header = { requestor.toSet() }
+   }
+   
+   fun requestFooter(vararg requestor: String) {
+      footer = { requestor.toSet() }
+   }
+   
+   fun requestCurrent(requestor: FilterEngine.(String, Int) -> Iterable<String>) {
+      current = requestor
+   }
+   
+   fun requestBackground(requestor: FilterEngine.(String, Int) -> Iterable<String>) {
+      background = requestor
    }
    
    /**
     * The header lore to be mapped.
     */
-   open fun withHeader(): Iterable<String> =
-      listOf("§7Filtre a seleção", "§7dos elementos.", "")
+   open fun withHeader() = header()
    
    /**
     * The footer lore to be mapped.
     */
-   open fun withFooter(): Iterable<String> =
-      listOf("", if (graph.isFilterDisabled) "§cFiltro desativado." else "§aClique para filtrar.")
+   open fun withFooter() = footer()
    
    /**
     * The current filter lore to be mapped.
     */
-   open fun withCurrentFilter(text: String, index: Int): Iterable<String> =
-      listOf(" §b➟ $text")
+   open fun withCurrentFilter(text: String, index: Int) = current(this, text, index)
    
    /**
     * The background filter lore to be mapped.
     */
-   open fun withBackgroundFilter(text: String, index: Int): Iterable<String> =
-      listOf("   §8$text")
+   open fun withBackgroundFilter(text: String, index: Int) = background(this, text, index)
    
    /**
     * The filter shown text lore to be mapped.
@@ -59,7 +103,7 @@ open class FilterEngine : Engine {
    }
    
    override fun notifyChange() {
-      alter(newWithLore(withHeader() + withFilter() + withFooter()))
+      alter(copyWithLore(withHeader() + withFilter() + withFooter()))
    }
    
    override fun handleClick(event: InventoryClickEvent) {

@@ -13,11 +13,14 @@ inline fun ItemStack.toToggleEngine() = ToggleEngine(this)
 inline fun ItemStack.toFilterToggleEngine() = ToggleFilterEngine(this)
 inline fun ItemStack.toSorterToggleEngine() = ToggleSorterEngine(this)
 inline fun ItemStack.toProcessorEngine() = ProcessorEngine(this)
-inline fun ItemStack.toRequirementEngine() = RequirementEngine(this)
+inline fun ItemStack.toReqEngine() = ReqEngine(this)
+inline fun ItemStack.toItemReqEngine() = ItemReqEngine(this)
 inline fun ItemStack.toCountEngine() = CountEngine(this)
 inline fun ItemStack.toAmountCountEngine() = AmountCountEngine(this)
 inline fun ItemStack.toFilterEngine() = FilterEngine(this)
 inline fun ItemStack.toSorterEngine() = SorterEngine(this)
+inline fun ItemStack.toEmptyIndexEngine() = EmptyIndexEngine(this)
+inline fun ItemStack.toAccessEngine() = AccessEngine(this)
 
 /**
  * Copies this item stack applying the new name of them.
