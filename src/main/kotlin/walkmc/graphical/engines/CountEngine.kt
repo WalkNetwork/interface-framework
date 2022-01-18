@@ -37,8 +37,9 @@ open class CountEngine : Engine {
    }
    
    override fun handleClick(event: InventoryClickEvent) {
-      if (isCountEnabled)
+      if (isCountEnabled) {
          count = between(range.first, if (event.isLeftClick) count + inc else count - dec, range.last)
+      }
    }
 }
 

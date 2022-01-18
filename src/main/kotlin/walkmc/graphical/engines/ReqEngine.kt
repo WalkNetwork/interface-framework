@@ -80,7 +80,14 @@ open class ReqEngine : Engine {
    }
    
    override fun tick() {
-      if (isRequirementDone() || !limitTick) super.tick()
+      // delegate all for performance
+      if (graphical == null || !allowTick) return
+      if (ticks++ % tickDelay != 0) return
+      
+      if (isRequirementDone() || !limitTick) {
+         for (act in tickers) act(graphical!!)
+         handleTick()
+      }
    }
    
    override fun scroll() {

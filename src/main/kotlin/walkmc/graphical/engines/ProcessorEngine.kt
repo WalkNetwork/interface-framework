@@ -47,8 +47,6 @@ open class ProcessorEngine : Engine {
    }
    
    override fun handleTick() {
-      if (processOnTick) {
-         if (ticks % processOnTickDelay == 0) notifyChange()
-      }
+      if (processOnTick && ticks % processOnTickDelay == 0) notifyChange()
    }
 }

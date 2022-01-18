@@ -1,5 +1,7 @@
 package walkmc.graphical
 
+import walkmc.graphical.interfaces.*
+
 /**
  * AN animation interface to add some animations to graphicals.
  */
@@ -44,8 +46,8 @@ fun Engine.addAnimation(animation: EngineAnimation) {
  * Adds an animation to this graphical.
  */
 fun IGraphical.addAnimation(tick: Int, animation: GraphicalAnimation) {
-	onTick {
-		if (ticks % tick == 0) animation.animate(this)
+	onTick(tick) {
+		animation.animate(this)
 	}
 }
 

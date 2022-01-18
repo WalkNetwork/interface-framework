@@ -39,7 +39,6 @@ open class AccessEngine : Engine {
 	}
    
    override fun handleTick() {
-      if (autoAccess && ticks == autoAccessDelay)
-         access(player)
+      if (autoAccess && ticks == autoAccessDelay) access(player)
    }
 }

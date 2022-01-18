@@ -38,9 +38,7 @@ abstract class AbstractCycleEngine<T> : Engine {
    }
    
    override fun handleTick() {
-      if (autoCycle) {
-         if (ticks % autoCycleDelay == 0) cycle()
-      }
+      if (autoCycle && ticks % autoCycleDelay == 0) cycle()
    }
 }
 

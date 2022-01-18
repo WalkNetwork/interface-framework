@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "io.github.uinnn"
-version = "1.9.2"
+version = "1.9.3"
 
 repositories {
 	mavenLocal()

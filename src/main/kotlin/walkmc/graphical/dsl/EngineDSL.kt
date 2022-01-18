@@ -228,25 +228,25 @@ fun IGraphical.reqEngine(slot: Int, model: ItemStack) =
 //
 
 /**
- * Installs a item requirement engine in the specified [slot] applying [block].
+ * Installs an item requirement engine in the specified [slot] applying [block].
  */
 inline fun IGraphical.reqItemEngine(slot: Int, material: Materials, block: ItemReqEngine.() -> Unit) =
    makeEngine(slot, ItemReqEngine(material), block)
 
 /**
- * Installs a item requirement engine in the specified [slot] applying [block].
+ * Installs an item requirement engine in the specified [slot] applying [block].
  */
 inline fun IGraphical.reqItemEngine(slot: Int, model: ItemStack, block: ItemReqEngine.() -> Unit) =
    makeEngine(slot, ItemReqEngine(model), block)
 
 /**
- * Installs a item requirement engine in the specified [slot].
+ * Installs an item requirement engine in the specified [slot].
  */
 fun IGraphical.reqItemEngine(slot: Int, material: Materials) =
    makeEngine(slot, ItemReqEngine(material))
 
 /**
- * Installs a item requirement engine in the specified [slot].
+ * Installs an item requirement engine in the specified [slot].
  */
 fun IGraphical.reqItemEngine(slot: Int, model: ItemStack) =
    makeEngine(slot, ItemReqEngine(model))

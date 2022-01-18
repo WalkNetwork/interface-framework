@@ -48,8 +48,6 @@ open class ItemReqEngine : Engine {
    }
    
    override fun handleTick() {
-      if (notifyOnClick) {
-         if (ticks % notifyTickDelay == 0) notifyChange()
-      }
+      if (notifyOnTick && ticks % notifyTickDelay == 0) notifyChange()
    }
 }
