@@ -48,6 +48,8 @@ enum class ObserverKind {
 	PICKUP,
 	DRAG,
 	DAMAGE,
+	TELEPORT,
+	RECEIVE_MESSAGE
 }
 
 /**
@@ -63,7 +65,9 @@ fun Observable.defaultObservers() = apply {
 	allow(ObserverKind.PRESS_CANCELLABLE)
 	allow(ObserverKind.ACCESS)
 	allow(ObserverKind.UNCESS)
+	allow(ObserverKind.DAMAGE)
+	allow(ObserverKind.RECEIVE_MESSAGE)
 	negate(ObserverKind.DRAG)
 	negate(ObserverKind.PICKUP)
-	negate(ObserverKind.DAMAGE)
+	negate(ObserverKind.TELEPORT)
 }
