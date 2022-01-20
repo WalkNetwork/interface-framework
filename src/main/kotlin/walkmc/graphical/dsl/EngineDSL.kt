@@ -342,25 +342,25 @@ fun IGraphical.processorEngine(slot: Int, model: ItemStack) =
 /**
  * Installs a filter engine in the specified [slot] applying [block].
  */
-inline fun FilterGraphical<*>.filterEngine(slot: Int, material: Materials, block: FilterEngine.() -> Unit) =
+inline fun IScrollGraphical.filterEngine(slot: Int, material: Materials, block: FilterEngine.() -> Unit) =
    makeEngine(slot, FilterEngine(material), block)
 
 /**
  * Installs a filter engine in the specified [slot] applying [block].
  */
-inline fun FilterGraphical<*>.filterEngine(slot: Int, model: ItemStack, block: FilterEngine.() -> Unit) =
+inline fun IScrollGraphical.filterEngine(slot: Int, model: ItemStack, block: FilterEngine.() -> Unit) =
    makeEngine(slot, FilterEngine(model), block)
 
 /**
  * Installs a filter engine in the specified [slot].
  */
-fun FilterGraphical<*>.filterEngine(slot: Int, material: Materials) =
+fun IScrollGraphical.filterEngine(slot: Int, material: Materials) =
    makeEngine(slot, FilterEngine(material))
 
 /**
  * Installs a filter engine in the specified [slot].
  */
-fun FilterGraphical<*>.filterEngine(slot: Int, model: ItemStack) =
+fun IScrollGraphical.filterEngine(slot: Int, model: ItemStack) =
    makeEngine(slot, FilterEngine(model))
 
 //
@@ -370,25 +370,25 @@ fun FilterGraphical<*>.filterEngine(slot: Int, model: ItemStack) =
 /**
  * Installs a sorter engine in the specified [slot] applying [block].
  */
-inline fun SortGraphical<*>.sorterEngine(slot: Int, material: Materials, block: SorterEngine.() -> Unit) =
+inline fun IScrollGraphical.sorterEngine(slot: Int, material: Materials, block: SorterEngine.() -> Unit) =
    makeEngine(slot, SorterEngine(material), block)
 
 /**
  * Installs a sorter engine in the specified [slot] applying [block].
  */
-inline fun SortGraphical<*>.sorterEngine(slot: Int, model: ItemStack, block: SorterEngine.() -> Unit) =
+inline fun IScrollGraphical.sorterEngine(slot: Int, model: ItemStack, block: SorterEngine.() -> Unit) =
    makeEngine(slot, SorterEngine(model), block)
 
 /**
  * Installs a sorter engine in the specified [slot].
  */
-fun SortGraphical<*>.sorterEngine(slot: Int, material: Materials) =
+fun IScrollGraphical.sorterEngine(slot: Int, material: Materials) =
    makeEngine(slot, SorterEngine(material))
 
 /**
  * Installs a sorter engine in the specified [slot].
  */
-fun SortGraphical<*>.sorterEngine(slot: Int, model: ItemStack) =
+fun IScrollGraphical.sorterEngine(slot: Int, model: ItemStack) =
    makeEngine(slot, SorterEngine(model))
 
 //
@@ -474,3 +474,31 @@ fun IScrollGraphical.scrollDownEngine(slot: Int, material: Materials) =
  */
 fun IScrollGraphical.scrollDownEngine(slot: Int, model: ItemStack) =
    makeEngine(slot, ScrollDownEngine(model))
+
+//
+// Empty Index Engines
+//
+
+/**
+ * Installs an empty index engine in the specified [slot] applying [block].
+ */
+inline fun IndexGraphical<*>.emptyIndexEngine(slot: Int, material: Materials, block: EmptyIndexEngine.() -> Unit) =
+   makeEngine(slot, EmptyIndexEngine(material), block)
+
+/**
+ * Installs an empty index engine in the specified [slot] applying [block].
+ */
+inline fun IndexGraphical<*>.emptyIndexEngine(slot: Int, model: ItemStack, block: EmptyIndexEngine.() -> Unit) =
+   makeEngine(slot, EmptyIndexEngine(model), block)
+
+/**
+ * Installs an empty index engine in the specified [slot].
+ */
+fun IndexGraphical<*>.emptyIndexEngine(slot: Int, material: Materials) =
+   makeEngine(slot, EmptyIndexEngine(material))
+
+/**
+ * Installs an empty index engine in the specified [slot].
+ */
+fun IndexGraphical<*>.emptyIndexEngine(slot: Int, model: ItemStack) =
+   makeEngine(slot, EmptyIndexEngine(model))

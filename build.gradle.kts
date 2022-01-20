@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "io.github.uinnn"
-version = "1.9.3"
+version = "1.9.5"
 
 repositories {
 	mavenLocal()
@@ -20,7 +20,6 @@ dependencies {
 	api("io.github.uinnn:walk-server:2.3.30")
 	api(kotlin("stdlib-jdk8"))
 	compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
-	compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-core:1.3.2")
 }
 
 nexusPublishing {

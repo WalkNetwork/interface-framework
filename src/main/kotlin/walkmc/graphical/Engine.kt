@@ -46,10 +46,9 @@ open class Engine : ItemStack, Alterable, Renderable, Pressable, Visible, Metada
       set(value) {
          if (field == value) return
          
-         val graph = graphical
-         if (graph != null) {
-            graph.uninstall(field)
-            graph.install(value, this)
+         graphical?.let {
+            it.uninstall(field)
+            it.installSafe(value, this)
          }
          
          field = value
@@ -58,7 +57,11 @@ open class Engine : ItemStack, Alterable, Renderable, Pressable, Visible, Metada
    override var isVisible: Boolean = true
       set(value) {
          if (field == value) return
-         graphical?.let { it.setItem(slot, if (value) this else it.backgroundOrDefault()) }
+         
+         graphical?.let {
+            it.setItem(slot, if (value) this else it.backgroundOrDefault())
+         }
+         
          field = value
       }
    

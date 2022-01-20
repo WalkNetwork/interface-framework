@@ -4,64 +4,63 @@ import walkmc.*
 import walkmc.collections.*
 import walkmc.extensions.*
 import walkmc.graphical.common.*
-import walkmc.graphical.dsl.*
-import walkmc.graphical.engines.*
-
-typealias FilterPair<T> = Pair<String, Filter<T>>
+import walkmc.graphical.interfaces.*
 
 /**
  * A graphical interface with compatibility to filter their engines and indexes.
  */
-abstract class FilterGraphical<T>(title: String, size: Int = 6) : IndexGraphical<T>(title, size) {
+abstract class FilterGraphical<T>(title: String, size: Int = 6) : IndexGraphical<T>(title, size), Filterable<T> {
    
-   open var options = IndexList<FilterPair<T>>()
    open var limit = Int.MAX_VALUE
-   open var isFilterDisabled = false
    
-   val currentFilter get() = options.currentOrNull()?.second
-   val texts get() = options.map { it.first }
-   val filters get() = options.map { it.second }
-   
-   open var filterEngine = filterEngine(midSlot(lines), newItem(Materials.HOPPER, "§dFiltro"))
+   override var filterOptions = IndexList<FilterPair<T>>()
+   override var isFilterDisabled = false
+   override var filterEngine = newItem(Materials.HOPPER, "§dFiltro").toFilterEngine(midSlot(lines))
    
    override fun indexes() {
-      val values = if (isFilterDisabled || currentFilter == null) {
-         indexes.toList().take(limit)
+      buildSource(filtered(indexes))
+   }
+   
+   override fun initEngines() {
+      super.initEngines()
+      install(filterEngine)
+   }
+   
+   /**
+    * Filters all [indexes] by the given [filter] and updates [isEmpty] and [source].
+    */
+   inline fun filtering(scroll: Boolean = true, filter: Filter<T>) {
+      buildSource(indexes.filter(filter).take(limit))
+      if (scroll) scrollTo()
+   }
+   
+   override fun filtered(elements: Iterable<T>): List<T> {
+      return if (isFilterDisabled || currentFilter == null) {
+         elements.toList().take(limit)
       } else {
-         indexes.filter(currentFilter!!).take(limit)
+         elements.filter(currentFilter!!).take(limit)
       }
-   
-      isEmpty = values.isEmpty()
-      source.removeIf { !it.isPersistent }
-      source += values.mapIndexed { index, value -> buildIndex(value, index) }
    }
    
-   fun toNextFilter() {
-      options.toNextOrFirst()
+   override fun toNextFilter() {
+      filterOptions.toNextOrFirst()
       scrollIndexing()
    }
    
-   fun toPreviousFilter() {
-      options.toPreviousOrLast()
+   override fun toPreviousFilter() {
+      filterOptions.toPreviousOrLast()
       scrollIndexing()
    }
    
-   fun disableFilter() {
+   override fun disableFilter() {
       isFilterDisabled = true
       scrollIndexing()
    }
    
-   fun enableFilter() {
+   override fun enableFilter() {
       isFilterDisabled = false
       scrollIndexing()
    }
-   
-   inline fun editFilter(block: FilterEngine.() -> Unit) {
-      filterEngine.apply(block)
-   }
-   
-   fun addFilter(text: String, filter: Filter<T>) = options.add(text to filter)
-   fun addNoFilter(text: String) = addFilter(text) { true }
 }
 
 /**

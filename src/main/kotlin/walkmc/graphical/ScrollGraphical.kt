@@ -6,14 +6,12 @@ import org.bukkit.inventory.*
 import walkmc.*
 import walkmc.extensions.*
 import walkmc.graphical.common.*
-import walkmc.graphical.dsl.*
 import walkmc.graphical.engines.*
 import walkmc.graphical.interfaces.*
 import walkmc.graphical.interfaces.Storage
 import walkmc.graphical.mapper.*
 import walkmc.graphical.schema.*
 import walkmc.graphical.worker.*
-import java.util.*
 import java.util.concurrent.*
 
 /**
@@ -30,11 +28,20 @@ abstract class ScrollGraphical(title: String, lines: Int) : IScrollGraphical {
 	override var scrollers: ScrollSet = LinkedHashSet()
 	override var storage: Storage = ConcurrentHashMap()
 	override var observers: Observers = Observers()
-	override var scrollDownEngine: ScrollDownEngine = scrollDownEngine(startSlot(lines), newItem(Materials.ARROW, "§c◀ Voltar", listOf("§7Clique para voltar á página anterior.")))
-	override var scrollUpEngine: ScrollUpEngine = scrollUpEngine(lastSlot(lines), newItem(Materials.ARROW, "§aAvançar ▶", listOf("§7Clique para ir á próxima página.")))
-	override var schema: Schema = StandardSchema()
-	override var source: Source = LinkedList()
+	
+	override var scrollDownEngine: ScrollDownEngine =
+		newItem(Materials.ARROW, "§c◀ Voltar", listOf("§7Clique para voltar á página anterior."))
+			.toScrollDownEngine(startSlot(lines))
+	
+	override var scrollUpEngine: ScrollUpEngine =
+		newItem(Materials.ARROW, "§aAvançar ▶", listOf("§7Clique para ir á próxima página."))
+			.toScrollUpEngine(lastSlot(lines))
+	
+	override var schema: Schema = basicSchema()
+	override var source: Source = Source(this)
+	override var isDirty: Boolean = true
 	override var page: Int = 1
+	override var pages: Scrollers = emptyList()
 	override var mapper: Mapper = PartialMapper
 	override lateinit var owner: Player
 	override var isOpen: Boolean = false

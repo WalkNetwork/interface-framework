@@ -5,6 +5,7 @@ import org.bukkit.inventory.*
 import walkmc.*
 import walkmc.graphical.*
 import walkmc.graphical.common.*
+import walkmc.graphical.interfaces.*
 
 /**
  * An implementation of [Engine] for easily creation of filter engines.
@@ -15,14 +16,14 @@ open class FilterEngine : Engine {
    constructor(type: Materials, amount: Int = 1) : super(type, amount)
    constructor(stack: ItemStack) : super(stack)
    
-   val graph get() = graphical as FilterGraphical<*>
+   val filter get() = graphical as Filterable<*>
    
    protected open var header: LoreRequestor<FilterEngine> = {
-      setOf("§7Ordene a seleção", "§7dos elementos.", "")
+      setOf("§7Filtre a seleção", "§7dos elementos.", "")
    }
    
    protected var footer: LoreRequestor<FilterEngine> = {
-      setOf("", if (graph.isFilterDisabled) "§cOrdem desativada." else "§aClique para ordenar.")
+      setOf("", if (filter.isFilterDisabled) "§cFiltro desativado." else "§aClique para filtrar.")
    }
    
    protected var current: FilterEngine.(String, Int) -> Iterable<String> = { text, _ ->
@@ -93,10 +94,10 @@ open class FilterEngine : Engine {
     * The filter shown text lore to be mapped.
     */
    open fun withFilter(): Iterable<String> {
-      val current = graph.options.index
+      val current = filter.filterOptions.index
       
       return buildList {
-         graph.texts.forEachIndexed { index, entry ->
+         filter.filterTexts.forEachIndexed { index, entry ->
             this += if (current == index) withCurrentFilter(entry, index) else withBackgroundFilter(entry, index)
          }
       }
@@ -107,8 +108,8 @@ open class FilterEngine : Engine {
    }
    
    override fun handleClick(event: InventoryClickEvent) {
-      if (!graph.isFilterDisabled) {
-         if (event.isLeftClick) graph.toNextFilter() else graph.toPreviousFilter()
+      if (!filter.isFilterDisabled) {
+         if (event.isLeftClick) filter.toNextFilter() else filter.toPreviousFilter()
          notifyChange()
       }
    }

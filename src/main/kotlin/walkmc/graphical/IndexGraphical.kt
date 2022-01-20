@@ -1,6 +1,7 @@
 package walkmc.graphical
 
-import org.bukkit.inventory.*
+import walkmc.*
+import walkmc.extensions.*
 import walkmc.extensions.collections.*
 import walkmc.graphical.common.*
 import walkmc.graphical.dsl.*
@@ -13,7 +14,7 @@ abstract class IndexGraphical<T>(title: String, size: Int = 6) : ScrollGraphical
    internal var buildIndexCallback: ((T, Int) -> Engine)? = null
    
    open var isEmpty = false
-   open var emptyEngine = makeEngine(midSlot(size / 2), EmptyIndexEngine.default())
+   open var emptyEngine = emptyIndexEngine(midSlot(size / 2), newItem(Materials.BARRIER, "§cVazio."))
    
    /**
     * A list holding the index values. This is used to map this indexable graphical.
@@ -29,55 +30,45 @@ abstract class IndexGraphical<T>(title: String, size: Int = 6) : ScrollGraphical
     * Indexes this graphical to correctly order.
     */
    open fun indexes() {
-      isEmpty = indexes.isEmpty()
-      source.removeIf { !it.isPersistent }
-      source += indexes.mapIndexed { index, value -> buildIndex(value, index) }
+      val values = indexes.mapIndexed { index, value -> buildIndex(value, index) }
+      isEmpty = values.isEmpty()
+      updateSource(values)
    }
    
    // index graphical has special case for scrolling
    override fun scrollTo(to: Int) {
-      // fast non possible or equals scroll
+      // fast non possible scroll
       if (to < 1 || hasScrolled && to > pageCount)
          return
       
       if (isEmpty) {
          install(emptyEngine)
-         
-         // required to avoid showing scrolls engines.
+         // avoid showing scrolls engines.
          scrollDownEngine.turnVisibilityOff()
          scrollUpEngine.turnVisibilityOff()
+      } else {
+         emptyEngine.turnVisibilityOff()
       }
       
-      if (source.isEmpty()) {
-         uninstallAllNonPersistents()
-         return
-      }
-      
-      val mapped = mapper.map(this, source)
-      
-      page = to
-      pages = mapped
-      
-      val engines = currentEngines
-      if (hasScrolled) uninstallAllNonPersistents()
-      
-      val limit = installPerPage
-      var installed = 0
-      for (index in schema) {
-         if (installed >= limit || installed >= engines.size)
-            break
-         
-         install(index, engines[installed])
-         installed++
-      }
-      
-      if (!hasScrolled) {
-         install(scrollUpEngine)
-         install(scrollDownEngine)
-      }
-      
-      scrolleds++
-      scrollAll()
+      super.scrollTo(to)
+   }
+   
+   /**
+    * Updates [source] elements by clearing adding all [elements].
+    */
+   fun updateSource(elements: Iterable<Engine>) {
+      source.clear()
+      source += elements
+   }
+   
+   /**
+    * Builds [source] elements by clearing and calling [buildIndex]
+    * for every element in [elements].
+    */
+   fun buildSource(elements: Iterable<T>) {
+      isEmpty = elements.isEmpty()
+      source.clear()
+      source += elements.mapIndexed { index, value -> buildIndex(value, index) }
    }
    
    fun requestIndex(callback: (T, Int) -> Engine) {
@@ -86,16 +77,6 @@ abstract class IndexGraphical<T>(title: String, size: Int = 6) : ScrollGraphical
    
    inline fun editEmpty(block: EmptyIndexEngine.() -> Unit) {
       emptyEngine.apply(block).notifyChange()
-   }
-   
-   fun withEmptyEngine(engine: EmptyIndexEngine): IndexGraphical<T> {
-      emptyEngine.alter(engine)
-      return this
-   }
-   
-   fun withEmptyEngine(slot: Int, item: ItemStack): IndexGraphical<T> {
-      emptyEngine.relocate(slot).alter(item)
-      return this
    }
 }
 

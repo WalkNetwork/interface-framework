@@ -1,5 +1,6 @@
 package walkmc.graphical
 
+import net.minecraft.server.*
 import org.bukkit.*
 import org.bukkit.entity.*
 import org.bukkit.event.*
@@ -84,6 +85,19 @@ object InterfaceService : Listener {
 		if (entity !is Player) return
 		val graphical = entity.interfaceOrNull() ?: return
 		event.isCancelled = !graphical.permits(ObserverKind.DAMAGE)
+	}
+	
+	@EventHandler
+	fun onTeleport(event: PlayerTeleportEvent) {
+		val graphical = event.player.interfaceOrNull() ?: return
+		event.isCancelled = !graphical.permits(ObserverKind.TELEPORT)
+	}
+	
+	@EventHandler
+	fun onMessageReceived(event: PacketSendEvent) {
+		if (event.packet !is PacketPlayOutChat) return
+		val graphical = event.player.interfaceOrNull() ?: return
+		event.isCancelled = !graphical.permits(ObserverKind.RECEIVE_MESSAGE)
 	}
 }
 

@@ -1,12 +1,10 @@
 package walkmc.graphical
 
-import kotlinx.serialization.*
 import org.bukkit.entity.*
 import org.bukkit.inventory.*
 import walkmc.*
 import walkmc.graphical.common.*
 import walkmc.graphical.interfaces.*
-import walkmc.graphical.serializer.*
 import walkmc.graphical.worker.*
 import kotlin.math.*
 
@@ -14,8 +12,7 @@ import kotlin.math.*
  * A graphical user interface is a more extensible [Inventory].
  * That's can, holds [Engine] (an extensible ItemStack for use with graphical interfaces),
  * can also register handlers, like access, uncess, render, works. And has
- * a custom implementation of Metadata ([Metadatable]). Also has a pre-made
- * serializer: [GraphicalSerializer].
+ * a custom implementation of Metadata ([Metadatable]).
  *
  * To create an interface:
  * ```
@@ -36,77 +33,86 @@ import kotlin.math.*
  * To create a scrollable graphical interface see [IScrollGraphical]
  * @see IScrollGraphical
  */
-@Serializable(GraphicalSerializer::class)
 interface IGraphical : Interface, Accessible, Renderable, Workable, Observable, Tickable {
-	var engineStack: EngineStack
-	
-	@Deprecated("Workers are now replaced by Tickable.")
-	var worker: Worker
-	
-	override fun access(player: Player) {
-		owner = player
-		owner.closeInventory()
-		
-		render()
-		for (accessor in accessors) accessor(this)
-		
-		if (worker.allow) worker.start()
-		owner.openInventory(this)
-		isOpen = true
-		accesseds++
-	}
-	
-	override fun uncess(close: Boolean) {
-		for (unc in uncessors) unc(this)
-		if (close) owner.closeInventory()
-		worker.cancel()
-		isOpen = false
-		uncesseds++
-	}
-	
-	override fun tick() {
-		ticks++
-		tickAll()
-	}
-	
-	override fun render() = renderAll()
-	
-	override suspend fun work() = workAll()
-	
-	/**
-	 * Install an engine to this [IGraphical].
-	 * Corresponding by the slot.
-	 */
-	fun install(slot: Int, engine: Engine): Engine {
-		setItem(slot, engine)
-		engineStack[slot] = engine
-		engine.slot = slot
-		engine.graphical = this
-		return engine
-	}
-	
-	/**
-	 * Install an engine to this [IGraphical].
-	 * Corresponding by the slot and a [AlterAction] to be triggered.
-	 */
-	fun install(slot: Int, engine: Engine, action: AlterAction): Engine {
-		return install(slot, engine.apply(action))
-	}
-	
-	/**
-	 * Uninstalls an engine of this [IGraphical]
-	 * corresponding by the slot.
-	 */
-	fun uninstall(slot: Int) {
-		setItem(slot, backgroundOrDefault())
-		engineStack.remove(slot)
-	}
+   var engineStack: EngineStack
+   
+   @Deprecated("Workers are now replaced by Tickable.")
+   var worker: Worker
+   
+   override fun access(player: Player) {
+      owner = player
+      owner.closeInventory()
+      
+      render()
+      for (accessor in accessors) accessor(this)
+      
+      if (worker.allow) worker.start()
+      owner.openInventory(this)
+      isOpen = true
+      accesseds++
+   }
+   
+   override fun uncess(close: Boolean) {
+      for (unc in uncessors) unc(this)
+      if (close) owner.closeInventory()
+      worker.cancel()
+      isOpen = false
+      uncesseds++
+   }
+   
+   override fun tick() {
+      ticks++
+      tickAll()
+   }
+   
+   override fun render() = renderAll()
+   
+   override suspend fun work() = workAll()
+   
+   /**
+    * Install an engine to this [IGraphical].
+    * Corresponding by the slot.
+    */
+   fun <T : Engine> install(slot: Int, engine: T): T {
+      setItem(slot, engine)
+      engineStack[slot] = engine
+      engine.slot = slot
+      engine.graphical = this
+      return engine
+   }
+   
+   /**
+    * Install an engine to this [IGraphical].
+    * Corresponding by the slot and a [AlterAction] to be triggered.
+    */
+   fun <T : Engine> install(slot: Int, engine: T, action: AlterAction): T {
+      return install(slot, engine.apply(action))
+   }
+   
+   /**
+    * Uninstalls an engine of this [IGraphical]
+    * corresponding by the slot.
+    */
+   fun uninstall(slot: Int) {
+      setItem(slot, backgroundOrDefault())
+      engineStack -= slot
+   }
+   
+   /**
+    * Installs an [engine] in the given [slot] safely.
+    */
+   fun <T : Engine> installSafe(slot: Int, engine: T): T {
+      setItem(slot, engine)
+      engineStack[slot] = engine
+      engine.graphical = this
+      return engine
+   }
 }
 
 /**
  * Installs an engine to this [IGraphical] abstractly.
  */
-fun IGraphical.install(engine: Engine): Engine = install(engine.slot, engine)
+fun IGraphical.install(engine: Engine): Engine = installSafe(engine.slot, engine)
 
 /**
  * Install an engine copy to this [IGraphical].
@@ -128,10 +134,10 @@ fun IGraphical.uninstallAll() = engineStack.onEach { uninstall(it.key) }
  * Uninstalls all engines of this [IGraphical]
  * if the engine satisfies the filter.
  */
-inline fun IGraphical.uninstallAll(filter: Filter<Engine>) = engineStack.onEach { engine ->
-	if (filter(engine.value)) {
-		uninstall(engine.key)
-	}
+inline fun IGraphical.uninstallAll(filter: Filter<Engine>) = engineStack.onEach {
+   if (filter(it.value)) {
+      uninstall(it.key)
+   }
 }
 
 /**
@@ -179,13 +185,13 @@ fun IGraphical.selectAllNonPersistents() = selectAll { !it.isPersistent }
  * of this [IGraphical].
  */
 var IGraphical.background: Materials?
-	get() = locate("Background")
-	set(value) {
-		if (value != null) {
-			interject("Background", value)
-			fill(value.data)
-		}
-	}
+   get() = locate("Background")
+   set(value) {
+      if (value != null) {
+         interject("Background", value)
+         fill(value.data)
+      }
+   }
 
 /**
  * Verifies if this [IGraphical]
@@ -198,12 +204,12 @@ val IGraphical.hasBackground get() = background != null
  * of this [IGraphical].
  */
 var IGraphical.parent: IGraphical?
-	get() = locate("Parent")
-	set(value) {
-		if (value != null) {
-			interject("Parent", value)
-		}
-	}
+   get() = locate("Parent")
+   set(value) {
+      if (value != null) {
+         interject("Parent", value)
+      }
+   }
 
 /**
  * Verifies if this [IGraphical]
@@ -216,7 +222,7 @@ val IGraphical.hasParent get() = parent != null
  * to a specified player.
  */
 fun IGraphical.renderEngines() {
-	for (engine in engineStack.values) engine.render()
+   for (engine in engineStack.values) engine.render()
 }
 
 /**
@@ -224,22 +230,22 @@ fun IGraphical.renderEngines() {
  */
 @Deprecated("Workers are now replaced by Tickable.")
 suspend fun IGraphical.workEngines() {
-	for (engine in engineStack.values) engine.work()
+   for (engine in engineStack.values) engine.work()
 }
 
 /**
  * Ticks all engines of this [IGraphical].
  */
 fun IGraphical.tickEngines() {
-	for (engine in engineStack.values) engine.tick()
+   for (engine in engineStack.values) engine.tick()
 }
 
 /**
  * Renders this [IGraphical] to a specified player.
  */
 fun IGraphical.renderInterface() {
-	for (rnd in renders) rnd()
-	rendereds++
+   for (rnd in renders) rnd()
+   rendereds++
 }
 
 /**
@@ -247,14 +253,14 @@ fun IGraphical.renderInterface() {
  */
 @Deprecated("Workers are now replaced by Tickable.")
 suspend fun IGraphical.workInterface() {
-	for (work in works) work()
+   for (work in works) work()
 }
 
 /**
  * Ticks this [IGraphical].
  */
 fun IGraphical.tickInterface() {
-	for (ticker in tickers) ticker()
+   for (ticker in tickers) ticker()
 }
 
 /**
@@ -262,8 +268,8 @@ fun IGraphical.tickInterface() {
  * to a specified player. This includes the interface and engines.
  */
 fun IGraphical.renderAll() {
-	renderInterface()
-	renderEngines()
+   renderInterface()
+   renderEngines()
 }
 
 /**
@@ -271,8 +277,8 @@ fun IGraphical.renderAll() {
  * This includes the interface and engines.
  */
 fun IGraphical.tickAll() {
-	tickInterface()
-	tickEngines()
+   tickInterface()
+   tickEngines()
 }
 
 /**
@@ -281,8 +287,8 @@ fun IGraphical.tickAll() {
  */
 @Deprecated("Workers are now replaced by Tickable.")
 suspend fun IGraphical.workAll() {
-	workInterface()
-	workEngines()
+   workInterface()
+   workEngines()
 }
 
 /**
@@ -295,53 +301,51 @@ fun IGraphical.asScrollable(): IScrollGraphical = this as IScrollGraphical
  * Gets the background as icon if not null or default.
  */
 fun IGraphical.backgroundOrDefault(default: ItemStack? = null): ItemStack? {
-	return background?.toItem() ?: default
+   return background?.toItem() ?: default
 }
 
 /**
  * Returns the accesseds amount of this graphical interface.
  */
 var IGraphical.accesseds: Int
-	get() = locate("Accesseds") ?: 0
-	set(value) {
-		interject("Accesseds", max(1, value))
-	}
+   get() = locate("Accesseds") ?: 0
+   set(value) {
+      interject("Accesseds", max(1, value))
+   }
 
 /**
  * Returns the uncesseds amount of this graphical interface.
  */
 var IGraphical.uncesseds: Int
-	get() = locate("Uncesseds") ?: 0
-	set(value) {
-		interject("Uncesseds", max(1, value))
-	}
+   get() = locate("Uncesseds") ?: 0
+   set(value) {
+      interject("Uncesseds", max(1, value))
+   }
 
 /**
  * Returns the amount of renders that these engines makes.
  */
 var IGraphical.rendereds: Int
-	get() = locate("Rendereds") ?: 0
-	set(value) {
-		interject("Rendereds", max(1, value))
-	}
+   get() = locate("Rendereds") ?: 0
+   set(value) {
+      interject("Rendereds", max(1, value))
+   }
 
 /**
  * Sets the current item in the cursor of the owner.
  */
 fun IGraphical.cursor(item: ItemStack) {
-	owner.itemOnCursor = item
+   owner.itemOnCursor = item
 }
 
 /**
  * Fills the background of this graphical with the given [item].
  */
 fun IGraphical.fillBackground(item: ItemStack) {
-	for (i in 0 until size) {
-		val engine = engineStack[i] ?: continue
-		if (engine.isVisible) continue
-		
-		setItem(i, item)
-	}
+   for (i in 0 until size) {
+      val engine = engineStack[i]
+      if (engine == null || !engine.isVisible) setItem(i, item)
+   }
 }
 
 /**
@@ -353,6 +357,6 @@ fun IGraphical.fillBackground(material: Materials) = fillBackground(material.toI
  * Fills the background of this graphical with the given material in [background].
  */
 fun IGraphical.fillBackground() {
-	val background = background ?: return
-	fillBackground(background)
+   val background = background ?: return
+   fillBackground(background)
 }

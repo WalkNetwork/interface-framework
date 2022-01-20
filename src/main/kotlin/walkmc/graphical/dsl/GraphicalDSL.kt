@@ -82,3 +82,26 @@ inline fun <T> sortable(title: String, lines: Int, indexes: Iterable<T>, block: 
       this.indexes = indexes
       scrollIndexing()
    }
+
+/**
+ * Constructs a new sort filter graphical with the given [title] and [lines].
+ *
+ * ### Note: This function automatically calls [SortFilterGraphical.scrollIndexing].
+ */
+inline fun <T> sortFilter(title: String, lines: Int, block: SortFilterGraphical<T>.() -> Unit) =
+   StandardSortFilterGraphical<T>(title, lines).apply {
+      block()
+      scrollIndexing()
+   }
+
+/**
+ * Constructs a new sort filter graphical with the given [title] and [lines] and pre-builded [indexes].
+ *
+ * ### Note: This function automatically calls [SortFilterGraphical.scrollIndexing].
+ */
+inline fun <T> sortFilter(title: String, lines: Int, indexes: Iterable<T>, block: SortFilterGraphical<T>.() -> Unit) =
+   StandardSortFilterGraphical<T>(title, lines).apply {
+      block()
+      this.indexes = indexes
+      scrollIndexing()
+   }

@@ -27,7 +27,7 @@ open class ScrollUpEngine : ScrollingEngine {
    constructor(stack: ItemStack) : super(stack)
    
    override fun handleClick(event: InventoryClickEvent) {
-      graph.scrollTo(if (event.click == ClickType.DOUBLE_CLICK) graph.pageCount else graph.next)
+      graph.scrollUp()
    }
    
    override fun handleScroll() {
@@ -43,7 +43,7 @@ open class ScrollDownEngine : ScrollingEngine {
    constructor(stack: ItemStack) : super(stack)
    
    override fun handleClick(event: InventoryClickEvent) {
-      graph.scrollTo(if (event.click == ClickType.DOUBLE_CLICK) 1 else graph.previous)
+      graph.scrollDown()
    }
    
    override fun handleScroll() {

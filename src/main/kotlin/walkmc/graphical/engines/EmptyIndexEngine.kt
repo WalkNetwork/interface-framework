@@ -2,9 +2,11 @@ package walkmc.graphical.engines
 
 import org.bukkit.inventory.*
 import walkmc.*
-import walkmc.extensions.*
 import walkmc.graphical.*
 
+/**
+ * An implementation of [ReqEngine] that's show's an empty index.
+ */
 open class EmptyIndexEngine : ReqEngine {
    constructor(type: Materials, amount: Int = 1) : super(type, amount)
    constructor(stack: ItemStack) : super(stack)
@@ -15,9 +17,5 @@ open class EmptyIndexEngine : ReqEngine {
    
    init {
       isPersistent = true
-   }
-   
-   companion object {
-      fun default() = EmptyIndexEngine(newItem(Materials.BARRIER, "§cVazio."))
    }
 }

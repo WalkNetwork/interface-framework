@@ -24,6 +24,22 @@ inline fun ItemStack.toAccessEngine() = AccessEngine(this)
 inline fun ItemStack.toScrollUpEngine() = ScrollUpEngine(this)
 inline fun ItemStack.toScrollDownEngine() = ScrollDownEngine(this)
 
+fun ItemStack.toEngine(slot: Int) = Engine(this).also { it.slot = slot }
+fun ItemStack.toCycleEngine(slot: Int) = CycleEngine(this).also { it.slot = slot }
+fun ItemStack.toToggleEngine(slot: Int) = ToggleEngine(this).also { it.slot = slot }
+fun ItemStack.toFilterToggleEngine(slot: Int) = ToggleFilterEngine(this).also { it.slot = slot }
+fun ItemStack.toSorterToggleEngine(slot: Int) = ToggleSorterEngine(this).also { it.slot = slot }
+fun ItemStack.toProcessorEngine(slot: Int) = ProcessorEngine(this).also { it.slot = slot }
+fun ItemStack.toReqEngine(slot: Int) = ReqEngine(this).also { it.slot = slot }
+fun ItemStack.toItemReqEngine(slot: Int) = ItemReqEngine(this).also { it.slot = slot }
+fun ItemStack.toCountEngine(slot: Int) = CountEngine(this).also { it.slot = slot }
+fun ItemStack.toAmountCountEngine(slot: Int) = AmountCountEngine(this).also { it.slot = slot }
+fun ItemStack.toFilterEngine(slot: Int) = FilterEngine(this).also { it.slot = slot }
+fun ItemStack.toSorterEngine(slot: Int) = SorterEngine(this).also { it.slot = slot }
+fun ItemStack.toEmptyIndexEngine(slot: Int) = EmptyIndexEngine(this).also { it.slot = slot }
+fun ItemStack.toAccessEngine(slot: Int) = AccessEngine(this).also { it.slot = slot }
+fun ItemStack.toScrollUpEngine(slot: Int) = ScrollUpEngine(this).also { it.slot = slot }
+fun ItemStack.toScrollDownEngine(slot: Int) = ScrollDownEngine(this).also { it.slot = slot }
 
 /**
  * Copies this item stack applying the new name of them.

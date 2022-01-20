@@ -8,7 +8,6 @@ import walkmc.graphical.schema.*
 import kotlin.math.*
 
 typealias Scrollers = List<List<Engine>>
-typealias Source = MutableList<Engine>
 typealias ScrollRenderAction = Action<IScrollGraphical>
 
 /**
@@ -60,6 +59,11 @@ interface IScrollGraphical : IGraphical, Scrollable {
 	var mapper: Mapper
 	
 	/**
+	 * All pages mapped from [mapper].
+	 */
+	var pages: Scrollers
+	
+	/**
 	 * The current page of this [IScrollGraphical]
 	 */
 	var page: Int
@@ -70,12 +74,17 @@ interface IScrollGraphical : IGraphical, Scrollable {
 	var scrolleds: Int
 	
 	/**
+	 * Returns if this scroll graphical needs an update from [Mapper].
+	 */
+	var isDirty: Boolean
+	
+	/**
 	 * Scrolls this [IScrollGraphical] to a certain page.
 	 * If a [to] is less than 0, equals than [page] or is greather
 	 * than [pageCount] nothing will be done.
 	 */
 	fun scrollTo(to: Int = 1) {
-		// fast non possible or equals scroll
+		// fast non possible scroll
 		if (to < 1 || hasScrolled && to > pageCount)
 			return
 		
@@ -86,32 +95,41 @@ interface IScrollGraphical : IGraphical, Scrollable {
 		}
 		
 		page = to
-		val mapped = mapper.map(this, source)
-		pages = mapped
 		
-		val engines = currentEngines
-		if (hasScrolled) uninstallAllNonPersistents()
+		// optimizes mapper call
+		if (!hasScrolled || isDirty) {
+			pages = mapper.map(this, source)
+			isDirty = false
+		}
 		
-		val limit = installPerPage
+      val engines = currentEngines
+      
+      // TODO: this is really necessary?
+      if (hasScrolled) uninstallAllNonPersistents()
+		
 		var installed = 0
-		for (index in schema) {
-			if (installed >= limit || installed >= engines.size)
-				break
-			
+		for (index in 0 until size) {
+			if (index !in schema) continue
+			if (installed >= schema.size || installed >= engines.size) break
 			install(index, engines[installed++])
 		}
 		
-		if (!hasScrolled) {
-			install(scrollUpEngine)
-			install(scrollDownEngine)
-		}
+		if (!hasScrolled) initEngines()
 		
-		scrolleds++
 		scrollAll()
 	}
 	
 	override fun scroll() {
+		scrolleds++
 		for (scroll in scrollers) scroll(this)
+	}
+	
+	/**
+	 * Initializes all default engines for this graphical.
+	 */
+	fun initEngines() {
+		install(scrollUpEngine)
+		install(scrollDownEngine)
 	}
 }
 
@@ -153,16 +171,6 @@ fun IScrollGraphical.scrollAll() {
 	scroll()
 	for (engine in engineStack.values) engine.scroll()
 }
-
-/**
- * Returns all pages item of this
- * paginated graphical interface.
- */
-var IScrollGraphical.pages: Scrollers
-	get() = locate("Pages") ?: listOf()
-	set(value) {
-		interject("Pages", value)
-	}
 
 /**
  * Returns all current mappable engines of
@@ -207,7 +215,7 @@ inline val IScrollGraphical.hasScrolled get() = scrolleds >= 1
  * Returns the amount of engines that a scrollable
  * graphical interface can install per page.
  */
-inline val IScrollGraphical.installPerPage: Int
+inline val IScrollGraphical.enginesPerPage: Int
 	get() = schema.size
 
 /**

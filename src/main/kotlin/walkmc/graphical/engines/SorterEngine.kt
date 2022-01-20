@@ -5,6 +5,7 @@ import org.bukkit.inventory.*
 import walkmc.*
 import walkmc.graphical.*
 import walkmc.graphical.common.*
+import walkmc.graphical.interfaces.*
 
 typealias LoreRequestor<T> = T.() -> Iterable<String>
 
@@ -17,14 +18,14 @@ open class SorterEngine : Engine {
    constructor(type: Materials, amount: Int = 1) : super(type, amount)
    constructor(stack: ItemStack) : super(stack)
    
-   val graph get() = graphical as SortGraphical<*>
+   val sort get() = graphical as Sortable<*>
    
    protected open var header: LoreRequestor<SorterEngine> = {
       setOf("§7Ordene a seleção", "§7dos elementos.", "")
    }
    
    protected var footer: LoreRequestor<SorterEngine> = {
-      setOf("", if (graph.isSorterDisabled) "§cOrdem desativada." else "§aClique para ordenar.")
+      setOf("", if (sort.isSorterDisabled) "§cOrdem desativada." else "§aClique para ordenar.")
    }
    
    protected var current: SorterEngine.(String, Int) -> Iterable<String> = { text, _ ->
@@ -79,10 +80,10 @@ open class SorterEngine : Engine {
     * The sorter shown text lore to be mapped.
     */
    open fun withSorter(): Iterable<String> {
-      val current = graph.options.index
+      val current = sort.sorterOptions.index
       
       return buildList {
-         graph.texts.forEachIndexed { index, entry ->
+         sort.sorterTexts.forEachIndexed { index, entry ->
             this += if (current == index) withCurrentSorter(entry, index) else withBackgroundSorter(entry, index)
          }
       }
@@ -93,8 +94,8 @@ open class SorterEngine : Engine {
    }
    
    override fun handleClick(event: InventoryClickEvent) {
-      if (!graph.isSorterDisabled) {
-         if (event.isLeftClick) graph.toNextSorter() else graph.toPreviousSorter()
+      if (!sort.isSorterDisabled) {
+         if (event.isLeftClick) sort.toNextSorter() else sort.toPreviousSorter()
          notifyChange()
       }
    }

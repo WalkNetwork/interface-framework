@@ -1,7 +1,8 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package walkmc.graphical.schema
 
-typealias Includer = MutableSet<Int>
-typealias Excluder = MutableSet<Int>
+import walkmc.graphical.common.*
 
 /**
  * A schema represents how a Scroll graphical
@@ -13,53 +14,100 @@ typealias Excluder = MutableSet<Int>
 typealias Schema = MutableSet<Int>
 
 /**
- * Creates a schematic with this Int as lines
- * and the specified [last] as columns.
+ * Creates a schema with this as start and [last] as end.
  */
-infix fun Int.schema(last: Int): Schema {
+inline infix fun Int.schema(last: Int): Schema {
    return (this..last).toHashSet()
+}
+
+/**
+ * Creates a schema by [row].
+ */
+inline fun rowSchema(row: Int): Schema {
+   return (startSlot(row)..lastSlot(row)).toHashSet()
 }
 
 /**
  * Includes all slots of the specified
  * includer to this schematic.
  */
-fun Schema.includes(vararg includer: Int): Schema = includes(includer.toHashSet())
+inline fun Schema.include(vararg includer: Int): Schema {
+   addAll(includer.toHashSet())
+   return this
+}
 
 /**
  * Includes all slots of the specified
  * includer to this schematic.
  */
-infix fun Schema.includes(includer: Iterable<Int>): Schema = apply {
-   addAll(includer.toHashSet())
+inline infix fun Schema.include(includer: Iterable<Int>): Schema {
+   addAll(includer)
+   return this
 }
 
 /**
  * Includes a specified slot to this schematic.
  */
-infix fun Schema.includes(slot: Int): Schema = apply {
+inline infix fun Schema.include(slot: Int): Schema {
    add(slot)
+   return this
+}
+
+/**
+ * Includes all slots from [range].
+ */
+inline infix fun Schema.include(range: IntRange): Schema {
+   addAll(range)
+   return this
+}
+
+/**
+ * Includes all slots of the specified [row].
+ */
+inline infix fun Schema.includeRow(row: Int): Schema {
+   addAll(startSlot(row)..lastSlot(row))
+   return this
 }
 
 /**
  * Excludes all slots of the specified
  * excluder to this schematic.
  */
-fun Schema.excludes(vararg excluder: Int): Schema = excludes(excluder.toHashSet())
-
-/**
- * Excludes all slots of the specified
- * excluder to this schematic.
- */
-infix fun Schema.excludes(excluder: Iterable<Int>): Schema = apply {
+inline fun Schema.exclude(vararg excluder: Int): Schema {
    removeAll(excluder.toHashSet())
+   return this
 }
 
 /**
- * Excludes a specified slot to this schematic.
+ * Excludes all slots of the specified excluder.
  */
-infix fun Schema.excludes(slot: Int): Schema = apply {
+infix fun Schema.exclude(excluder: Iterable<Int>): Schema {
+   removeAll(excluder.toHashSet())
+   return this
+}
+
+/**
+ * Excludes all slots from [range].
+ */
+inline infix fun Schema.exclude(range: IntRange): Schema {
+   removeAll(range)
+   return this
+}
+
+/**
+ * Excludes all slots of the specified [row].
+ */
+inline infix fun Schema.excludeRow(row: Int): Schema {
+   removeAll(startSlot(row)..lastSlot(row))
+   return this
+}
+
+/**
+ * Excludes a specified slot.
+ */
+inline infix fun Schema.exclude(slot: Int): Schema {
    remove(slot)
+   return this
 }
 
 /**
@@ -77,9 +125,12 @@ const val MAXIMUM_SLOT = 53
 /**
  * The defaults' excluder for all schematics.
  */
-val DefaultExcluder: Excluder = hashSetOf(17, 18, 26, 27)
+val DefaultExcluder: Schema = schemaOf(17, 18, 26, 27)
 
 /**
  * The defaults' includer for all schematics.
  */
-val DefaultIncluder: Includer = HashSet()
+val DefaultIncluder: Schema = emptySchema()
+
+fun Iterable<Int>.toSchema(): Schema = toHashSet()
+fun IntArray.toSchema(): Schema = toHashSet()
