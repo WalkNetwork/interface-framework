@@ -7,62 +7,66 @@
 
 # interface-framework
 
-### 1.9.0 Patch news
+### Note:
+> This repository is a showcase from WalkMC Network interface-framework.
+> This will not work in your server.
 
-#### New engines:
-```kt
-CountEngine
-CycleEngine
-ToggleEngine
-ProcessorEngine
-RequirementEngine
-FilterEngine
-SorterEngine
-ToggleSorterEngine
-ToggleFilterEngine
-```
-
-#### New Graphical/Engine DSL examples:
+## Showcase:
+### Filterable
 ```kt
 val menu = filterable(title = "My Title", lines = 6, indexes = 1..1000) {
   requestIndex { value, index ->
     newEngine(Materials.SIGN, "§aValue: $value")
   }
   
-  addNoFilter("Nenhum")
-  addFilter("1 até 500") { it in 1..500 }
-  addFilter("500 até 1000") { it in 500..1000 }
+  addNoFilter("None")
+  addFilter("1 to 500") { it in 1..500 }
+  addFilter("500 to 1000") { it in 500..1000 }
 }
 
 menu.access(player)
 ```
 
+### Sortable
 
-## Setup for development
+```kt
+val menu = sortable(title = "My Title", lines = 6, indexes = 1..1000) {
+  requestIndex { value, index ->
+    newEngine(Materials.SIGN, "§aValue: $value")
+  }
+  
+  addSorter("Lower quantity") { it }
+  addSorterDescending("Higher quantity") { it }
+}
 
-### Gradle KTS
-```gradle
-implementation("io.github.uinnn:interface-framework:1.9.0")
+menu.access(player)
 ```
 
-### Gradle
-```gradle
-implementation 'io.github.uinnn:interface-framework:1.9.0"'
+### Updating
+
+```kt
+graphical(title = "My Title", lines = 6) {
+  onTick { } // called every tick
+  onTick(20) { } // called every 20 ticks
+  onEverySecond { } // called every second (20 ticks)
+  onEverySecond(5) { } // called every 5 seconds (100 ticks)
+  onFirstSecond(3) { } // called once after 3 seconds (60 ticks)
+  onTick(100..200) { } // called every tick in a range of 100 to 200 ticks, this is, after 100 ticks will start ticking and ending after more 100 ticks
+  
+  // more
+}
 ```
 
-### Maven
-```xml
-<dependency>
-  <groupId>io.github.uinnn</groupId>
-  <artifactId>interface-framework</artifactId>
-  <version>1.9.0"</version>
-</dependency>
+### Engine
+```kt
+val engine = newEngine(Materials.ANDESITE, "§7Engine")
+engine.onPress { } // add click listener
+engine.onPress { } // add another click listener
+engine.onRender { } // add render listener
+engine.onTick { } // add tick listener
+engine.onScroll { } // add scroll listener
+
+// more
 ```
-
-
-
-
-
-
 
 
