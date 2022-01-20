@@ -2,7 +2,7 @@
   <img align="center" src="https://img.shields.io/static/v1?style=for-the-badge&label=author&message=uinnn&color=informational"/>
 </a>
 <a href="https://github.com/uinnn/interface-framework">
-  <img align="center" src="https://img.shields.io/static/v1?style=for-the-badge&label=version&message=1.9.0&color=yellow"/>
+  <img align="center" src="https://img.shields.io/static/v1?style=for-the-badge&label=version&message=1.9.4&color=yellow"/>
 </a>
 
 # interface-framework
