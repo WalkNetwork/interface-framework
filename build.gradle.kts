@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-	api("io.github.uinnn:walk-server:2.3.30")
+	api("io.github.uinnn:walk-server:2.4.0")
 	api(kotlin("stdlib-jdk8"))
 	compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
 }
@@ -106,5 +106,6 @@ tasks {
 		baseName = project.name
 		version = project.version.toString()
 		relocate("net.minecraft.server", "net.minecraft.server.v1_8_R3")
+		relocate("org.bukkit.craftbukkit", "org.bukkit.craftbukkit.v1_8_R3")
 	}
 }

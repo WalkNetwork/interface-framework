@@ -46,8 +46,11 @@ interface IGraphical : Interface, Accessible, Renderable, Workable, Observable, 
       render()
       for (accessor in accessors) accessor(this)
       
+      if (!permits(ObserverKind.ACCESS)) return
       if (worker.allow) worker.start()
-      owner.openInventory(this)
+      
+      Container(this, player, model).open(player)
+      
       isOpen = true
       accesseds++
    }

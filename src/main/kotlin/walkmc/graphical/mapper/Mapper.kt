@@ -22,9 +22,7 @@ interface Mapper {
  */
 inline fun mapping(crossinline block: IScrollGraphical.(Source) -> Scrollers): Mapper {
 	return object : Mapper {
-		override fun map(graphical: IScrollGraphical, engines: Source): Scrollers {
-			return block(graphical, engines)
-		}
+		override fun map(graphical: IScrollGraphical, engines: Source) = block(graphical, engines)
 	}
 }
 

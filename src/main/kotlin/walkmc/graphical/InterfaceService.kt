@@ -33,20 +33,6 @@ object InterfaceService : Listener {
 	}
 	
 	@EventHandler
-	fun onTick(event: InventoryTickEvent) {
-		val graphical = event.interfaceOrNull() ?: return
-		if (graphical.allowTick && graphical.ticks % graphical.tickDelay == 0) {
-			graphical.tick()
-		}
-	}
-	
-	@EventHandler
-	fun onOpen(event: InventoryOpenEvent) {
-		val graphical = event.interfaceOrNull() ?: return
-		event.isCancelled = !graphical.permits(ObserverKind.ACCESS)
-	}
-	
-	@EventHandler
 	fun onDrag(event: InventoryDragEvent) {
 		val graphical = event.interfaceOrNull() ?: return
 		event.isCancelled = !graphical.permits(ObserverKind.DRAG)

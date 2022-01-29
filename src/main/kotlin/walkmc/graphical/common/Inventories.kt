@@ -1,11 +1,24 @@
 package walkmc.graphical.common
 
-import org.bukkit.*
+import net.minecraft.server.*
+import org.bukkit.Material
+import org.bukkit.craftbukkit.inventory.*
 import org.bukkit.event.inventory.*
 import org.bukkit.inventory.*
+import org.bukkit.inventory.ItemStack
 import org.bukkit.material.*
 import walkmc.*
 import walkmc.graphical.*
+
+/**
+ * Gets the craft inventory represented by this inventory.
+ */
+inline val Inventory.craftHandler get() = this as CraftInventory
+
+/**
+ * Gets the NMS inventory handler represented by this inventory.
+ */
+inline val Inventory.handler: IInventory get() = craftHandler.inventory
 
 /**
  * Verifies if this inventory has space for an item.
