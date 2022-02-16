@@ -12,6 +12,30 @@
 > This will not work in your server.
 
 ## Showcase:
+
+### Clicker Sample
+```kt
+fun clickerItem(clicks: Int): ItemStack {
+  return newItem(Materials.EMERALD, "§aClicker §8[$clicks]")
+}
+
+val menu = graphical(title = "My Title", lines = 3) {
+  engine(13, clickerItem(0)) {
+    var count = 0
+  
+    onLeftClick {
+      if (++count >= 25) owner.kickPlayer("You are clicking very fast.")
+      alter(clickerItem(count)) // change item display
+    }
+    
+    onTick(20) {
+      count = 0
+      alter(clickerItem(0))
+    }
+  }
+}
+```
+
 ### Filterable
 ```kt
 val menu = filterable(title = "My Title", lines = 6, indexes = 1..1000) {
